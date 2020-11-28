@@ -62,8 +62,10 @@
                 margin-bottom: 30px;
             }
         </style>
+        <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
+        <div class="md:flex mx-auto container border p-4"></div>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
