@@ -6,6 +6,7 @@ use App\Http\Controllers\authController;
 use App\Http\Controllers\bookingController;
 use App\Http\Controllers\carController;
 use App\Http\Controllers\routeController;    
+use App\Http\Controllers\schedulerController;    
 use App\Http\Controllers\stationController;    
 use App\Http\Controllers\contactController;
 
@@ -54,6 +55,16 @@ Route::get('routes/{id}', [routeController::class, 'show']);
 Route::post('routes', [routeController::class, 'store']);
 Route::put('routes/{id}', [routeController::class, 'update']);
 Route::delete('routes/{id}',[routeController::class, 'destroy']);
+
+//schedulers
+
+Route::get('schedulers', [schedulerController::class, 'index']);
+Route::get('schedulers/{id}', [schedulerController::class, 'show']);
+Route::get('schedulers/operator/{id}', [schedulerController::class, 'findByOperator']);
+Route::get('schedulers/today', [schedulerController::class, 'getTodaysScheduler']);
+Route::post('schedulers', [schedulerController::class, 'store']);
+Route::put('schedulers/{id}', [schedulerController::class, 'update']);
+Route::delete('schedulers/{id}',[schedulerController::class, 'destroy']);
 
 // stations
 

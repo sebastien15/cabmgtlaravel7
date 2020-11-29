@@ -15,11 +15,12 @@ class CreateSchedulersTable extends Migration
     {
         Schema::create('schedulers', function (Blueprint $table) {
             $table->id();
-            $table->integer('car_id');
+            $table->integer('operator_id');
             $table->string('route_from');
             $table->string('route_to');
-            $table->datetime('departure_time');
-            $table->datetime('arrival_time');
+            $table->date('journey_date');
+            $table->time('departure_time');
+            $table->time('arrival_time');
             $table->string('journey_time');
             $table->string('message')->nullable();
             $table->timestamps();

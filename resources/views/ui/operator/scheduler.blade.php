@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<operatorscheduler></operatorscheduler>
+<operatorscheduler :user="{{ Auth::user() }}"></operatorscheduler>
 {{-- {{ auth()->user()->name }} --}}
 @endsection
+
+
+

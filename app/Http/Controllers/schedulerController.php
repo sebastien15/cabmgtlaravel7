@@ -5,14 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Scheduler;
 use db;
+use Carbon\Carbon;
 
 class schedulerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $schedulers = Scheduler::all();
@@ -21,30 +18,36 @@ class schedulerController extends Controller
             $schedulers
         );
     }
+    public function getTodaysScheduler()
+    {
+        $current = new Carbon;
+        // $current =  json_encode($current->format('Y-m-d'));
+        // echo $current;
+        // exit;
+        $schedulers = Scheduler::where('journey_date', $current->format('Y-m-d'))->get();
+        // $schedulers = Scheduler::where('where', )->get();
+        
+        return response()->json([
+            $schedulers
+        ], 201);
+    }
+    
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         $scheduler = new Scheduler;
  
-        $scheduler->car_id            = $request->car_id;
+        $scheduler->operator_id       = $request->operator_id;
         $scheduler->route_from        = $request->route_from;
         $scheduler->route_to          = $request->route_to;
+        $scheduler->journey_date      = $request->journey_date;
         $scheduler->departure_time    = $request->departure_time;
         $scheduler->arrival_time      = $request->arrival_time;
         $scheduler->journey_time      = $request->journey_time;
@@ -58,16 +61,23 @@ class schedulerController extends Controller
         ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function show($id)
     {
         if (Scheduler::where('id', $id)->exists()) {
             $scheduler = Scheduler::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
+            return response($scheduler, 200);
+        } else {
+            return response()->json([
+              "message" => "scheduler not found"
+            ], 404);
+        }
+    }
+
+    public function findByOperator($id)
+    {
+        if (Scheduler::where('operator_id', $id)->exists()) {
+            $scheduler = Scheduler::where('operator_id', $id)->get()->toJson(JSON_PRETTY_PRINT);
             return response($scheduler, 200);
         } else {
             return response()->json([
@@ -96,21 +106,15 @@ class schedulerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        'car_id', 
-        'route_from', 
-        'route_to', 
-        'departure_time', 
-        'arrival_time',
-        'journey_time',
-        'message'
 
         if (Scheduler::where('id', $id)->exists()) {
 
-            $scheduler                   = Scheduler::find($id);
+            $scheduler                    = Scheduler::find($id);
 
-            $scheduler->car_id            = is_null($request->car_id) ? $scheduler->car_id : $request->car_id;
+            $scheduler->operator_id       = is_null($request->operator_id) ? $scheduler->operator_id : $request->operator_id;
             $scheduler->route_from        = is_null($request->route_from) ? $scheduler->route_from : $request->route_from;
             $scheduler->route_to          = is_null($request->route_to) ? $scheduler->route_to : $request->route_to;
+            $scheduler->journey_date      = is_null($request->journey_date) ? $scheduler->journey_date : $request->journey_date;
             $scheduler->departure_time    = is_null($request->departure_time) ? $scheduler->departure_time : $request->departure_time;
             $scheduler->arrival_time      = is_null($request->arrival_time) ? $scheduler->arrival_time : $request->arrival_time;
             $scheduler->journey_time      = is_null($request->journey_time) ? $scheduler->journey_time : $request->journey_time;
@@ -142,7 +146,7 @@ class schedulerController extends Controller
             $scheduler->delete();
     
             return response()->json([
-              "message" => "$scheduler deleted"
+              "message" => "scheduler deleted successfully"
             ], 202);
         } else {
             return response()->json([

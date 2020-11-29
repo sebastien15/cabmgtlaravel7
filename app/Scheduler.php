@@ -12,6 +12,7 @@ class Scheduler extends Model
         'car_id', 
         'route_from', 
         'route_to', 
+        'journey_date',
         'departure_time', 
         'arrival_time',
         'journey_time',

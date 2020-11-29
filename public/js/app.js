@@ -3015,33 +3015,205 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "operatorscheduler",
+  props: ['user'],
   data: function data() {
     return {
-      bookings: {},
-      showSingleBookingModel: false,
-      singleBooking: {}
+      Scheduler_id: '',
+      schedulers: {},
+      showSingleSchedulerModel: false,
+      singleScheduler: {},
+      addSchedulerModel: false,
+      editMode: false,
+      form: new Form({
+        operator_id: this.user.id,
+        route_from: '',
+        route_to: '',
+        journey_date: '',
+        departure_time: '',
+        arrival_time: '',
+        journey_time: '',
+        message: ''
+      })
     };
   },
   methods: {
-    allbookings: function allbookings() {
+    allschedulers: function allschedulers() {
       var _this = this;
 
-      axios.get("/api/bookings").then(function (data) {
-        return _this.bookings = data.data;
+      axios.get("/api/schedulers").then(function (data) {
+        return _this.schedulers = data.data;
       });
     },
-    showSingleBooking: function showSingleBooking(id) {
+    getTodaysScheduler: function getTodaysScheduler() {
       var _this2 = this;
 
-      this.showSingleBookingModel = !this.showSingleBookingModel, axios.get("/api/bookings/" + id).then(function (response) {
-        return _this2.singleBooking = response.data;
-      }).then(console.log(this.singleBooking));
+      try {
+        axios.get("/schedulers/today").then(function (data) {
+          return _this2.schedulers = data.data;
+        });
+      } catch (error) {
+        console.log("her is the erro" + err.message);
+      }
+    },
+    showSingleScheduler: function showSingleScheduler(id) {
+      var _this3 = this;
+
+      this.showSingleSchedulerModel = !this.showSingleSchedulerModel, axios.get("/api/schedulers/" + id).then(function (data) {
+        return _this3.singleScheduler = data.data[0];
+      });
+    },
+    editModalWindow: function editModalWindow(singleScheduler) {
+      this.form.clear();
+      this.editMode = true;
+      this.addSchedulerModel = true;
+      this.showSingleSchedulerModel = false;
+      this.form.reset();
+      this.form.fill(singleScheduler);
+      this.form.Scheduler_id = this.singleScheduler.id;
+    },
+    saveScheduler: function saveScheduler() {
+      var _this4 = this;
+
+      this.$Progress.start();
+      console.log(this.form);
+      this.form.post('/api/schedulers').then(function () {
+        Fire.$emit('AfterCreatedUserLoadIt'); //custom events
+
+        Toast.fire({
+          icon: 'success',
+          title: 'Sheduler created successfully'
+        });
+
+        _this4.$Progress.finish();
+      })["catch"](function (error) {
+        console.log(error.message);
+      });
+    },
+    updateScheduler: function updateScheduler() {
+      var _this5 = this;
+
+      this.form.put('/api/schedulers/' + this.form.Scheduler_id).then(function () {
+        Toast.fire({
+          icon: 'success',
+          title: 'Scheduler updated successfully'
+        });
+        Fire.$emit('AfterCreatedUserLoadIt');
+
+        _this5.allschedulers();
+      })["catch"](function (error) {
+        console.log(error.message);
+      });
+    },
+    deleteScheduler: function deleteScheduler(id) {
+      var _this6 = this;
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (response) {
+        if (response.isConfirmed) {
+          _this6.allschedulers();
+
+          axios["delete"]("/api/schedulers/" + id).then(function (response) {
+            Swal.fire('Deleted!', 'Scheduler deleted successfully', 'success');
+
+            _this6.allschedulers();
+
+            if (_this6.showSingleSchedulerModel) {
+              _this6.showSingleSchedulerModel = !_this6.showSingleSchedulerModel;
+            }
+          })["catch"](function () {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
+              footer: '<a href>Why do I have this issue?</a>'
+            });
+          });
+        }
+      });
+    },
+    calcJourneytime: function calcJourneytime() {
+      var depTime = this.form.departure_time;
+      var arrTime = this.form.arrival_time;
+
+      if (depTime != "" && arrTime != "") {
+        console.log(depTime.slice(0, 2));
+        console.log(arrTime); // console.log(new Date(depT))
+      }
     }
   },
   beforeMount: function beforeMount() {
-    this.allbookings();
+    this.allschedulers(); // this.getTodaysScheduler()
   }
 });
 
@@ -67759,6 +67931,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 var render = function() {
+  var this$1 = this
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -67770,28 +67943,56 @@ var render = function() {
       staticStyle: { height: "1px" }
     }),
     _vm._v(" "),
-    _c("div", { staticClass: "flex justify-around" }, [
-      _c("div", { staticClass: "w-1/2 p-2 md:pt-20 " }, [
+    _c("div", { staticClass: "flex flex-col sm:flex-row justify-around " }, [
+      _c("div", { staticClass: "sm:w-10/12 p-2 md:pt-20 " }, [
         _c("h4", { staticClass: "text-xl font-bold mb-3" }, [
           _vm._v("To day's Scheduler")
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "overflow-x-auto" }, [
+        _c("div", { staticClass: "overflow-x-auto " }, [
           _c("table", { staticClass: "border border-blue-900 " }, [
             _vm._m(1),
             _vm._v(" "),
             _c(
               "tbody",
               { staticClass: "border border-blue-400 border-t-0" },
-              _vm._l(_vm.bookings, function(booking) {
-                return _c("tr", { key: booking.id, staticClass: "p-2 " }, [
+              _vm._l(_vm.schedulers, function(scheduler) {
+                return _c("tr", { key: scheduler.id, staticClass: "p-2 " }, [
                   _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
-                    _vm._v(_vm._s(booking.id))
+                    _vm._v(_vm._s(scheduler.id))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
+                    _vm._v(_vm._s(scheduler.route_from))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
+                    _vm._v(_vm._s(scheduler.route_to))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
+                    _vm._v(_vm._s(scheduler.journey_date))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
+                    _vm._v(_vm._s(scheduler.departure_time))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
+                    _vm._v(_vm._s(scheduler.arrival_time))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
+                    _vm._v(_vm._s(scheduler.journey_time))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
+                    _vm._v(_vm._s(scheduler.message))
                   ]),
                   _vm._v(" "),
                   _c(
                     "td",
-                    { staticClass: "border-r border-blue-400 flex p-2" },
+                    { staticClass: "border-r border-blue-400 flex p-2 " },
                     [
                       _c(
                         "span",
@@ -67799,7 +68000,7 @@ var render = function() {
                           staticClass: "cursor-pointer",
                           on: {
                             click: function($event) {
-                              return _vm.showSingleBooking(booking.id)
+                              return _vm.showSingleScheduler(scheduler.id)
                             }
                           }
                         },
@@ -67810,7 +68011,23 @@ var render = function() {
                         ]
                       ),
                       _vm._v(" "),
-                      _vm._m(2, true)
+                      _c(
+                        "span",
+                        {
+                          staticClass: "cursor-pointer",
+                          on: {
+                            click: function($event) {
+                              return _vm.deleteScheduler(scheduler.id)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass:
+                              "fa fa-trash text-2xl text-red-500 cursor-pointer"
+                          })
+                        ]
+                      )
                     ]
                   )
                 ])
@@ -67821,7 +68038,25 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(3)
+      _c(
+        "div",
+        { staticClass: "order-first sm:order-last sm:w-2/12 p-2 md:pt-20 " },
+        [
+          _c(
+            "button",
+            {
+              staticClass:
+                "text-xl font-bold mb-3 border border-blue-400 text-blue-500 p-4 rounded-sm",
+              on: {
+                click: function() {
+                  this$1.addSchedulerModel = !this$1.addSchedulerModel
+                }
+              }
+            },
+            [_vm._v("Add a Scheduler")]
+          )
+        ]
+      )
     ]),
     _vm._v(" "),
     _c(
@@ -67829,20 +68064,23 @@ var render = function() {
       {
         staticClass:
           "w-11/12 md:w-8/12 bg-white border-blue-400 top-0 mt-5 md:mt-20  p-20",
-        class: [_vm.showSingleBookingModel ? "absolute" : "hidden"]
+        class: [_vm.showSingleSchedulerModel ? "absolute" : "hidden"]
       },
       [
         _c("div", { staticClass: "border-b-blue-200 mb-10" }, [
           _c("div", { staticClass: "flex justify-between mb-5" }, [
-            _c("p", { staticClass: "text-xl font-bold " }, [_vm._v("Book id")]),
+            _c("p", { staticClass: "text-xl font-bold " }, [
+              _vm._v("Scheduler ")
+            ]),
             _vm._v(" "),
             _c(
               "p",
               {
                 staticClass: "cursor-pointer",
                 on: {
-                  click: function($event) {
-                    return _vm.showSingleBooking(1)
+                  click: function() {
+                    this$1.showsingleSchedulerModel = !this$1.showsingleSchedulerModel
+                    this$1.singleScheduler = {}
                   }
                 }
               },
@@ -67850,14 +68088,429 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("p", [_vm._v("Hyedrabad to kigali")])
+          _c("p", [
+            _c("span", { staticClass: "ml-2" }, [
+              _vm._v(_vm._s(_vm.singleScheduler.route_from))
+            ]),
+            _vm._v(" to "),
+            _c("span", { staticClass: "ml-2" }, [
+              _vm._v(_vm._s(_vm.singleScheduler.route_to))
+            ])
+          ])
         ]),
         _vm._v(" "),
-        _vm._m(4),
+        _c("div", { staticClass: " mb-10" }, [
+          _c("h3", [_vm._v("Scheduler info")]),
+          _vm._v(" "),
+          _c("div", [
+            _c("p", { staticClass: " font-bold" }, [
+              _vm._v("Expected departure Date:")
+            ]),
+            _c("p"),
+            _c("p", [_vm._v(_vm._s(_vm.singleScheduler.journey_date))]),
+            _vm._v(" "),
+            _c("p", { staticClass: " font-bold" }, [
+              _vm._v("Expected departure time:")
+            ]),
+            _c("p"),
+            _c("p", [_vm._v(_vm._s(_vm.singleScheduler.departure_time))]),
+            _vm._v(" "),
+            _c("p", { staticClass: " font-bold" }, [
+              _vm._v("Expected arrival time:")
+            ]),
+            _c("p"),
+            _c("p", [_vm._v(_vm._s(_vm.singleScheduler.arrival_time))]),
+            _vm._v(" "),
+            _c("p", { staticClass: " font-bold" }, [
+              _vm._v("Expected journey time:")
+            ]),
+            _c("p"),
+            _c("p", [_vm._v(_vm._s(_vm.singleScheduler.journey_time))]),
+            _vm._v(" "),
+            _c("p", { staticClass: "font-bold" }, [
+              _vm._v("Custom message to show passengers: ")
+            ]),
+            _vm._v(" "),
+            _c("p", [_vm._v(_vm._s(_vm.singleScheduler.message))])
+          ])
+        ]),
         _vm._v(" "),
-        _vm._m(5),
-        _vm._v(" "),
-        _vm._m(6)
+        _c("div", [
+          _c("h3", [_vm._v("Quick actions")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex justify-items-start pt-10" }, [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "p-2 rounded-md mr-3 text-md font-light border-2 border-red-600 text-red-600",
+                attrs: { type: "submit" },
+                on: {
+                  click: function($event) {
+                    return _vm.deleteScheduler(_vm.singleScheduler.id)
+                  }
+                }
+              },
+              [_vm._v("Delete")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "p-2 rounded-md mr-3 text-md font-light border-2 border-green-600 text-green-600",
+                on: {
+                  click: function($event) {
+                    return _vm.editModalWindow(_vm.singleScheduler)
+                  }
+                }
+              },
+              [_vm._v("Edit")]
+            )
+          ])
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass:
+          "w-11/12 sm:w-8/12  bg-white border-blue-400 top-10 mt-5 md:mt-20 p-20 shadow-md",
+        class: [_vm.addSchedulerModel ? "absolute" : "hidden"]
+      },
+      [
+        _c("h2", { staticClass: "text-2xl font-bold mb-4" }, [
+          _vm._v("Add a Scheduler")
+        ]),
+        _vm._v("\n        " + _vm._s(this.form.arrival_time) + "\n        "),
+        _c("div", { staticClass: "border-b-blue-200 mb-10" }, [
+          _c(
+            "form",
+            {
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  _vm.editMode ? _vm.updateScheduler() : _vm.saveScheduler()
+                }
+              }
+            },
+            [
+              _c("div", { staticClass: "flex justify-between mb-2 sm:mb-4" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.operator_id,
+                      expression: "form.operator_id"
+                    }
+                  ],
+                  attrs: {
+                    type: "hidden",
+                    name: "operator_id",
+                    value: "(user.id )"
+                  },
+                  domProps: { value: _vm.form.operator_id },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "operator_id", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.route_from,
+                      expression: "form.route_from"
+                    }
+                  ],
+                  staticClass:
+                    "w-5/12 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3",
+                  attrs: {
+                    type: "text",
+                    name: "route_from",
+                    placeholder: "route_from"
+                  },
+                  domProps: { value: _vm.form.route_from },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "route_from", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.route_to,
+                      expression: "form.route_to"
+                    }
+                  ],
+                  staticClass:
+                    "w-5/12 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3",
+                  attrs: {
+                    type: "text",
+                    name: "route_to",
+                    placeholder: "route_to"
+                  },
+                  domProps: { value: _vm.form.route_to },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "route_to", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex justify-between mb-2 sm:mb-4" }, [
+                _c("div", { staticClass: "w-3/12 flex flex-col" }, [
+                  _c("label", { staticClass: "text-md pb-2 mb-2" }, [
+                    _vm._v("Journey date")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.journey_date,
+                        expression: "form.journey_date"
+                      }
+                    ],
+                    staticClass:
+                      " text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3",
+                    attrs: {
+                      type: "date",
+                      name: "journey_date",
+                      placeholder: "journey_date"
+                    },
+                    domProps: { value: _vm.form.journey_date },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "journey_date", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "w-3/12 flex flex-col" }, [
+                  _c("label", { staticClass: "text-md pb-2 mb-2" }, [
+                    _vm._v("Depart time")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.departure_time,
+                        expression: "form.departure_time"
+                      }
+                    ],
+                    staticClass:
+                      " text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3",
+                    attrs: {
+                      type: "text",
+                      name: "departure_time",
+                      placeholder: "12/15"
+                    },
+                    domProps: { value: _vm.form.departure_time },
+                    on: {
+                      change: function($event) {
+                        return _vm.calcJourneytime()
+                      },
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.form,
+                          "departure_time",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "w-3/12 flex flex-col" }, [
+                  _c("label", { staticClass: "text-md pb-2 mb-2" }, [
+                    _vm._v("Arrival time")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.arrival_time,
+                        expression: "form.arrival_time"
+                      }
+                    ],
+                    staticClass:
+                      " text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3",
+                    attrs: {
+                      type: "text",
+                      name: "arrival_time",
+                      placeholder: "15/04"
+                    },
+                    domProps: { value: _vm.form.arrival_time },
+                    on: {
+                      change: function($event) {
+                        return _vm.calcJourneytime()
+                      },
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "arrival_time", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex justify-between mb-2 sm:mb-4" }, [
+                _c("div", { staticClass: "w-5/12 flex flex-col" }, [
+                  _c("label", { staticClass: "text-md pb-2 mb-2" }, [
+                    _vm._v(" Expected journey time")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.journey_time,
+                        expression: "form.journey_time"
+                      }
+                    ],
+                    staticClass:
+                      "w-5/12 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3",
+                    attrs: {
+                      type: "text",
+                      disabled: "",
+                      name: "journey_time",
+                      placeholder: "journey_time"
+                    },
+                    domProps: { value: _vm.form.journey_time },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "journey_time", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "w-5/12 flex flex-col" }, [
+                  _c("label", { staticClass: "text-md pb-2 mb-2" }, [
+                    _vm._v("some custom message")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "textarea",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.message,
+                          expression: "form.message"
+                        }
+                      ],
+                      staticClass:
+                        " text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3",
+                      attrs: { name: "message" },
+                      domProps: { value: _vm.form.message },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "message", $event.target.value)
+                        }
+                      }
+                    },
+                    [_vm._v("message")]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex justify-items-start pt-10" }, [
+                _c(
+                  "button",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.editMode,
+                        expression: "!editMode"
+                      }
+                    ],
+                    staticClass:
+                      "p-2 rounded-md mr-3 text-md font-light border-2 border-blue-600 text-blue-600",
+                    attrs: { type: "submit" }
+                  },
+                  [_vm._v("Save")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.editMode,
+                        expression: "editMode"
+                      }
+                    ],
+                    staticClass:
+                      "p-2 rounded-md mr-3 text-md font-light border-2 border-green-600 text-green-600",
+                    attrs: { type: "submit" }
+                  },
+                  [_vm._v("Update")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "p-2 rounded-md mr-3 text-md font-light border-2 border-red-600 text-red-600",
+                    on: {
+                      click: function() {
+                        this$1.addSchedulerModel = false
+                      }
+                    }
+                  },
+                  [_vm._v("Cancel")]
+                )
+              ])
+            ]
+          )
+        ])
       ]
     )
   ])
@@ -67969,108 +68622,36 @@ var staticRenderFns = [
         ]),
         _vm._v(" "),
         _c("td", { staticClass: "border-r border-blue-600 p-2" }, [
-          _vm._v("quick actions")
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "cursor-pointer" }, [
-      _c("i", {
-        staticClass: "fa fa-trash text-2xl text-red-500 cursor-pointer"
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-1/2 p-2 md:pt-20 " }, [
-      _c("h4", { staticClass: "text-xl font-bold mb-3" }, [
-        _vm._v("Add a Scheduler")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: " mb-10" }, [
-      _c("h3", [_vm._v("Passenger info")]),
-      _vm._v(" "),
-      _c("div", [
-        _c("p", [_vm._v("Passenger names: Ndagijimana sebastine")]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v("Passenger phone: "),
-          _c("a", { attrs: { href: "tel:0788451717" } }, [_vm._v("0788451717")])
+          _vm._v("From")
         ]),
         _vm._v(" "),
-        _c("p", [_vm._v("Passenger sex: Male")]),
+        _c("td", { staticClass: "border-r border-blue-600 p-2" }, [
+          _vm._v("To")
+        ]),
         _vm._v(" "),
-        _c("p", [_vm._v("Passenger with luggage: yes")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: " mb-10" }, [
-      _c("p", { staticClass: "text-lg leading-8 font-light mb-5" }, [
-        _vm._v(
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut blanditiis eligendi \n                accusantium, similique minima earum corrupti voluptate odit qui veritatis possimus \n                sit facere quisquam maiores provident eaque necessitatibus rem quis.\n            "
-        )
-      ]),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v("Payment status: "),
-        _c("span", { staticClass: "text-blue-300 border-1 border-blue-300" }, [
-          _vm._v("Payed")
+        _c("td", { staticClass: "border-r border-blue-600 p-2" }, [
+          _vm._v("Dep date")
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "border-r border-blue-600 p-2" }, [
+          _vm._v("Dep time")
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "border-r border-blue-600 p-2" }, [
+          _vm._v("Arrival time")
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "border-r border-blue-600 p-2" }, [
+          _vm._v("expected time")
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "border-r border-blue-600 p-2" }, [
+          _vm._v("custom message")
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "border-r border-blue-600 p-2" }, [
+          _vm._v("quick actions")
         ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("h3", [_vm._v("Quick actions")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "flex justify-items-start pt-10" }, [
-        _c(
-          "button",
-          {
-            staticClass:
-              "p-2 rounded-md mr-3 text-md font-light border-2 border-green-600 text-green-600",
-            attrs: { type: "submit" }
-          },
-          [_vm._v("Cancel")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass:
-              "p-2 rounded-md mr-3 text-md font-light border-2 border-red-600 text-red-600",
-            attrs: { type: "submit" }
-          },
-          [_vm._v("Delete")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass:
-              "p-2 rounded-md mr-3 text-md font-light border-2 border-blue-600 text-blue-600",
-            attrs: { type: "submit" }
-          },
-          [_vm._v("Call passenger")]
-        )
       ])
     ])
   }
