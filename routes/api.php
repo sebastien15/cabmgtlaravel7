@@ -2,6 +2,12 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\authController;
+use App\Http\Controllers\bookingController;
+use App\Http\Controllers\carController;
+use App\Http\Controllers\routeController;    
+use App\Http\Controllers\stationController;    
+use App\Http\Controllers\contactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +25,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 // authentication apis
-Route::post('logout', [authController::class, 'logout']);
+Route::post('logout', [authController::class, 'logout'])->middleware('auth');
 Route::get('users', [authController::class, 'getUsers']);
 Route::post('register', [authController::class, 'register']);
 Route::get('users/{id}', [authController::class, 'getUser']);
