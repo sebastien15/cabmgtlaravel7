@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Car;
+use db;
+
 
 class carController extends Controller
 {
@@ -13,7 +16,11 @@ class carController extends Controller
      */
     public function index()
     {
-        //
+        $cars = Car::all();
+ 
+        return response()->json(
+            $cars
+        );
     }
 
     /**
@@ -34,7 +41,21 @@ class carController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $car = new Car;
+ 
+        $car->name = $request->name;
+        $car->description = $request->description;
+        $car->image = $request->image;
+        $car->seates = $request->seates;
+        $car->luggage_place = $request->luggage_place;
+        $car->status = $request->status;
+ 
+        $car->save();
+        
+        return response()->json([
+            "message" => "car created",
+            $car
+        ], 201);
     }
 
     /**
@@ -45,7 +66,14 @@ class carController extends Controller
      */
     public function show($id)
     {
-        //
+        if (Car::where('id', $id)->exists()) {
+            $car = CAR::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
+            return response($car, 200);
+        } else {
+            return response()->json([
+              "message" => "car not found"
+            ], 404);
+        }
     }
 
     /**
@@ -68,7 +96,26 @@ class carController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (Car::where('id', $id)->exists()) {
+            $car = Car::find($id);
+            $car->name = is_null($request->name) ? $car->name : $request->name;
+            $car->description = is_null($request->description) ? $car->description : $request->description;
+            $car->status = is_null($request->status) ? $car->status : $request->status;
+            $car->image = is_null($request->image) ? $car->image : $request->image;
+            $car->seates = is_null($request->seates) ? $car->seates : $request->seates;
+            $car->luggage_place = is_null($request->luggage_place) ? $car->luggage_place : $request->luggage_place;
+ 
+            $car->save();
+ 
+            return response()->json([
+                "message" => "records updated successfully",
+                $car
+            ], 200);
+        } else{
+            return response()->json([
+                "message" => "car not found"
+            ], 404);
+        };
     }
 
     /**
@@ -79,6 +126,17 @@ class carController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(Car::where('id', $id)->exists()) {
+            $car = Car::find($id);
+            $car->delete();
+    
+            return response()->json([
+              "message" => "records deleted"
+            ], 202);
+        } else {
+            return response()->json([
+              "message" => "car not found"
+            ], 404);
+        }
     }
 }
