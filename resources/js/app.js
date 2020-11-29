@@ -71,8 +71,15 @@ Vue.component('research', require('./components/front/booking/research').default
 Vue.component('book-header', require('./components/front/booking/bookheader').default);
 Vue.component('no-cab', require('./components/front/booking/noCab').default);
 Vue.component('cab-list', require('./components/front/booking/cabList').default);
+
+// operator components starts
+
 Vue.component('operatordashboard', require('./components/admin/operator/dashboard').default);
 Vue.component('routesandstations', require('./components/admin/operator/routesAndStations').default);
+Vue.component('operatorscheduler', require('./components/admin/operator/scheduler').default);
+
+// operator components ends
+
 Vue.component('car', require('./components/admin/superAdmin/car').default);
 
 /**

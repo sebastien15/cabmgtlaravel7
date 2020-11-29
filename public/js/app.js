@@ -2410,6 +2410,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "operatordashboard",
   data: function data() {
@@ -2897,6 +2903,145 @@ __webpack_require__.r(__webpack_exports__);
   beforeMount: function beforeMount() {
     this.allroutes();
     this.allStations(0);
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/operator/scheduler.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/operator/scheduler.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "operatorscheduler",
+  data: function data() {
+    return {
+      bookings: {},
+      showSingleBookingModel: false,
+      singleBooking: {}
+    };
+  },
+  methods: {
+    allbookings: function allbookings() {
+      var _this = this;
+
+      axios.get("/api/bookings").then(function (data) {
+        return _this.bookings = data.data;
+      });
+    },
+    showSingleBooking: function showSingleBooking(id) {
+      var _this2 = this;
+
+      this.showSingleBookingModel = !this.showSingleBookingModel, axios.get("/api/bookings/" + id).then(function (response) {
+        return _this2.singleBooking = response.data;
+      }).then(console.log(this.singleBooking));
+    }
+  },
+  beforeMount: function beforeMount() {
+    this.allbookings();
   }
 });
 
@@ -66227,39 +66372,22 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-5 flex justify-around mb-4" }, [
+    return _c("div", { staticClass: "p-5 sm:flex justify-around mb-4" }, [
       _c(
         "div",
         {
-          staticClass: "w-3/12 bg-blue-300 rounded-md p-5 py-10 cursor-pointer"
+          staticClass:
+            "sm:w-2/12 bg-blue-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
         },
         [
           _c("div", { staticClass: "flex justify-around" }, [
-            _c("p", { staticClass: "text-2xl font-bold" }, [
+            _c("p", { staticClass: "text-sm sm:text-2xl sm:font-bold" }, [
               _vm._v("Pending bookings ")
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "rounded-full bg-blue-100 p-2 px-3 ml-4" }, [
-              _vm._v("2")
-            ])
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "w-3/12 bg-green-300 rounded-md p-5 py-10 cursor-pointer"
-        },
-        [
-          _c("div", { staticClass: "flex justify-around" }, [
-            _c("p", { staticClass: "text-2xl font-bold" }, [
-              _vm._v("Pending payments ")
             ]),
             _vm._v(" "),
             _c(
               "p",
-              { staticClass: "rounded-full bg-green-100 p-2 px-3 ml-4" },
+              { staticClass: "rounded-full bg-blue-100 sm:p-2 px-3 sm:ml-4" },
               [_vm._v("2")]
             )
           ])
@@ -66269,17 +66397,67 @@ var staticRenderFns = [
       _c(
         "div",
         {
-          staticClass: "w-3/12 bg-gray-300 rounded-md p-5 py-10 cursor-pointer"
+          staticClass:
+            "sm:w-2/12 bg-blue-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
         },
         [
           _c("div", { staticClass: "flex justify-around" }, [
-            _c("p", { staticClass: "text-2xl font-bold" }, [
+            _c(
+              "a",
+              {
+                staticClass: "text-sm sm:text-2xl sm:font-bold",
+                attrs: { href: "/operator/scheduler" }
+              },
+              [_vm._v("schedulers ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "p",
+              { staticClass: "rounded-full bg-blue-100 sm:p-2 px-3 sm:ml-4" },
+              [_vm._v("2")]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "sm:w-2/12 bg-green-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
+        },
+        [
+          _c("div", { staticClass: "flex justify-around" }, [
+            _c("p", { staticClass: "text-sm sm:text-2xl sm:font-bold" }, [
+              _vm._v("Pending pays ")
+            ]),
+            _vm._v(" "),
+            _c(
+              "p",
+              { staticClass: "rounded-full bg-green-100 sm:p-2 px-3 sm:ml-4" },
+              [_vm._v("2")]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "sm:w-2/12 bg-gray-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
+        },
+        [
+          _c("div", { staticClass: "flex justify-around" }, [
+            _c("p", { staticClass: "text-sm sm:text-2xl sm:font-bold" }, [
               _vm._v("Notifications ")
             ]),
             _vm._v(" "),
-            _c("p", { staticClass: "rounded-full bg-gray-100 p-2 px-3 ml-4" }, [
-              _vm._v("2")
-            ])
+            _c(
+              "p",
+              { staticClass: "rounded-full bg-gray-100 sm:p-2 px-3 sm:ml-4" },
+              [_vm._v("2")]
+            )
           ])
         ]
       )
@@ -67559,6 +67737,340 @@ var staticRenderFns = [
         ]),
         _vm._v(" "),
         _c("td", { staticClass: "p-2" }, [_vm._v("quick actions")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/operator/scheduler.vue?vue&type=template&id=49d5fb1b&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/operator/scheduler.vue?vue&type=template&id=49d5fb1b&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("hr", {
+      staticClass: "w-10/12 bg-blue-400 m-auto",
+      staticStyle: { height: "1px" }
+    }),
+    _vm._v(" "),
+    _c("div", { staticClass: "flex justify-around" }, [
+      _c("div", { staticClass: "w-1/2 p-2 md:pt-20 " }, [
+        _c("h4", { staticClass: "text-xl font-bold mb-3" }, [
+          _vm._v("To day's Scheduler")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "overflow-x-auto" }, [
+          _c("table", { staticClass: "border border-blue-900 " }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              { staticClass: "border border-blue-400 border-t-0" },
+              _vm._l(_vm.bookings, function(booking) {
+                return _c("tr", { key: booking.id, staticClass: "p-2 " }, [
+                  _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
+                    _vm._v(_vm._s(booking.id))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "border-r border-blue-400 flex p-2" },
+                    [
+                      _c(
+                        "span",
+                        {
+                          staticClass: "cursor-pointer",
+                          on: {
+                            click: function($event) {
+                              return _vm.showSingleBooking(booking.id)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-eye text-xl text-blue-400 mr-2"
+                          })
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm._m(2, true)
+                    ]
+                  )
+                ])
+              }),
+              0
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._m(3)
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass:
+          "w-11/12 md:w-8/12 bg-white border-blue-400 top-0 mt-5 md:mt-20  p-20",
+        class: [_vm.showSingleBookingModel ? "absolute" : "hidden"]
+      },
+      [
+        _c("div", { staticClass: "border-b-blue-200 mb-10" }, [
+          _c("div", { staticClass: "flex justify-between mb-5" }, [
+            _c("p", { staticClass: "text-xl font-bold " }, [_vm._v("Book id")]),
+            _vm._v(" "),
+            _c(
+              "p",
+              {
+                staticClass: "cursor-pointer",
+                on: {
+                  click: function($event) {
+                    return _vm.showSingleBooking(1)
+                  }
+                }
+              },
+              [_c("i", { staticClass: "fa fa-times text-blue-700 text-3xl" })]
+            )
+          ]),
+          _vm._v(" "),
+          _c("p", [_vm._v("Hyedrabad to kigali")])
+        ]),
+        _vm._v(" "),
+        _vm._m(4),
+        _vm._v(" "),
+        _vm._m(5),
+        _vm._v(" "),
+        _vm._m(6)
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-5 sm:flex justify-around mb-4" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "sm:w-2/12 bg-blue-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
+        },
+        [
+          _c("div", { staticClass: "flex justify-around" }, [
+            _c("p", { staticClass: "text-sm sm:text-2xl sm:font-bold" }, [
+              _vm._v("Pending bookings ")
+            ]),
+            _vm._v(" "),
+            _c(
+              "p",
+              { staticClass: "rounded-full bg-blue-100 sm:p-2 px-3 sm:ml-4" },
+              [_vm._v("2")]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "sm:w-2/12 bg-blue-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
+        },
+        [
+          _c("div", { staticClass: "flex justify-around" }, [
+            _c(
+              "a",
+              {
+                staticClass: "text-sm sm:text-2xl sm:font-bold",
+                attrs: { href: "/operator/scheduler" }
+              },
+              [_vm._v("schedulers ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "p",
+              { staticClass: "rounded-full bg-blue-100 sm:p-2 px-3 sm:ml-4" },
+              [_vm._v("2")]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "sm:w-2/12 bg-green-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
+        },
+        [
+          _c("div", { staticClass: "flex justify-around" }, [
+            _c("p", { staticClass: "text-sm sm:text-2xl sm:font-bold" }, [
+              _vm._v("Pending pays ")
+            ]),
+            _vm._v(" "),
+            _c(
+              "p",
+              { staticClass: "rounded-full bg-green-100 sm:p-2 px-3 sm:ml-4" },
+              [_vm._v("2")]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "sm:w-2/12 bg-gray-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
+        },
+        [
+          _c("div", { staticClass: "flex justify-around" }, [
+            _c("p", { staticClass: "text-sm sm:text-2xl sm:font-bold" }, [
+              _vm._v("Notifications ")
+            ]),
+            _vm._v(" "),
+            _c(
+              "p",
+              { staticClass: "rounded-full bg-gray-100 sm:p-2 px-3 sm:ml-4" },
+              [_vm._v("2")]
+            )
+          ])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "border border-blue-900 " }, [
+      _c("tr", { staticClass: "p-2 text-sm font-bold" }, [
+        _c("td", { staticClass: "border-r border-blue-600 p-2" }, [
+          _vm._v("id")
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "border-r border-blue-600 p-2" }, [
+          _vm._v("quick actions")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "cursor-pointer" }, [
+      _c("i", {
+        staticClass: "fa fa-trash text-2xl text-red-500 cursor-pointer"
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-1/2 p-2 md:pt-20 " }, [
+      _c("h4", { staticClass: "text-xl font-bold mb-3" }, [
+        _vm._v("Add a Scheduler")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: " mb-10" }, [
+      _c("h3", [_vm._v("Passenger info")]),
+      _vm._v(" "),
+      _c("div", [
+        _c("p", [_vm._v("Passenger names: Ndagijimana sebastine")]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v("Passenger phone: "),
+          _c("a", { attrs: { href: "tel:0788451717" } }, [_vm._v("0788451717")])
+        ]),
+        _vm._v(" "),
+        _c("p", [_vm._v("Passenger sex: Male")]),
+        _vm._v(" "),
+        _c("p", [_vm._v("Passenger with luggage: yes")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: " mb-10" }, [
+      _c("p", { staticClass: "text-lg leading-8 font-light mb-5" }, [
+        _vm._v(
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut blanditiis eligendi \n                accusantium, similique minima earum corrupti voluptate odit qui veritatis possimus \n                sit facere quisquam maiores provident eaque necessitatibus rem quis.\n            "
+        )
+      ]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v("Payment status: "),
+        _c("span", { staticClass: "text-blue-300 border-1 border-blue-300" }, [
+          _vm._v("Payed")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("h3", [_vm._v("Quick actions")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex justify-items-start pt-10" }, [
+        _c(
+          "button",
+          {
+            staticClass:
+              "p-2 rounded-md mr-3 text-md font-light border-2 border-green-600 text-green-600",
+            attrs: { type: "submit" }
+          },
+          [_vm._v("Cancel")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "p-2 rounded-md mr-3 text-md font-light border-2 border-red-600 text-red-600",
+            attrs: { type: "submit" }
+          },
+          [_vm._v("Delete")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "p-2 rounded-md mr-3 text-md font-light border-2 border-blue-600 text-blue-600",
+            attrs: { type: "submit" }
+          },
+          [_vm._v("Call passenger")]
+        )
       ])
     ])
   }
@@ -81244,9 +81756,12 @@ Vue.component('safety', __webpack_require__(/*! ./components/front/home/safety *
 Vue.component('research', __webpack_require__(/*! ./components/front/booking/research */ "./resources/js/components/front/booking/research.vue")["default"]);
 Vue.component('book-header', __webpack_require__(/*! ./components/front/booking/bookheader */ "./resources/js/components/front/booking/bookheader.vue")["default"]);
 Vue.component('no-cab', __webpack_require__(/*! ./components/front/booking/noCab */ "./resources/js/components/front/booking/noCab.vue")["default"]);
-Vue.component('cab-list', __webpack_require__(/*! ./components/front/booking/cabList */ "./resources/js/components/front/booking/cabList.vue")["default"]);
+Vue.component('cab-list', __webpack_require__(/*! ./components/front/booking/cabList */ "./resources/js/components/front/booking/cabList.vue")["default"]); // operator components starts
+
 Vue.component('operatordashboard', __webpack_require__(/*! ./components/admin/operator/dashboard */ "./resources/js/components/admin/operator/dashboard.vue")["default"]);
 Vue.component('routesandstations', __webpack_require__(/*! ./components/admin/operator/routesAndStations */ "./resources/js/components/admin/operator/routesAndStations.vue")["default"]);
+Vue.component('operatorscheduler', __webpack_require__(/*! ./components/admin/operator/scheduler */ "./resources/js/components/admin/operator/scheduler.vue")["default"]); // operator components ends
+
 Vue.component('car', __webpack_require__(/*! ./components/admin/superAdmin/car */ "./resources/js/components/admin/superAdmin/car.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -81921,6 +82436,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_routesAndStations_vue_vue_type_template_id_5bd89cec_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_routesAndStations_vue_vue_type_template_id_5bd89cec_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/operator/scheduler.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/admin/operator/scheduler.vue ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _scheduler_vue_vue_type_template_id_49d5fb1b_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scheduler.vue?vue&type=template&id=49d5fb1b&scoped=true& */ "./resources/js/components/admin/operator/scheduler.vue?vue&type=template&id=49d5fb1b&scoped=true&");
+/* harmony import */ var _scheduler_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./scheduler.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/operator/scheduler.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _scheduler_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _scheduler_vue_vue_type_template_id_49d5fb1b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _scheduler_vue_vue_type_template_id_49d5fb1b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "49d5fb1b",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/admin/operator/scheduler.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/operator/scheduler.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/admin/operator/scheduler.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_scheduler_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./scheduler.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/operator/scheduler.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_scheduler_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/operator/scheduler.vue?vue&type=template&id=49d5fb1b&scoped=true&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/admin/operator/scheduler.vue?vue&type=template&id=49d5fb1b&scoped=true& ***!
+  \*********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_scheduler_vue_vue_type_template_id_49d5fb1b_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./scheduler.vue?vue&type=template&id=49d5fb1b&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/operator/scheduler.vue?vue&type=template&id=49d5fb1b&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_scheduler_vue_vue_type_template_id_49d5fb1b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_scheduler_vue_vue_type_template_id_49d5fb1b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

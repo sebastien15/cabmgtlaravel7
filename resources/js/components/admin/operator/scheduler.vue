@@ -28,43 +28,20 @@
         <hr class="w-10/12 bg-blue-400 m-auto" style="height: 1px">
         <div class="flex justify-around">
             <div class="w-1/2 p-2 md:pt-20 ">
+                <h4 class="text-xl font-bold mb-3">To day's Scheduler</h4>
                 <div class="overflow-x-auto">
                     <table class="border border-blue-900 ">
                         <thead class="border border-blue-900 ">
                             <tr class="p-2 text-sm font-bold">
                                 <td class="border-r border-blue-600 p-2">id</td>
-                                <td class="border-r border-blue-600 p-2">user_id</td>
-                                <td class="border-r border-blue-600 p-2">route_id</td>
-                                <td class="border-r border-blue-600 p-2">car_id</td>
-                                <td class="border-r border-blue-600 p-2">seat_no</td>
-                                <td class="border-r border-blue-600 p-2">payed</td>
-                                <td class="border-r border-blue-600 p-2">approved</td>
-                                <td class="border-r border-blue-600 p-2">nbr_people</td>
-                                <td class="border-r border-blue-600 p-2">nbr_luggage</td>
-                                <td class="border-r border-blue-600 p-2">pickup_date</td>
-                                <td class="border-r border-blue-600 p-2">pickup_time</td>
-                                <td class="border-r border-blue-600 p-2">pickup_full_add</td>
-                                <td class="border-r border-blue-600 p-2">dropoff_full_add</td>
-                                <td class="border-r border-blue-600 p-2">custom_message</td>
+
                                 <td class="border-r border-blue-600 p-2">quick actions</td>
                             </tr>
                         </thead>
                         <tbody class="border border-blue-400 border-t-0">
                             <tr class="p-2 " v-for="booking in bookings" :key="booking.id">
                                 <td class="border-r border-blue-400 p-2">{{ booking.id }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ booking.user_id }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ booking.route_id }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ booking.car_id }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ booking.seat_no }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ booking.payed }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ booking.approved }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ booking.nbr_people }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ booking.nbr_luggage }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ booking.pickup_date }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ booking.pickup_time }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ booking.pickup_full_add }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ booking.dropoff_full_add }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ booking.custom_message }}</td>
+
                                 <td class="border-r border-blue-400 flex p-2">
                                     <span class="cursor-pointer" @click="showSingleBooking( booking.id )"><i class="fa fa-eye text-xl text-blue-400 mr-2"></i></span>
                                     <span  class="cursor-pointer"><i class="fa fa-trash text-2xl text-red-500 cursor-pointer"></i></span>
@@ -74,7 +51,9 @@
                     </table>
                 </div>
             </div>
-            <div class="w-1/2"> Notifications area</div>
+            <div class="w-1/2 p-2 md:pt-20 ">
+                <h4 class="text-xl font-bold mb-3">Add a Scheduler</h4>
+            </div>
         </div>
         <div 
         class="w-11/12 md:w-8/12 bg-white border-blue-400 top-0 mt-5 md:mt-20  p-20"
@@ -119,7 +98,7 @@
 
 <script>
 export default {
-    name: "operatordashboard",
+    name: "operatorscheduler",
     data() {
         return {
             bookings:{},

@@ -21,7 +21,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('admin/home', 'HomeController@adminHome')->name('admin.home')->middleware('is_admin');
-Route::get('operator/home', 'HomeController@operatorHome')->name('operator.home')->middleware('is_admin');
+// Route::get('operator/home', 'HomeController@operatorHome')->middleware('is_admin');
 
 Route::view('/', 'ui.home');
 Route::view('/about', 'ui.about');
@@ -33,7 +33,8 @@ Route::view('/book', 'ui.book');
 
 //operator start
 
-Route::view('/operator/dashboard','ui.operator.dashboard');
+Route::view('/operator/dashboard','ui.operator.dashboard')->name('operator.home')->middleware('auth')->middleware('is_operator');
+Route::view('/operator/scheduler','ui.operator.scheduler')->name('operator.scheduler')->middleware('auth')->middleware('is_operator');
 
 //super admin pages
 Route::view('/operator/routesAndStations','ui.admin.routesAndStations');
