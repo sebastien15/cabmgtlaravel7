@@ -32,10 +32,8 @@ class stationController extends Controller
         ]);
         
         $station->route_id = $request->route_id;
-        $station->from = $request->from;
-        $station->to = $request->to;
-        $station->from_postcode = $request->from_postcode;
-        $station->to_postcode = $request->to_postcode;
+        $station->from_id = $request->from_id;
+        $station->to_id = $request->to_id;
         $station->price = $request->price;
         $station->kilometers = $request->kilometers;
         $station->time = $request->time;
@@ -78,14 +76,12 @@ class stationController extends Controller
         if (Station::where('id', $id)->exists()) {
             $station = Station::find($id);
             
-            $station->route_id = is_null($request->route_id) ? $station->route_id : $request->route_id;
-            $station->from = is_null($request->from) ? $station->from : $request->from;
-            $station->to = is_null($request->to) ? $station->to : $request->to;
-            $station->from_postcode = is_null($request->from_postcode) ? $station->from_postcode : $request->from_postcode;
-            $station->to_postcode = is_null($request->to_postcode) ? $station->to_postcode : $request->to_postcode;
-            $station->price = is_null($request->price) ? $station->price : $request->price;
+            $station->route_id   = is_null($request->route_id) ? $station->route_id : $request->route_id;
+            $station->from    = is_null($request->from) ? $station->from : $request->from;
+            $station->to      = is_null($request->to) ? $station->to : $request->to;
+            $station->price      = is_null($request->price) ? $station->price : $request->price;
             $station->kilometers = is_null($request->kilometers) ? $station->kilometers : $request->kilometers;
-            $station->time = is_null($request->time) ? $station->time : $request->time;
+            $station->time       = is_null($request->time) ? $station->time : $request->time;
  
             $station->save();
  
@@ -129,15 +125,5 @@ class stationController extends Controller
             ], 404);
           }
 
-    }
-
-    public function searchStation(Request $request)
-    {
-        $stations = Station::where('from','LIKE',"%{$request->keywords}%")
-        ->orWhere('to','LIKE',"%{$request->keywords}%")
-        ->orWhere('from_postcode','LIKE',"%{$request->keywords}%")
-        ->orWhere('to_postcode','LIKE',"%{$request->keywords}%")
-        ->get();
-        return response()->json($stations);
     }
 }

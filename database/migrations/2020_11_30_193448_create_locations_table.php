@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStationsTable extends Migration
+class CreateLocationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateStationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('stations', function (Blueprint $table) {
+        Schema::create('locations', function (Blueprint $table) {
             $table->id();
-            $table->unSignedBigInteger('route_id');
-            $table->string('from');
-            $table->string('to');
-            $table->string('kilometers')->nullable();
-            $table->string('price')->nullable();
-            $table->string('time');
+            $table->string("name");
+            $table->string("loc_postcode")->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ class CreateStationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stations');
+        Schema::dropIfExists('locations');
     }
 }

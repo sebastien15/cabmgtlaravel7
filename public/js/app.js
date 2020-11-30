@@ -2030,7 +2030,8 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       "default": 'text'
     },
-    className: String
+    className: String,
+    id: String
   }
 });
 
@@ -2651,17 +2652,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "routesandstations",
   data: function data() {
@@ -2680,11 +2670,7 @@ __webpack_require__.r(__webpack_exports__);
       form: new Form({
         route_id: '',
         from: '',
-        from_post_code: '',
-        from_postcode: '',
         to: '',
-        to_post_code: '',
-        to_postcode: '',
         kilometers: '',
         price: '',
         time: ''
@@ -3812,47 +3798,69 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "banner",
+  props: {
+    fromName: null,
+    toName: null
+  },
   data: function data() {
     return {
-      keywords: null,
-      results: []
+      from: null,
+      to: null,
+      results: [],
+      resultsTo: []
     };
   },
   watch: {
-    keywords: function keywords(after, before) {
+    from: function from(after, before) {
       this.fetch();
+    },
+    to: function to(after, before) {
+      this.fetchTo();
     }
   },
   methods: {
     fetch: function fetch() {
       var _this = this;
 
-      axios.get('api/search', {
-        params: {
-          keywords: this.keywords
-        }
-      }).then(function (response) {
-        _this.results = response.data; // console.log("keywords is" + typeof(this.keywords))
-        // console.log(response)
+      if (this.from == '') {
+        this.results = [];
+      } else {
+        axios.get('api/search', {
+          params: {
+            from: this.from
+          }
+        }).then(function (response) {
+          _this.results = response.data;
+        })["catch"](function (error) {
+          console.log(error.message);
+        });
+      }
+    },
+    fetchTo: function fetchTo() {
+      var _this2 = this;
 
-        if (_this.keywords == '') {
-          _this.results = [];
-        }
-      })["catch"](function (error) {
-        console.log(error.message);
-      });
-      axios.get('/api/searchStation', {
-        params: {
-          keywords: this.keywords
-        }
-      }).then(function (response) {
-        _this.results = Object.assign(_this.results, response.data);
-        console.log(_this.results);
-      })["catch"](function (error) {
-        return console.log(error.message);
-      });
+      if (this.to == '') {
+        this.resultsTo = [];
+      } else {
+        axios.get('api/search', {
+          params: {
+            to: this.to
+          }
+        }).then(function (response) {
+          _this2.resultsTo = response.data;
+        })["catch"](function (error) {
+          console.log(error.message);
+        });
+      }
+    },
+    setLocFrom: function setLocFrom(name) {
+      console.log(name);
+    },
+    setLocTo: function setLocTo(name) {
+      console.log(name);
     }
   }
 });
@@ -66905,15 +66913,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
-                      _vm._v(_vm._s(route.from_post_code))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
                       _vm._v(_vm._s(route.to))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
-                      _vm._v(_vm._s(route.to_post_code))
                     ]),
                     _vm._v(" "),
                     _c("td", { staticClass: " flex p-2" }, [
@@ -67015,15 +67015,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
-                      _vm._v(_vm._s(station.from_postcode))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
                       _vm._v(_vm._s(station.to))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
-                      _vm._v(_vm._s(station.to_postcode))
                     ]),
                     _vm._v(" "),
                     _c("td", { staticClass: "flex p-2" }, [
@@ -67107,14 +67099,6 @@ var render = function() {
           _c("p", [
             _vm._v(
               _vm._s(_vm.singleRoute.from) + " to " + _vm._s(_vm.singleRoute.to)
-            )
-          ]),
-          _vm._v(" "),
-          _c("p", [
-            _vm._v(
-              _vm._s(_vm.singleRoute.from_post_code) +
-                " to " +
-                _vm._s(_vm.singleRoute.to_post_code)
             )
           ])
         ]),
@@ -67224,14 +67208,6 @@ var render = function() {
               _vm._s(_vm.singleStation.from) +
                 " to " +
                 _vm._s(_vm.singleStation.to)
-            )
-          ]),
-          _vm._v(" "),
-          _c("p", [
-            _vm._v(
-              _vm._s(_vm.singleStation.from_postcode) +
-                " to " +
-                _vm._s(_vm.singleStation.to_postcode)
             )
           ]),
           _vm._v(" "),
@@ -67360,33 +67336,6 @@ var render = function() {
                       _vm.$set(_vm.form, "from", $event.target.value)
                     }
                   }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.from_post_code,
-                      expression: "form.from_post_code"
-                    }
-                  ],
-                  staticClass:
-                    "w-5/12 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3",
-                  attrs: {
-                    type: "text",
-                    name: "from_post_code",
-                    placeholder: "Pickup post code"
-                  },
-                  domProps: { value: _vm.form.from_post_code },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "from_post_code", $event.target.value)
-                    }
-                  }
                 })
               ]),
               _vm._v(" "),
@@ -67414,33 +67363,6 @@ var render = function() {
                         return
                       }
                       _vm.$set(_vm.form, "to", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.to_post_code,
-                      expression: "form.to_post_code"
-                    }
-                  ],
-                  staticClass:
-                    "w-5/12 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3",
-                  attrs: {
-                    type: "text",
-                    name: "to_post_code",
-                    placeholder: "Drop off post code"
-                  },
-                  domProps: { value: _vm.form.to_post_code },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "to_post_code", $event.target.value)
                     }
                   }
                 })
@@ -67634,33 +67556,6 @@ var render = function() {
                       _vm.$set(_vm.form, "from", $event.target.value)
                     }
                   }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.from_postcode,
-                      expression: "form.from_postcode"
-                    }
-                  ],
-                  staticClass:
-                    "w-5/12 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3",
-                  attrs: {
-                    type: "text",
-                    name: "from_post_code",
-                    placeholder: "Pickup post code"
-                  },
-                  domProps: { value: _vm.form.from_postcode },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "from_postcode", $event.target.value)
-                    }
-                  }
                 })
               ]),
               _vm._v(" "),
@@ -67688,33 +67583,6 @@ var render = function() {
                         return
                       }
                       _vm.$set(_vm.form, "to", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.to_postcode,
-                      expression: "form.to_postcode"
-                    }
-                  ],
-                  staticClass:
-                    "w-5/12 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3",
-                  attrs: {
-                    type: "text",
-                    name: "to_post_code",
-                    placeholder: "Drop off post code"
-                  },
-                  domProps: { value: _vm.form.to_postcode },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "to_postcode", $event.target.value)
                     }
                   }
                 })
@@ -67894,10 +67762,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
           _vm._v("pickup")
-        ]),
-        _vm._v(" "),
-        _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
-          _vm._v("pickup Post code")
         ]),
         _vm._v(" "),
         _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
@@ -69793,58 +69657,43 @@ var render = function() {
                 attrs: {
                   label: "From",
                   placeholder: "From",
+                  id: "fromInput",
                   className:
                     "h-8 p-2 text-red-800 font-hairline text-lg border-0"
                 },
                 model: {
-                  value: _vm.keywords,
+                  value: _vm.from,
                   callback: function($$v) {
-                    _vm.keywords = $$v
+                    _vm.from = $$v
                   },
-                  expression: "keywords"
+                  expression: "from"
                 }
-              })
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "absolute bg-white h-24" }, [
+                _vm.results.length > 0
+                  ? _c(
+                      "ul",
+                      { staticClass: "w-full list-none" },
+                      _vm._l(_vm.results, function(result) {
+                        return _c("li", {
+                          key: result.id,
+                          staticClass:
+                            "border-b-blue-400 p-4 py-2 text-base cursor-pointer",
+                          domProps: { textContent: _vm._s(result.name) },
+                          on: {
+                            click: function($event) {
+                              return _vm.setLocFrom(result.name)
+                            }
+                          }
+                        })
+                      }),
+                      0
+                    )
+                  : _vm._e()
+              ])
             ],
             1
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "absolute bg-white h-24",
-              staticStyle: { "margin-top": "4.2rem" }
-            },
-            [
-              _vm.results.length > 0
-                ? _c(
-                    "ul",
-                    { staticClass: "w-full list-none" },
-                    _vm._l(_vm.results, function(result) {
-                      return _c(
-                        "li",
-                        {
-                          key: result.id,
-                          staticClass: "border-b-blue-400 p-4 py-2 text-base"
-                        },
-                        [
-                          _c("span", {
-                            staticClass: "cursor-pointer hover:bg-blue-300",
-                            domProps: { textContent: _vm._s(result.from) }
-                          }),
-                          _vm._v(" "),
-                          _vm._m(0, true),
-                          _vm._v(" "),
-                          _c("span", {
-                            staticClass: "cursor-pointer hover:bg-blue-300",
-                            domProps: { textContent: _vm._s(result.to) }
-                          })
-                        ]
-                      )
-                    }),
-                    0
-                  )
-                : _vm._e()
-            ]
           ),
           _vm._v(" "),
           _c(
@@ -69855,10 +69704,41 @@ var render = function() {
                 attrs: {
                   label: "to",
                   placeholder: "to",
+                  id: "toInput",
                   className:
                     "h-8 p-2 text-red-800 font-hairline text-lg border-0"
+                },
+                model: {
+                  value: _vm.to,
+                  callback: function($$v) {
+                    _vm.to = $$v
+                  },
+                  expression: "to"
                 }
-              })
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "absolute bg-white h-24" }, [
+                _vm.resultsTo.length > 0
+                  ? _c(
+                      "ul",
+                      { staticClass: "w-full list-none" },
+                      _vm._l(_vm.resultsTo, function(result) {
+                        return _c("li", {
+                          key: result.id,
+                          staticClass:
+                            "border-b-blue-400 p-4 py-2 text-base cursor-pointer",
+                          domProps: { textContent: _vm._s(result.name) },
+                          on: {
+                            click: function($event) {
+                              return _vm.setLocTo(result.name)
+                            }
+                          }
+                        })
+                      }),
+                      0
+                    )
+                  : _vm._e()
+              ])
             ],
             1
           ),
@@ -69871,6 +69751,8 @@ var render = function() {
                 attrs: {
                   label: "Date",
                   placeholder: "date",
+                  id: "date",
+                  type: "date",
                   className:
                     "h-8 p-2 text-red-800 font-hairline text-lg border-0"
                 }
@@ -69897,16 +69779,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "mx-2 text-lg text-blue-500" }, [
-      _c("i", { staticClass: "fa fa-arrows-h" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

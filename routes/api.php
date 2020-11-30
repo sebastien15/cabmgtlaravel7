@@ -9,6 +9,7 @@ use App\Http\Controllers\routeController;
 use App\Http\Controllers\schedulerController;    
 use App\Http\Controllers\stationController;    
 use App\Http\Controllers\contactController;
+use App\Http\Controllers\locationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,21 +54,20 @@ Route::delete('cars/{id}',[carController::class, 'destroy']);
 //routes
 
 Route::get('routes', [routeController::class, 'index']);
-Route::get('search',[routeController::class, 'searchRoutes']);
+// Route::get('search',[routeController::class, 'searchRoutes']);
 Route::get('routes/{id}', [routeController::class, 'show']);
 Route::post('routes', [routeController::class, 'store']);
 Route::put('routes/{id}', [routeController::class, 'update']);
 Route::delete('routes/{id}',[routeController::class, 'destroy']);
 
-//schedulers
+//locations
 
-Route::get('schedulers', [schedulerController::class, 'index']);
-Route::get('schedulers/{id}', [schedulerController::class, 'show']);
-Route::get('schedulers/operator/{id}', [schedulerController::class, 'findByOperator']);
-Route::get('schedulers/today', [schedulerController::class, 'getTodaysScheduler']);
-Route::post('schedulers', [schedulerController::class, 'store']);
-Route::put('schedulers/{id}', [schedulerController::class, 'update']);
-Route::delete('schedulers/{id}',[schedulerController::class, 'destroy']);
+Route::get('locations', [locationController::class, 'index']);
+Route::get('locations/{id}', [locationController::class, 'show']);
+Route::post('locations', [locationController::class, 'store']);
+Route::put('locations/{id}', [locationController::class, 'update']);
+Route::delete('locations/{id}',[locationController::class, 'destroy']);
+Route::get('search',[locationController::class, 'searchLoc']);
 
 // stations
 
@@ -78,8 +78,16 @@ Route::post('stations', [stationController::class, 'store']);
 Route::put('stations/{id}', [stationController::class, 'update']);
 Route::delete('stations/{id}',[stationController::class, 'destroy']);
 Route::delete('stationDestroyByRouteId/{id}',[stationController::class, 'destroyByRouteId']);
-Route::get('searchStation',[stationController::class, 'searchStation']);
 
+//schedulers
+
+Route::get('schedulers', [schedulerController::class, 'index']);
+Route::get('schedulers/{id}', [schedulerController::class, 'show']);
+Route::get('schedulers/operator/{id}', [schedulerController::class, 'findByOperator']);
+Route::get('schedulers/today', [schedulerController::class, 'getTodaysScheduler']);
+Route::post('schedulers', [schedulerController::class, 'store']);
+Route::put('schedulers/{id}', [schedulerController::class, 'update']);
+Route::delete('schedulers/{id}',[schedulerController::class, 'destroy']);
 // contact apis
 
 Route::get('contacts', [contactController::class, 'index']);

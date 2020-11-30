@@ -32,8 +32,6 @@ class routeController extends Controller
  
         $route->from = $request->from;
         $route->to = $request->to;
-        $route->from_post_code = $request->from_post_code;
-        $route->to_post_code = $request->to_post_code;
         $route->price = $request->price;
         $route->kilometers = $request->kilometers;
         $route->time = $request->time;
@@ -66,8 +64,6 @@ class routeController extends Controller
             $route = Route::find($id);
             $route->from = is_null($request->from) ? $route->from : $request->from;
             $route->to = is_null($request->to) ? $route->to : $request->to;
-            $route->from_post_code = is_null($request->from_post_code) ? $route->from_post_code : $request->from_post_code;
-            $route->to_post_code = is_null($request->to_post_code) ? $route->to_post_code : $request->to_post_code;
             $route->price = is_null($request->price) ? $route->price : $request->price;
             $route->kilometers = is_null($request->kilometers) ? $route->kilometers : $request->kilometers;
             $route->time = is_null($request->time) ? $route->time : $request->time;
@@ -98,14 +94,5 @@ class routeController extends Controller
               "message" => "Route not found"
             ], 404);
           }
-    }
-    public function searchRoutes(Request $request)
-    {
-
-        // $ = Route::where('from', $request->keywords)->get();
-        $routes = Route::where('from','LIKE',"%{$request->keywords}%")
-        ->orWhere('to','LIKE',"%{$request->keywords}%")
-        ->get();
-        return response()->json($routes);
     }
 }

@@ -27,7 +27,8 @@
                 type: String,
                 default: 'text',
             },
-            className: String
+            className: String,
+            id: String
         }
     }
 </script>

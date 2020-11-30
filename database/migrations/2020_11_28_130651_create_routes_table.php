@@ -17,8 +17,6 @@ class CreateRoutesTable extends Migration
             $table->id();
             $table->string('from')->nullable();
             $table->string('to')->nullable();
-            $table->string('from_post_code')->nullable();
-            $table->string('to_post_code')->nullable();
             $table->string('price')->nullable();
             $table->string('kilometers');
             $table->string('time');

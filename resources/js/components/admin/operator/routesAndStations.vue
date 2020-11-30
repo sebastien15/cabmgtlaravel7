@@ -14,7 +14,6 @@
                             <tr class="p-2 text-sm font-bold">
                                 <td class="border-r border-blue-400 p-2">id</td>
                                 <td class="border-r border-blue-400 p-2">pickup</td>
-                                <td class="border-r border-blue-400 p-2">pickup Post code</td>
                                 <td class="border-r border-blue-400 p-2">Destination</td>
                                 <td class="border-r border-blue-400 p-2">Destination post code</td>
                                 <td class="p-2">quick actions</td>
@@ -24,9 +23,7 @@
                             <tr class="p-2 border-b border-b-blue-400" v-for="route in routes" :key="route.id">
                                 <td class="border-r border-blue-400 p-2">{{ route.id }}</td>
                                 <td class="border-r border-blue-400 p-2">{{ route.from }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ route.from_post_code }}</td>
                                 <td class="border-r border-blue-400 p-2">{{ route.to }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ route.to_post_code }}</td>
                                 <td class=" flex p-2">
                                     <span class="cursor-pointer" @click="showSingleRoute( route.id )"><i class="fa fa-eye text-xl text-blue-400 mr-2"></i></span>
                                     <span  class="cursor-pointer" @click="deleteRoute( route.id )"><i class="fa fa-trash text-xl text-red-500 cursor-pointer"></i></span>
@@ -56,9 +53,7 @@
                             <tr class="p-2 border-b border-b-blue-400" v-for="station in stations" :key="station.id">
                                 <td class="border-r border-blue-400 p-2">{{ station.id }}</td>
                                 <td class="border-r border-blue-400 p-2">{{ station.from }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ station.from_postcode }}</td>
                                 <td class="border-r border-blue-400 p-2">{{ station.to }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ station.to_postcode }}</td>
                                 <td class="flex p-2">
                                     <span class="cursor-pointer" @click="showSingleStation( station.id )"><i class="fa fa-eye text-xl text-blue-400 mr-2"></i></span>
                                     <span  class="cursor-pointer" @click="deleteStation( station.id )"><i class="fa fa-trash text-xl text-red-500 cursor-pointer"></i></span>
@@ -82,7 +77,6 @@
                 <p class="cursor-pointer" @click="()=>{this.showSingleRouteModel = !this.showSingleRouteModel; this.singleRoute = {}}"><i class="fa fa-times text-blue-700 text-3xl"></i></p>
                 </div>
                 <p >{{ singleRoute.from }} to {{ singleRoute.to }}</p>
-                <p >{{ singleRoute.from_post_code }} to {{ singleRoute.to_post_code }}</p>
             </div>
             <div class=" mb-10">
                 <h3>Route info</h3>
@@ -114,7 +108,6 @@
                 <p class="cursor-pointer" @click="()=>{this.showSingleStationModel = !this.showSingleStationModel; this.singleStation = {}}"><i class="fa fa-times text-blue-700 text-3xl"></i></p>
                 </div>
                 <p >{{ singleStation.from }} to {{ singleStation.to }}</p>
-                <p >{{ singleStation.from_postcode }} to {{ singleStation.to_postcode }}</p>
                 <h5 class="text-sm font-semibold my-2">Main road</h5>
                 <p>{{singleStation.route_id}}</p>
             </div>
@@ -147,11 +140,9 @@
                 <form @submit.prevent="editMode? updateRoute() : saveRoute()">
                     <div class="flex justify-between mb-2">
                         <input class="w-5/12 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" type="text" v-model="form.from" name="from" placeholder="Pickup name"/>
-                        <input class="w-5/12 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" type="text" v-model="form.from_post_code" name="from_post_code" placeholder="Pickup post code"/>
                     </div>
                     <div class="flex justify-between mb-2">
                         <input class="w-5/12 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" type="text" v-model="form.to" name="to" placeholder="Drop off name"/>
-                        <input class="w-5/12 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" type="text" v-model="form.to_post_code" name="to_post_code" placeholder="Drop off post code"/>
                     </div>
                     <div class="flex justify-between mb-2">
                         <input class="w-5/12 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" type="text" v-model="form.kilometers" name="kilometers" placeholder="Kilometers"/>
@@ -180,11 +171,9 @@
                 <form @submit.prevent="editStationMode? updateStation() : saveStation()">
                     <div class="flex justify-between mb-2">
                         <input class="w-5/12 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" type="text" v-model="form.from" name="from" placeholder="Pickup name"/>
-                        <input class="w-5/12 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" type="text" v-model="form.from_postcode" name="from_post_code" placeholder="Pickup post code"/>
                     </div>
                     <div class="flex justify-between mb-2">
                         <input class="w-5/12 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" type="text" v-model="form.to" name="to" placeholder="Drop off name"/>
-                        <input class="w-5/12 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" type="text" v-model="form.to_postcode" name="to_post_code" placeholder="Drop off post code"/>
                     </div>
                     <div class="flex justify-between mb-2">
                         <input class="w-5/12 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" type="text" v-model="form.kilometers" name="kilometers" placeholder="Kilometers"/>
@@ -224,11 +213,7 @@ export default {
             form: new Form({
                     route_id: '',
                     from : '',
-                    from_post_code: '',
-                    from_postcode: '',
                     to: '',
-                    to_post_code: '',
-                    to_postcode: '',
                     kilometers: '',
                     price: '',
                     time: '',
