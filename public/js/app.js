@@ -3803,12 +3803,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "banner",
+  data: function data() {
+    return {
+      keywords: null,
+      results: []
+    };
+  },
+  watch: {
+    keywords: function keywords(after, before) {
+      this.fetch();
+    }
+  },
   methods: {
-    addLabel: function addLabel() {
-      // this.label = labelName
-      console.log('hello');
+    fetch: function fetch() {
+      var _this = this;
+
+      axios.get('api/search', {
+        params: {
+          keywords: this.keywords
+        }
+      }).then(function (response) {
+        _this.results = response.data; // console.log("keywords is" + typeof(this.keywords))
+        // console.log(response)
+
+        if (_this.keywords == '') {
+          _this.results = [];
+        }
+      })["catch"](function (error) {
+        console.log(error.message);
+      });
+      axios.get('/api/searchStation', {
+        params: {
+          keywords: this.keywords
+        }
+      }).then(function (response) {
+        _this.results = Object.assign(_this.results, response.data);
+        console.log(_this.results);
+      })["catch"](function (error) {
+        return console.log(error.message);
+      });
     }
   }
 });
@@ -69747,9 +69791,17 @@ var render = function() {
             [
               _c("base-input", {
                 attrs: {
-                  label: "",
+                  label: "From",
                   placeholder: "From",
-                  className: "h-8 text-red-800 font-hairline text-lg border-0"
+                  className:
+                    "h-8 p-2 text-red-800 font-hairline text-lg border-0"
+                },
+                model: {
+                  value: _vm.keywords,
+                  callback: function($$v) {
+                    _vm.keywords = $$v
+                  },
+                  expression: "keywords"
                 }
               })
             ],
@@ -69758,13 +69810,53 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
+            {
+              staticClass: "absolute bg-white h-24",
+              staticStyle: { "margin-top": "4.2rem" }
+            },
+            [
+              _vm.results.length > 0
+                ? _c(
+                    "ul",
+                    { staticClass: "w-full list-none" },
+                    _vm._l(_vm.results, function(result) {
+                      return _c(
+                        "li",
+                        {
+                          key: result.id,
+                          staticClass: "border-b-blue-400 p-4 py-2 text-base"
+                        },
+                        [
+                          _c("span", {
+                            staticClass: "cursor-pointer hover:bg-blue-300",
+                            domProps: { textContent: _vm._s(result.from) }
+                          }),
+                          _vm._v(" "),
+                          _vm._m(0, true),
+                          _vm._v(" "),
+                          _c("span", {
+                            staticClass: "cursor-pointer hover:bg-blue-300",
+                            domProps: { textContent: _vm._s(result.to) }
+                          })
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                : _vm._e()
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
             { staticClass: "border-2 border-gray-300 px-3" },
             [
               _c("base-input", {
                 attrs: {
-                  label: "",
+                  label: "to",
                   placeholder: "to",
-                  className: "h-8 text-red-800 font-hairline text-lg border-0"
+                  className:
+                    "h-8 p-2 text-red-800 font-hairline text-lg border-0"
                 }
               })
             ],
@@ -69779,7 +69871,8 @@ var render = function() {
                 attrs: {
                   label: "Date",
                   placeholder: "date",
-                  className: "h-8 text-red-800 font-hairline text-lg border-0"
+                  className:
+                    "h-8 p-2 text-red-800 font-hairline text-lg border-0"
                 }
               })
             ],
@@ -69804,7 +69897,16 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "mx-2 text-lg text-blue-500" }, [
+      _c("i", { staticClass: "fa fa-arrows-h" })
+    ])
+  }
+]
 render._withStripped = true
 
 

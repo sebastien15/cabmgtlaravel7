@@ -41,6 +41,7 @@ Route::get('bookings/{id}', [bookingController::class, 'show']);
 Route::post('bookings', [bookingController::class, 'store']);
 Route::put('bookings/{id}', [bookingController::class, 'update']);
 Route::delete('bookings/{id}',[bookingController::class, 'destroy']);
+
 // Car routes
 
 Route::get('cars', [carController::class, 'index']);
@@ -48,9 +49,11 @@ Route::get('cars/{id}', [carController::class, 'show']);
 Route::post('cars', [carController::class, 'store']);
 Route::put('cars/{id}', [carController::class, 'update']);
 Route::delete('cars/{id}',[carController::class, 'destroy']);
+
 //routes
 
 Route::get('routes', [routeController::class, 'index']);
+Route::get('search',[routeController::class, 'searchRoutes']);
 Route::get('routes/{id}', [routeController::class, 'show']);
 Route::post('routes', [routeController::class, 'store']);
 Route::put('routes/{id}', [routeController::class, 'update']);
@@ -75,6 +78,7 @@ Route::post('stations', [stationController::class, 'store']);
 Route::put('stations/{id}', [stationController::class, 'update']);
 Route::delete('stations/{id}',[stationController::class, 'destroy']);
 Route::delete('stationDestroyByRouteId/{id}',[stationController::class, 'destroyByRouteId']);
+Route::get('searchStation',[stationController::class, 'searchStation']);
 
 // contact apis
 
