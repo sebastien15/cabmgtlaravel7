@@ -115,7 +115,6 @@
             ]"
             >
             <h2 class="text-2xl font-bold mb-4">Add a Scheduler</h2>
-            {{ this.form.arrival_time }}
             <div class="border-b-blue-200 mb-10">
                 <form @submit.prevent="editMode? updateScheduler() : saveScheduler()">
                     <div class="flex justify-between mb-2 sm:mb-4">
@@ -130,11 +129,11 @@
                         </div>
                         <div class="w-3/12 flex flex-col">
                             <label class="text-md pb-2 mb-2">Depart time</label>
-                            <input class=" text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" @change="calcJourneytime()" type="text" v-model="form.departure_time" name="departure_time" placeholder="12/15"/>
+                            <input class=" text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" @change="calcJourneytime()" type="time" v-model="form.departure_time" name="departure_time" placeholder="12/15"/>
                         </div>
                         <div class="w-3/12 flex flex-col">
                             <label class="text-md pb-2 mb-2">Arrival time</label>
-                            <input class=" text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" @change="calcJourneytime()" type="text" v-model="form.arrival_time" name="arrival_time" placeholder="15/04"/>
+                            <input class=" text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" @change="calcJourneytime()" type="time" v-model="form.arrival_time" name="arrival_time" placeholder="15/04"/>
                         </div>
                     </div>
                     <div class="flex justify-between mb-2 sm:mb-4">
@@ -278,9 +277,16 @@ export default {
                 let arrTime = this.form.arrival_time
                 if(depTime != "" && arrTime != "")
                 {
-                    console.log(depTime.slice(0, 2))
-                    console.log(arrTime)
+                    let depHour = +depTime.slice(0, 2)
+                    let depMin  = +depTime.substr(3)
+                    let arrHour = +arrTime.slice(0, 2)
+                    let arrMin  = +arrTime.substr(3)
 
+                    let diffHour =arrHour - depHour;
+                    let diffMin = arrMin - depMin;
+                    this.form.journey_time = JSON.stringify(diffHour)+"hours and "+ JSON.stringify(diffMin) + "min"
+                    console.log(`dep hour is ${depHour} dep min is ${depMin} arr hour is ${arrHour} arr min is ${arrHour}`)
+                    console.log(`journey hour is ${diffHour} and journey min is ${diffMin}`)
                     // console.log(new Date(depT))
                 }
              }

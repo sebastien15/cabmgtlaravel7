@@ -24,7 +24,9 @@
             </ul>
        </div>
        <div class="w-1/3">
-            <div class="mb-5">OrnaSol</div>
+            <div class="mb-5">
+                <img src="/images/logo.png" alt="logo" class="w-16 h-12">
+            </div>
             <div class="mb-5">
                 <p class="text-xl font-hairline">
                     redBus is the  world's largest online bus ticket booking service trusted by over 18 million happy customers 
