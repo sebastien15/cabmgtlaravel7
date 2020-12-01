@@ -11,6 +11,7 @@
                :placeholder="placeholder"
                :required="required"
                :class="className"
+               :id="id"
         >
     </label>
 </template>

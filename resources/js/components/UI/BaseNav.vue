@@ -4,23 +4,50 @@
             <div class="flex items-center justify-between h-20">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <a href="#" class="flex items-center">
+                        <a href="/" class="flex items-center">
                             <img src="/images/logo.png" alt="logo" class="w-16 h-12">
-                            <span class="text-gray-300 text-xl font-semibold mx-2">Dashboard</span>
+                            <span class="text-gray-300 text-xl font-semibold mx-2">Home</span>
                         </a>
                     </div>
                     <div class="hidden md:block">
                         <div class="mx-10 flex items-baseline">
-                            <a href="#"
-                               class="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">Home</a>
-                            <a href="#"
-                               class="mx-1 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Link</a>
-                            <a href="#"
-                               class="mx-1 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Another Link</a>
-                            <a href="#"
-                               class="mx-1 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Another one</a>
-                            <a href="#"
-                               class="mx-1 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Reports</a>
+                            <!-- <a href="#"
+                               class="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">Home</a> -->
+                            <a href="/about"
+                               class="mx-1 
+                               px-3 py-2 rounded-md 
+                               text-sm font-medium 
+                               text-gray-300 hover:text-white 
+                               hover:bg-gray-700 focus:outline-none 
+                               focus:text-white focus:bg-gray-700">About us</a>
+                            <a href="/contactus"
+                               class="mx-1 
+                               px-3 py-2 rounded-md 
+                               text-sm font-medium 
+                               text-gray-300 hover:text-white 
+                               hover:bg-gray-700 focus:outline-none 
+                               focus:text-white focus:bg-gray-700">contact us</a>
+                            <a href="/values"
+                               class="mx-1 
+                               px-3 py-2 rounded-md 
+                               text-sm font-medium 
+                               text-gray-300 hover:text-white 
+                               hover:bg-gray-700 focus:outline-none 
+                               focus:text-white focus:bg-gray-700">Our values</a>
+                            <a href="/offers"
+                               class="mx-1 
+                               px-3 py-2 rounded-md 
+                               text-sm font-medium 
+                               text-gray-300 hover:text-white 
+                               hover:bg-gray-700 focus:outline-none 
+                               focus:text-white focus:bg-gray-700">Offers</a>
+                            <a href="/siteMap"
+                               class="mx-1 
+                               px-3 py-2 rounded-md 
+                               text-sm font-medium 
+                               text-gray-300 hover:text-white 
+                               hover:bg-gray-700 focus:outline-none 
+                               focus:text-white focus:bg-gray-700">Site Map</a>
                         </div>
                     </div>
                 </div>
@@ -55,16 +82,58 @@
         -->
         <div class="block md:hidden" v-show="isOpen">
             <div class="px-2 pt-2 pb-3 sm:px-3">
-                <a href="#"
-                   class="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">Home</a>
-                <a href="#"
-                   class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Link</a>
-                <a href="#"
-                   class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Another Link</a>
-                <a href="#"
-                   class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Another one</a>
-                <a href="#"
-                   class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Reports</a>
+                <!-- <a href="#"
+                   class="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">Home</a> -->
+                <a href="/about"
+                   class="
+                   mt-1 block px-3 py-2 
+                   rounded-md text-base 
+                   font-medium text-gray-300 
+                   hover:text-white 
+                   hover:bg-gray-700 
+                   focus:outline-none 
+                   focus:text-white 
+                   focus:bg-gray-700">About us</a>
+                <a href="/contactus"
+                   class="
+                   mt-1 block px-3 py-2 
+                   rounded-md text-base 
+                   font-medium text-gray-300 
+                   hover:text-white 
+                   hover:bg-gray-700 
+                   focus:outline-none 
+                   focus:text-white 
+                   focus:bg-gray-700">contact us</a>
+                <a href="/values"
+                   class="
+                   mt-1 block px-3 py-2 
+                   rounded-md text-base 
+                   font-medium text-gray-300 
+                   hover:text-white 
+                   hover:bg-gray-700 
+                   focus:outline-none 
+                   focus:text-white 
+                   focus:bg-gray-700">Our values</a>
+                <a href="/offers"
+                   class="
+                   mt-1 block px-3 py-2 
+                   rounded-md text-base 
+                   font-medium text-gray-300 
+                   hover:text-white 
+                   hover:bg-gray-700 
+                   focus:outline-none 
+                   focus:text-white 
+                   focus:bg-gray-700">Offers</a>
+                <a href="/siteMap"
+                   class="
+                   mt-1 block px-3 py-2 
+                   rounded-md text-base 
+                   font-medium text-gray-300 
+                   hover:text-white 
+                   hover:bg-gray-700 
+                   focus:outline-none 
+                   focus:text-white 
+                   focus:bg-gray-700">Site map</a>
                 <button class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
                    @click="logout">Logout</button>
 

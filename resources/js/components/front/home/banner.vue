@@ -1,12 +1,14 @@
 <template>
     <div class="px-40 text-lg bg-blue-400 -mt-6 pt-64 pb-10">
+
+        <object type="image/svg+xml" data="images/xylo.svg" style="height:30px; width: 24px;"></object>
         <div class="w-7/12 m-auto flex">
             <div class="w-8/12 flex bg-white border-gray-300">
                 <div class="border-2 border-gray-300 px-3">
                     <base-input  label="From" placeholder="From" id="fromInput" className="h-8 p-2 text-red-800 font-hairline text-lg border-0" v-model="from"></base-input>
                     <div class="absolute bg-white h-24">
                         <ul class="w-full list-none" v-if="results.length > 0">
-                            <li class="border-b-blue-400 p-4 py-2 text-base cursor-pointer" v-for="result in results" :key="result.id"  v-text="result.name" @click="setLocFrom(result.name)"></li>
+                            <li class="border-b-blue-400 p-4 py-2 text-base cursor-pointer hover:bg-blue-400" v-for="result in results" :key="result.id"  v-text="result.name" @click="setLocFrom(result.name)"></li>
                         </ul>
                     </div>
                 </div>
@@ -14,15 +16,15 @@
                     <base-input label="to"   placeholder="to" id="toInput" className="h-8 p-2 text-red-800 font-hairline text-lg border-0" v-model="to"> </base-input>
                     <div class="absolute bg-white h-24">
                         <ul class="w-full list-none" v-if="resultsTo.length > 0">
-                            <li class="border-b-blue-400 p-4 py-2 text-base cursor-pointer" v-for="result in resultsTo" :key="result.id"  v-text="result.name" @click="setLocTo(result.name)"></li>
+                            <li class="border-b-blue-400 p-4 py-2 text-base cursor-pointer hover:bg-blue-400" v-for="result in resultsTo" :key="result.id"  v-text="result.name" @click="setLocTo(result.name)"></li>
                         </ul>
                     </div>
                 </div>
                 <div class="border-2 border-gray-300 px-3">
-                    <base-input  label="Date" placeholder="date" id="date"  type="date" className="h-8 p-2 text-red-800 font-hairline text-lg border-0" ></base-input>
+                    <base-input  label="Date" placeholder="date" id="date"  type="date" className="h-8 p-2 text-red-800 font-hairline text-lg border-0" v-model="dDate"></base-input>
                 </div>
             </div>
-            <div class="w-4/12">
+            <div class="w-4/12" @click="redirect">
                 <base-button className="h-16 px-10 bg-red-400 text-white font-hairline text-lg border-0 p-0"></base-button>
             </div>
         </div>  
@@ -32,16 +34,15 @@
 <script>
 export default {
     name: "banner",
-    props: {
-        fromName: null,
-        toName: null,
-    },
     data() {
         return {
             from: null,
             to: null,
             results: [],
             resultsTo: [],
+            dDate: null,
+            fromName: null,
+            toName: null,
         }
     },
     watch: {
@@ -59,8 +60,7 @@ export default {
             }else{
                 axios.get('api/search', { params: { from: this.from } })
                     .then(response => {
-                        this.results = response.data; 
-                            
+                        this.results = response.data;                             
                         })
                     .catch(error => {console.log(error.message)}); 
             }
@@ -77,10 +77,26 @@ export default {
             }
         },
         setLocFrom(name){
-            console.log(name)
+            document.querySelector('#fromInput').value = name;
+            this.fromName = name;
+            this.results = ''
          },
         setLocTo(name){
-            console.log(name);
+            document.querySelector('#toInput').value = name;
+            this.toName = name;
+            this.resultsTo = ''
+         },
+        redirect(){
+            if (this.from ==null || this.to ==null || this.dDate ==null) {
+                this.$Progress.start();
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Please add all fields'
+                })
+                this.$Progress.finish()
+            }else{
+                window.location.href = `/book?from=${this.fromName}&to=${this.toName}&date=${this.dDate}`;
+            }
          }
     },
 }

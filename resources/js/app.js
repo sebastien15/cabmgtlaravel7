@@ -37,6 +37,12 @@ window.Form = Form;
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 
+//Import View Router
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
+
+//Routes
+import { routes } from './routes';
 
 /**
  * The following block of code may be used to automatically register your
