@@ -1,80 +1,65 @@
 <template>
-    <div>    
+    <div>   
         <div class="p-5 sm:flex justify-around mb-4">
-            <div class="sm:w-2/12 bg-blue-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer">
-                <div class="flex justify-around">
-                <p class="text-sm sm:text-2xl sm:font-bold">Pending bookings </p>
-                <p class="rounded-full bg-blue-100 sm:p-2 px-3 sm:ml-4">2</p>
+            <div class="sm:w-4/12 flex justify-between">
+                <div class="w-5/12 sm:w-1/2 bg-blue-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer">
+                    <div class="flex justify-around">
+                    <p class="text-sm sm:text-lg sm:font-bold">Pending bookings </p>
+                    <p class="rounded-full bg-blue-100 sm:p-2 px-3 sm:ml-4">2</p>
                 </div>             
+                </div>
+                <div class="w-5/12 sm:w-1/2 bg-blue-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer">
+                    <div class="flex justify-around">
+                    <a href="/operator/scheduler" class="text-sm sm:text-lg sm:font-bold">schedulers </a>
+                    <p class="rounded-full bg-blue-100 sm:p-2 px-3 sm:ml-4">2</p>
+                    </div>                              
+                </div>
             </div>
-             <div class="sm:w-2/12 bg-blue-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer">
-                <div class="flex justify-around">
-                <a href="/operator/scheduler" class="text-sm sm:text-2xl sm:font-bold">schedulers </a>
-                <p class="rounded-full bg-blue-100 sm:p-2 px-3 sm:ml-4">2</p>
-                </div>             
+            <div class="sm:w-4/12 flex justify-between">
+                <div class="w-5/12 sm:w-1/2 bg-green-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer">
+                    <div class="flex justify-around">
+                    <p class="text-sm sm:text-lg sm:font-bold">Pending pays </p>
+                    <p class="rounded-full bg-green-100 sm:p-2 px-3 sm:ml-4">2</p>
+                    </div>         
+                </div>
+                <div class="w-5/12 sm:w-1/2 bg-gray-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer">
+                    <div class="flex justify-around">
+                        <a href="/operator/profile">
+                        <p class="text-sm sm:text-lg sm:font-bold">Profile </p>
+                        </a>
+                    <p class="rounded-full bg-gray-100 sm:p-2 px-3 sm:ml-4">2</p>
+                    </div>
+                </div>            
             </div>
-            <div class="sm:w-2/12 bg-green-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer">
-                <div class="flex justify-around">
-                <p class="text-sm sm:text-2xl sm:font-bold">Pending pays </p>
-                <p class="rounded-full bg-green-100 sm:p-2 px-3 sm:ml-4">2</p>
-                </div>         </div>
-            <div class="sm:w-2/12 bg-gray-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer">
-                <div class="flex justify-around">
-                <p class="text-sm sm:text-2xl sm:font-bold">Notifications </p>
-                <p class="rounded-full bg-gray-100 sm:p-2 px-3 sm:ml-4">2</p>
-                </div> 
-            </div>
+            <div class="sm:w-4/12 flex justify-between">
+                <div class="w-5/12 sm:w-1/2 bg-gray-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer">
+                    <div class="flex justify-around">
+                    <p class="text-sm sm:text-lg sm:font-bold">Notifications </p>
+                    <p class="rounded-full bg-gray-100 sm:p-2 px-3 sm:ml-4">2</p>
+                    </div> 
+                </div>
+            </div>            
         </div>
         <hr class="w-10/12 bg-blue-400 m-auto" style="height: 1px">
-        <div class="flex justify-around">
-            <div class="w-1/2 p-2 md:pt-20 ">
+        <div class="flex flex-col sm:flex-col justify-around">
+            <div class="sm:w-1/2 p-2 md:pt-20 ">
                 <div class="overflow-x-auto">
                     <table class="border border-blue-900 ">
                         <thead class="border border-blue-900 ">
-                            <tr class="p-2 text-sm font-bold">
-                                <td class="border-r border-blue-600 p-2">id</td>
-                                <td class="border-r border-blue-600 p-2">user_id</td>
-                                <td class="border-r border-blue-600 p-2">route_id</td>
-                                <td class="border-r border-blue-600 p-2">car_id</td>
-                                <td class="border-r border-blue-600 p-2">seat_no</td>
-                                <td class="border-r border-blue-600 p-2">payed</td>
-                                <td class="border-r border-blue-600 p-2">approved</td>
-                                <td class="border-r border-blue-600 p-2">nbr_people</td>
-                                <td class="border-r border-blue-600 p-2">nbr_luggage</td>
-                                <td class="border-r border-blue-600 p-2">pickup_date</td>
-                                <td class="border-r border-blue-600 p-2">pickup_time</td>
-                                <td class="border-r border-blue-600 p-2">pickup_full_add</td>
-                                <td class="border-r border-blue-600 p-2">dropoff_full_add</td>
-                                <td class="border-r border-blue-600 p-2">custom_message</td>
+                            <tr class="p-2 text-sm font-bold">                                
                                 <td class="border-r border-blue-600 p-2">quick actions</td>
                             </tr>
                         </thead>
                         <tbody class="border border-blue-400 border-t-0">
                             <tr class="p-2 " v-for="booking in bookings" :key="booking.id">
-                                <td class="border-r border-blue-400 p-2">{{ booking.id }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ booking.user_id }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ booking.route_id }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ booking.car_id }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ booking.seat_no }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ booking.payed }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ booking.approved }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ booking.nbr_people }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ booking.nbr_luggage }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ booking.pickup_date }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ booking.pickup_time }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ booking.pickup_full_add }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ booking.dropoff_full_add }}</td>
-                                <td class="border-r border-blue-400 p-2">{{ booking.custom_message }}</td>
-                                <td class="border-r border-blue-400 flex p-2">
-                                    <span class="cursor-pointer" @click="showSingleBooking( booking.id )"><i class="fa fa-eye text-xl text-blue-400 mr-2"></i></span>
-                                    <span  class="cursor-pointer"><i class="fa fa-trash text-2xl text-red-500 cursor-pointer"></i></span>
+                                    
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="w-1/2"> Notifications area</div>
+            <div class="sm:w-1/2"> Notifications area</div>
         </div>
         <div 
         class="w-11/12 md:w-8/12 bg-white border-blue-400 top-0 mt-5 md:mt-20  p-20"

@@ -36,6 +36,7 @@ Route::view('/book', 'ui.book');
 
 Route::view('/operator/dashboard','ui.operator.dashboard')->name('operator.home')->middleware('auth')->middleware('is_operator');
 Route::view('/operator/scheduler','ui.operator.scheduler')->name('operator.scheduler')->middleware('auth')->middleware('is_operator');
+Route::view('/operator/profile','ui.operator.profile')->name('operator.scheduler')->middleware('auth')->middleware('is_operator');
 
 //super admin pages
 Route::view('/operator/routesAndStations','ui.admin.routesAndStations');

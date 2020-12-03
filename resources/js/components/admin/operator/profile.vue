@@ -1,0 +1,191 @@
+<template>
+    <div>   
+        <div class="p-5 sm:flex justify-around mb-4">
+            <div class="sm:w-4/12 flex justify-around">
+                <div class="w-5/12 sm:w-5/12 bg-blue-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer">
+                    <div class="flex justify-around">
+                        <p class="text-sm sm:text-lg sm:font-bold">Pending bookings </p>
+                        <p class="rounded-full bg-blue-100 sm:p-2 px-3 sm:ml-4">2</p>
+                    </div>             
+                </div>
+                <div class="w-5/12 sm:w-5/12 bg-blue-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer">
+                    <div class="flex justify-around">
+                        <a href="/operator/scheduler" class="text-sm sm:text-lg sm:font-bold">schedulers </a>
+                        <p class="rounded-full bg-blue-100 sm:p-2 px-3 sm:ml-4">2</p>
+                    </div>                              
+                </div>
+            </div>
+            <div class="sm:w-4/12 flex justify-around">
+                <div class="w-5/12 sm:w-5/12 bg-green-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer">
+                    <div class="flex justify-around">
+                        <p class="text-sm sm:text-lg sm:font-bold">Pending pays </p>
+                        <p class="rounded-full bg-green-100 sm:p-2 px-3 sm:ml-4">2</p>
+                    </div>         
+                </div>
+                <div class="w-5/12 sm:w-5/12 bg-gray-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer">
+                    <div class="flex justify-around">
+                    <p class="text-sm sm:text-lg sm:font-bold">Profile </p>
+                    <p class="rounded-full bg-gray-100 sm:p-2 px-3 sm:ml-4">2</p>
+                    </div>
+                </div>            
+            </div>
+            <div class="sm:w-4/12 flex justify-between">
+                <div class="w-5/12 sm:w-1/2 bg-gray-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer">
+                    <div class="flex justify-around">
+                    <p class="text-sm sm:text-lg sm:font-bold">Notifications </p>
+                    <p class="rounded-full bg-gray-100 sm:p-2 px-3 sm:ml-4">2</p>
+                    </div> 
+                </div>
+            </div>            
+        </div>
+        <hr class="w-10/12 bg-blue-400 m-auto" style="height: 1px">
+        <div class="p-5 sm:p-20">
+            <!-- <div class="sm:w-1/2 p-2 md:pt-20 ">
+                <div class="overflow-x-auto">
+                    <table class="border border-blue-900 ">
+                        <thead class="border border-blue-900 ">
+                            <tr class="p-2 text-sm font-bold">
+
+                            </tr>
+                        </thead>
+                        <tbody class="border border-blue-400 border-t-0">
+                            <tr class="p-2 " v-for="booking in bookings" :key="booking.id">
+                                <td class="border-r border-blue-400 flex p-2">
+                                    <span class="cursor-pointer" @click="showSingleBooking( booking.id )"><i class="fa fa-eye text-xl text-blue-400 mr-2"></i></span>
+                                    <span  class="cursor-pointer"><i class="fa fa-trash text-2xl text-red-500 cursor-pointer"></i></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div> -->
+            <!-- {{ profile[0] }} -->
+            <ul class="list-none" v-if="profileAdded">
+                <li><span class="mr-2">Names: </span> <span>{{user.name}}</span></li>
+                <li><span class="mr-2">phone: </span> <span>{{profile[0].phone}}</span></li>
+                <li><span class="mr-2">Company names: </span> <span>{{profile[0].company_name}}</span></li>
+                <li><span class="mr-2">Car Type: </span> <span>{{usercar[0].name}}</span></li>
+            </ul>   
+            <div class="flex sm:justify-end p-4 mt-5">
+                <button class="w-full sm:w-3/12 py-2 px-4 border border-gray-600 text-gray-900"  v-show="!profileAdded" @click="addProfile(user.id)">Add Profile</button>
+                <button class="w-full sm:w-3/12 py-2 px-4 border border-blue-600 text-blue-900" v-show="profileAdded" @click="editProfile(user.id,profile[0])">Edit profile</button>
+            </div>         
+        </div>
+        <div 
+            class="bg-white w-full border-blue-400 top-0 md:mt-20  p-2 sm:p-20"
+            :class="[
+                profileform ? 'absolute' : 'hidden',
+            ]"
+            >
+            <h2 class="text-2xl font-bold mb-4" v-show="!editMode">Add a Profile</h2>
+            <h2 class="text-2xl font-bold mb-4" v-show="editMode" >Edit a Profile</h2>
+            <div class="border-b-blue-200 mb-10">
+                <form @submit.prevent="editMode? updateProfile(profile[0].id) : addProfile()">
+                    <div class="flex flex-col justify-between mb-2">
+                        <input type="hidden" v-model="form.operator_id" name="operator_id" placeholder="company_name"/>
+                        <input class="w-8/12 m-auto mb-3 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" type="text" v-model="form.company_name" name="company_name" placeholder="company_name"/>
+                        <input class="w-8/12 m-auto mb-3 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" type="text" v-model="form.phone" name="phone" placeholder="phone"/>
+                        <select class="w-8/12 m-auto mb-3 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" v-model="form.car_id" name="car_id">
+                            <option v-for="car in cars" :key="car.id" :value="car.id" v-text="car.name"></option>
+                        </select>
+                    </div>
+                    <div class="flex justify-items-start pt-10">
+                        <button type="submit" v-show="!editMode" class="p-2 rounded-md mr-3 text-md font-light border-2 border-blue-600 text-blue-600" >Save</button>
+                        <button type="submit" v-show="editMode" class="p-2 rounded-md mr-3 text-md font-light border-2 border-green-600 text-green-600" >Update</button>
+                        <a class="p-2 rounded-md mr-3 text-md font-light border-2 border-red-600 text-red-600" @click="()=>{this.profileform = !this.profileform}">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+    name: "operatorprofile",
+    props : ['user'],
+    data() {
+        return {
+            cars:{},
+            profile:{},
+            profileAdded: false,
+            usercar:'',
+            profileform:false,
+            editMode: false,
+            form: new Form({
+                    operator_id: '',
+                    user_id: '',
+                    car_id : '',
+                    company_name: '',
+                    phone: '',
+                }),
+        }
+    },
+    methods: {
+            allcars() {
+                axios.get("/api/cars").then( data => (this.cars = data.data))
+             },
+            userProfile() {
+                axios.get("/api/operatorinfo/" + this.user.id).then( data => {
+                    this.profile = data.data;
+                    this.profileAdded = !this.profileAdded;
+                    axios.get("/api/cars/" + this.profile[0].car_id).then(data=>(
+                        this.usercar = data.data
+                        ))  
+                })
+            },
+            editProfile(id,profile) {
+                this.form.clear();
+                this.profileform = !this.profileform;
+                this.editMode = true;
+                this.form.operator_id = this.user.id;
+                this.allcars();
+                this.form.fill(profile)
+            },
+            addProfile(id) {
+                this.profileform = !this.profileform;
+                this.editMode = false;
+                this.form.operator_id = this.user.id;
+                this.allcars();
+                this.$Progress.start()
+                this.form.post('/api/operatorinfo')
+                    .then(() => {
+                        Fire.$emit('AfterCreatedUserLoadIt'); //custom events
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Profile added created successfully'
+                        })
+                        this.$Progress.finish()
+                        this.profileform = !this.profileform;
+                        this.userProfile()
+                    })
+                    .catch((error) => {
+                    console.log(error.message)
+                    })
+                
+            },
+            updateProfile(id){
+             this.form.put('/api/operatorinfo/'+id)
+                .then(()=>{
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Profile updated successfully'
+                        })
+                        Fire.$emit('AfterCreatedUserLoadIt');
+                    this.profileform = !this.profileform
+                    this.userProfile
+                })
+                .catch((error)=>{
+                    console.log(error.message)
+                })
+             },
+        },
+    mounted(){        
+        this.userProfile()
+    },
+}
+</script>
+<style scoped>
+
+</style>
+

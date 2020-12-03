@@ -171,6 +171,11 @@ export default {
             toName:null,
             date:null,
             cars:[],
+            form: new Form({
+                    from : '',
+                    to: '',
+                    date: '',
+                }),
         }
     },
     methods: {
@@ -178,10 +183,24 @@ export default {
             this.fromName = new URL(location.href).searchParams.get('from')
             this.toName = new URL(location.href).searchParams.get('to')
             this.date = new URL(location.href).searchParams.get('date')
-        }
+            this.form.from = this.fromName
+            this.form.to = this.toName
+            this.form.date = this.date
+        },
+        availableCars(){
+            this.date = this.date.replaceAll("-",",");
+            // console.log(this.form);
+            this.form.get('api/querySchedulers')
+                .then(response => {
+                    this.cars = data.data
+                    })
+                .catch(error => {console.log(error.message)});  
+            console.log(this.cars)
+         },
     },
     beforeMount() {
       this.checkParams()
+      this.availableCars()
     },
 }
 </script>

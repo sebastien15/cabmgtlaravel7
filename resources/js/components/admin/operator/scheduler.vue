@@ -149,7 +149,7 @@
                     <div class="flex justify-items-start pt-10">
                         <button type="submit" v-show="!editMode" class="p-2 rounded-md mr-3 text-md font-light border-2 border-blue-600 text-blue-600" >Save</button>
                         <button type="submit" v-show="editMode" class="p-2 rounded-md mr-3 text-md font-light border-2 border-green-600 text-green-600" >Update</button>
-                        <button class="p-2 rounded-md mr-3 text-md font-light border-2 border-red-600 text-red-600" @click="()=>{this.addSchedulerModel = false}">Cancel</button>
+                        <a class="p-2 rounded-md mr-3 text-md font-light border-2 border-red-600 text-red-600" @click="()=>{this.addSchedulerModel = false}">Cancel</a>
                     </div>
                 </form>
             </div>

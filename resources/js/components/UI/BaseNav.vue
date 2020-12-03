@@ -6,13 +6,20 @@
                     <div class="flex-shrink-0">
                         <a href="/" class="flex items-center">
                             <img src="/images/logo.png" alt="logo" class="w-16 h-12">
-                            <span class="text-gray-300 text-xl font-semibold mx-2">Home</span>
+                            <!-- <span class="text-gray-300 text-xl font-semibold mx-2">Home</span> -->
                         </a>
                     </div>
                     <div class="hidden md:block">
                         <div class="mx-10 flex items-baseline">
                             <!-- <a href="#"
                                class="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">Home</a> -->
+                            <a href="/"
+                               class="mx-1 
+                               px-3 py-2 rounded-md 
+                               text-sm font-medium 
+                               text-gray-300 hover:text-white 
+                               hover:bg-gray-700 focus:outline-none 
+                               focus:text-white focus:bg-gray-700">Home</a>
                             <a href="/about"
                                class="mx-1 
                                px-3 py-2 rounded-md 
@@ -84,6 +91,16 @@
             <div class="px-2 pt-2 pb-3 sm:px-3">
                 <!-- <a href="#"
                    class="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">Home</a> -->
+                <a href="/"
+                   class="
+                   mt-1 block px-3 py-2 
+                   rounded-md text-base 
+                   font-medium text-gray-300 
+                   hover:text-white 
+                   hover:bg-gray-700 
+                   focus:outline-none 
+                   focus:text-white 
+                   focus:bg-gray-700">Home</a>
                 <a href="/about"
                    class="
                    mt-1 block px-3 py-2 
@@ -134,9 +151,8 @@
                    focus:outline-none 
                    focus:text-white 
                    focus:bg-gray-700">Site map</a>
-                <button class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
-                   @click="logout">Logout</button>
-
+                <!-- <button class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+                   @click="logout">Logout</button> -->
             </div>
         </div>
     </nav>

@@ -10,6 +10,7 @@ use App\Http\Controllers\schedulerController;
 use App\Http\Controllers\stationController;    
 use App\Http\Controllers\contactController;
 use App\Http\Controllers\locationController;
+use App\Http\Controllers\operatorinfoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,7 @@ Route::put('users/{id}', [authController::class, 'updateUser']);
 Route::delete('users/{id}', [authController::class, 'deleteUser']);
 Route::post('login', [authController::class, 'authenticate']);
 
-// contact apis
+// booking apis
  
 Route::get('bookings', [bookingController::class, 'index']);
 Route::get('bookings/{id}', [bookingController::class, 'show']);
@@ -88,6 +89,8 @@ Route::get('schedulers/today', [schedulerController::class, 'getTodaysScheduler'
 Route::post('schedulers', [schedulerController::class, 'store']);
 Route::put('schedulers/{id}', [schedulerController::class, 'update']);
 Route::delete('schedulers/{id}',[schedulerController::class, 'destroy']);
+Route::get('querySchedulers',[schedulerController::class, 'querySchedulers']);
+
 // contact apis
 
 Route::get('contacts', [contactController::class, 'index']);
@@ -95,3 +98,11 @@ Route::get('contacts/{id}', [contactController::class, 'show']);
 Route::post('contacts', [contactController::class, 'store']);
 Route::put('contacts/{id}', [contactController::class, 'update']);
 Route::delete('contacts/{id}',[contactController::class, 'destroy']);
+
+// operator info apis
+
+Route::get('operatorinfo', [operatorinfoController::class, 'index']);
+Route::get('operatorinfo/{id}', [operatorinfoController::class, 'show']);
+Route::post('operatorinfo', [operatorinfoController::class, 'store']);
+Route::put('operatorinfo/{id}', [operatorinfoController::class, 'update']);
+Route::delete('operatorinfo/{id}',[operatorinfoController::class, 'destroy']);

@@ -31,6 +31,33 @@ class schedulerController extends Controller
             $schedulers
         ], 201);
     }
+    public function querySchedulers(Request $request)
+    {
+        $validatedData = $request->validate([
+            'from' => 'required',
+            'to' => 'required',
+            'date' => 'required',
+        ]);
+        // return response()->json([
+            // $q = Scheduler::whereDate('journey_date', '=', Carbon::today()->toDateString())->get();
+            // echo $q;
+            // echo Carbon::parse(2020-12-16);
+            // exit;
+            // $schedulers = Scheduler::where('journey_date', Carbon::create(2020,12,16))->get();
+            // echo $schedulers;
+            // exit;
+        // ], 201);
+            // exit;
+        $newDate = $request->date;
+        $schedulers = $schedulers = Scheduler::where('journey_date', Carbon::create($newDate))
+                                              ->where('route_from',$request->from)
+                                              ->where('route_to', $request->to)
+                                              ->get();;
+
+        return response()->json([
+            $schedulers
+        ], 201);
+    }
     
 
 

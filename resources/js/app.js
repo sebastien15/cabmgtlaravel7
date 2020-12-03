@@ -83,6 +83,7 @@ Vue.component('cab-list', require('./components/front/booking/cabList').default)
 Vue.component('operatordashboard', require('./components/admin/operator/dashboard').default);
 Vue.component('routesandstations', require('./components/admin/operator/routesAndStations').default);
 Vue.component('operatorscheduler', require('./components/admin/operator/scheduler').default);
+Vue.component('operatorprofile', require('./components/admin/operator/profile').default);
 
 // operator components ends
 
