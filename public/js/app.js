@@ -3340,6 +3340,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "operatorscheduler",
   props: ['user'],
@@ -3351,14 +3380,18 @@ __webpack_require__.r(__webpack_exports__);
       singleScheduler: {},
       addSchedulerModel: false,
       editMode: false,
+      operator: '',
       form: new Form({
         operator_id: this.user.id,
+        operator_company: '',
+        operator_car: '',
         route_from: '',
         route_to: '',
         journey_date: '',
         departure_time: '',
         arrival_time: '',
         journey_time: '',
+        journey_price: '',
         message: ''
       })
     };
@@ -3382,11 +3415,26 @@ __webpack_require__.r(__webpack_exports__);
         console.log("her is the erro" + err.message);
       }
     },
-    showSingleScheduler: function showSingleScheduler(id) {
+    fetchOperator: function fetchOperator() {
       var _this3 = this;
 
+      try {
+        axios.get("/api/operatorinfo/").then(function (data) {
+          return _this3.operator = data.data;
+        }).then(function () {
+          _this3.form.operator_company = _this3.operator.company_name;
+          _this3.form.operator_car = _this3.operator.car_id;
+          console.log(_this3.operator);
+        });
+      } catch (error) {
+        console.log("her is the erro" + err.message);
+      }
+    },
+    showSingleScheduler: function showSingleScheduler(id) {
+      var _this4 = this;
+
       this.showSingleSchedulerModel = !this.showSingleSchedulerModel, axios.get("/api/schedulers/" + id).then(function (data) {
-        return _this3.singleScheduler = data.data[0];
+        return _this4.singleScheduler = data.data[0];
       });
     },
     editModalWindow: function editModalWindow(singleScheduler) {
@@ -3399,10 +3447,9 @@ __webpack_require__.r(__webpack_exports__);
       this.form.Scheduler_id = this.singleScheduler.id;
     },
     saveScheduler: function saveScheduler() {
-      var _this4 = this;
+      var _this5 = this;
 
       this.$Progress.start();
-      console.log(this.form);
       this.form.post('/api/schedulers').then(function () {
         Fire.$emit('AfterCreatedUserLoadIt'); //custom events
 
@@ -3411,13 +3458,13 @@ __webpack_require__.r(__webpack_exports__);
           title: 'Sheduler created successfully'
         });
 
-        _this4.$Progress.finish();
+        _this5.$Progress.finish();
       })["catch"](function (error) {
         console.log(error.message);
       });
     },
     updateScheduler: function updateScheduler() {
-      var _this5 = this;
+      var _this6 = this;
 
       this.form.put('/api/schedulers/' + this.form.Scheduler_id).then(function () {
         Toast.fire({
@@ -3426,13 +3473,13 @@ __webpack_require__.r(__webpack_exports__);
         });
         Fire.$emit('AfterCreatedUserLoadIt');
 
-        _this5.allschedulers();
+        _this6.allschedulers();
       })["catch"](function (error) {
         console.log(error.message);
       });
     },
     deleteScheduler: function deleteScheduler(id) {
-      var _this6 = this;
+      var _this7 = this;
 
       Swal.fire({
         title: 'Are you sure?',
@@ -3444,15 +3491,15 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Yes, delete it!'
       }).then(function (response) {
         if (response.isConfirmed) {
-          _this6.allschedulers();
+          _this7.allschedulers();
 
           axios["delete"]("/api/schedulers/" + id).then(function (response) {
             Swal.fire('Deleted!', 'Scheduler deleted successfully', 'success');
 
-            _this6.allschedulers();
+            _this7.allschedulers();
 
-            if (_this6.showSingleSchedulerModel) {
-              _this6.showSingleSchedulerModel = !_this6.showSingleSchedulerModel;
+            if (_this7.showSingleSchedulerModel) {
+              _this7.showSingleSchedulerModel = !_this7.showSingleSchedulerModel;
             }
           })["catch"](function () {
             Swal.fire({
@@ -3476,7 +3523,7 @@ __webpack_require__.r(__webpack_exports__);
         var arrMin = +arrTime.substr(3);
         var diffHour = arrHour - depHour;
         var diffMin = arrMin - depMin;
-        this.form.journey_time = JSON.stringify(diffHour) + "hours and " + JSON.stringify(diffMin) + "min";
+        this.form.journey_time = JSON.stringify(diffHour) + "hrs " + JSON.stringify(diffMin) + "min";
         console.log("dep hour is ".concat(depHour, " dep min is ").concat(depMin, " arr hour is ").concat(arrHour, " arr min is ").concat(arrHour));
         console.log("journey hour is ".concat(diffHour, " and journey min is ").concat(diffMin)); // console.log(new Date(depT))
       }
@@ -3484,6 +3531,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   beforeMount: function beforeMount() {
     this.allschedulers(); // this.getTodaysScheduler()
+
+    this.fetchOperator();
   }
 });
 
@@ -4057,6 +4106,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "cabList",
   data: function data() {
@@ -4064,7 +4114,7 @@ __webpack_require__.r(__webpack_exports__);
       fromName: null,
       toName: null,
       date: null,
-      cars: [],
+      schedules: [],
       form: new Form({
         from: '',
         to: '',
@@ -4077,26 +4127,27 @@ __webpack_require__.r(__webpack_exports__);
       this.fromName = new URL(location.href).searchParams.get('from');
       this.toName = new URL(location.href).searchParams.get('to');
       this.date = new URL(location.href).searchParams.get('date');
+      this.newdate = this.date.replaceAll(",", "-");
+      console.log("date now is " + this.newdate);
       this.form.from = this.fromName;
       this.form.to = this.toName;
-      this.form.date = this.date;
+      this.form.date = this.newdate;
     },
-    availableCars: function availableCars() {
+    availableschedules: function availableschedules() {
       var _this = this;
 
-      this.date = this.date.replaceAll("-", ","); // console.log(this.form);
-
-      this.form.get('api/querySchedulers').then(function (response) {
-        _this.cars = data.data;
+      this.form.post("/api/querySchedulers").then(function (data) {
+        return (// console.log(data.data)
+          _this.schedules = data.data, console.log(_this.schedules)
+        );
       })["catch"](function (error) {
-        console.log(error.message);
+        return console.log(error.message);
       });
-      console.log(this.cars);
     }
   },
   beforeMount: function beforeMount() {
     this.checkParams();
-    this.availableCars();
+    this.availableschedules();
   }
 });
 
@@ -68715,6 +68766,10 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
+                    _vm._v(_vm._s(scheduler.operator_company))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
                     _vm._v(_vm._s(scheduler.route_from))
                   ]),
                   _vm._v(" "),
@@ -68736,6 +68791,10 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
                     _vm._v(_vm._s(scheduler.journey_time))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
+                    _vm._v(_vm._s(scheduler.journey_price))
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
@@ -68832,7 +68891,6 @@ var render = function() {
                 on: {
                   click: function() {
                     this$1.showsingleSchedulerModel = !this$1.showsingleSchedulerModel
-                    this$1.singleScheduler = {}
                   }
                 }
               },
@@ -68861,6 +68919,10 @@ var render = function() {
             _c("p"),
             _c("p", [_vm._v(_vm._s(_vm.singleScheduler.journey_date))]),
             _vm._v(" "),
+            _c("p", { staticClass: " font-bold" }, [_vm._v("Company name:")]),
+            _c("p"),
+            _c("p", [_vm._v(_vm._s(_vm.singleScheduler.operator_company))]),
+            _vm._v(" "),
             _c("p", { staticClass: " font-bold" }, [
               _vm._v("Expected departure time:")
             ]),
@@ -68878,6 +68940,10 @@ var render = function() {
             ]),
             _c("p"),
             _c("p", [_vm._v(_vm._s(_vm.singleScheduler.journey_time))]),
+            _vm._v(" "),
+            _c("p", { staticClass: " font-bold" }, [_vm._v("Journey price:")]),
+            _c("p"),
+            _c("p", [_vm._v(_vm._s(_vm.singleScheduler.journey_price))]),
             _vm._v(" "),
             _c("p", { staticClass: "font-bold" }, [
               _vm._v("Custom message to show passengers: ")
@@ -68970,6 +69036,60 @@ var render = function() {
                         return
                       }
                       _vm.$set(_vm.form, "operator_id", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.operator_car,
+                      expression: "form.operator_car"
+                    }
+                  ],
+                  attrs: {
+                    type: "hidden",
+                    name: "operator_id",
+                    value: "(operator.car_id )"
+                  },
+                  domProps: { value: _vm.form.operator_car },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "operator_car", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.operator_company,
+                      expression: "form.operator_company"
+                    }
+                  ],
+                  attrs: {
+                    type: "hidden",
+                    name: "operator_id",
+                    value: "(user.company_name )"
+                  },
+                  domProps: { value: _vm.form.operator_company },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.form,
+                        "operator_company",
+                        $event.target.value
+                      )
                     }
                   }
                 }),
@@ -69141,7 +69261,40 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "flex justify-between mb-2 sm:mb-4" }, [
-                _c("div", { staticClass: "w-5/12 flex flex-col" }, [
+                _c("div", { staticClass: "w-3/12 flex flex-col" }, [
+                  _c("label", { staticClass: "text-md pb-2 mb-2" }, [
+                    _vm._v(" Expected journey price")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.journey_price,
+                        expression: "form.journey_price"
+                      }
+                    ],
+                    staticClass:
+                      "w-5/12 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3",
+                    attrs: {
+                      type: "text",
+                      name: "journey_price",
+                      placeholder: "journey_price"
+                    },
+                    domProps: { value: _vm.form.journey_price },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "journey_price", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "w-3/12 flex flex-col" }, [
                   _c("label", { staticClass: "text-md pb-2 mb-2" }, [
                     _vm._v(" Expected journey time")
                   ]),
@@ -69175,7 +69328,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "w-5/12 flex flex-col" }, [
+                _c("div", { staticClass: "w-3/12 flex flex-col" }, [
                   _c("label", { staticClass: "text-md pb-2 mb-2" }, [
                     _vm._v("some custom message")
                   ]),
@@ -69273,94 +69426,125 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "p-5 sm:flex justify-around mb-4" }, [
-      _c(
-        "div",
-        {
-          staticClass:
-            "sm:w-2/12 bg-blue-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
-        },
-        [
-          _c("div", { staticClass: "flex justify-around" }, [
-            _c("p", { staticClass: "text-sm sm:text-2xl sm:font-bold" }, [
-              _vm._v("Pending bookings ")
-            ]),
-            _vm._v(" "),
-            _c(
-              "p",
-              { staticClass: "rounded-full bg-blue-100 sm:p-2 px-3 sm:ml-4" },
-              [_vm._v("2")]
-            )
-          ])
-        ]
-      ),
+      _c("div", { staticClass: "sm:w-4/12 flex justify-between" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "w-5/12 sm:w-1/2 bg-blue-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
+          },
+          [
+            _c("div", { staticClass: "flex justify-around" }, [
+              _c("p", { staticClass: "text-sm sm:text-lg sm:font-bold" }, [
+                _vm._v("Pending bookings ")
+              ]),
+              _vm._v(" "),
+              _c(
+                "p",
+                { staticClass: "rounded-full bg-blue-100 sm:p-2 px-3 sm:ml-4" },
+                [_vm._v("2")]
+              )
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "w-5/12 sm:w-1/2 bg-blue-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
+          },
+          [
+            _c("div", { staticClass: "flex justify-around" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "text-sm sm:text-lg sm:font-bold",
+                  attrs: { href: "/operator/scheduler" }
+                },
+                [_vm._v("schedulers ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "p",
+                { staticClass: "rounded-full bg-blue-100 sm:p-2 px-3 sm:ml-4" },
+                [_vm._v("2")]
+              )
+            ])
+          ]
+        )
+      ]),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "sm:w-2/12 bg-blue-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
-        },
-        [
-          _c("div", { staticClass: "flex justify-around" }, [
-            _c(
-              "a",
-              {
-                staticClass: "text-sm sm:text-2xl sm:font-bold",
-                attrs: { href: "/operator/scheduler" }
-              },
-              [_vm._v("schedulers ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "p",
-              { staticClass: "rounded-full bg-blue-100 sm:p-2 px-3 sm:ml-4" },
-              [_vm._v("2")]
-            )
-          ])
-        ]
-      ),
+      _c("div", { staticClass: "sm:w-4/12 flex justify-between" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "w-5/12 sm:w-1/2 bg-green-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
+          },
+          [
+            _c("div", { staticClass: "flex justify-around" }, [
+              _c("p", { staticClass: "text-sm sm:text-lg sm:font-bold" }, [
+                _vm._v("Pending pays ")
+              ]),
+              _vm._v(" "),
+              _c(
+                "p",
+                {
+                  staticClass: "rounded-full bg-green-100 sm:p-2 px-3 sm:ml-4"
+                },
+                [_vm._v("2")]
+              )
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "w-5/12 sm:w-1/2 bg-gray-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
+          },
+          [
+            _c("div", { staticClass: "flex justify-around" }, [
+              _c("a", { attrs: { href: "/operator/profile" } }, [
+                _c("p", { staticClass: "text-sm sm:text-lg sm:font-bold" }, [
+                  _vm._v("Profile ")
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "p",
+                { staticClass: "rounded-full bg-gray-100 sm:p-2 px-3 sm:ml-4" },
+                [_vm._v("2")]
+              )
+            ])
+          ]
+        )
+      ]),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "sm:w-2/12 bg-green-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
-        },
-        [
-          _c("div", { staticClass: "flex justify-around" }, [
-            _c("p", { staticClass: "text-sm sm:text-2xl sm:font-bold" }, [
-              _vm._v("Pending pays ")
-            ]),
-            _vm._v(" "),
-            _c(
-              "p",
-              { staticClass: "rounded-full bg-green-100 sm:p-2 px-3 sm:ml-4" },
-              [_vm._v("2")]
-            )
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "sm:w-2/12 bg-gray-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
-        },
-        [
-          _c("div", { staticClass: "flex justify-around" }, [
-            _c("p", { staticClass: "text-sm sm:text-2xl sm:font-bold" }, [
-              _vm._v("Notifications ")
-            ]),
-            _vm._v(" "),
-            _c(
-              "p",
-              { staticClass: "rounded-full bg-gray-100 sm:p-2 px-3 sm:ml-4" },
-              [_vm._v("2")]
-            )
-          ])
-        ]
-      )
+      _c("div", { staticClass: "sm:w-4/12 flex justify-between" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "w-5/12 sm:w-1/2 bg-gray-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
+          },
+          [
+            _c("div", { staticClass: "flex justify-around" }, [
+              _c("p", { staticClass: "text-sm sm:text-lg sm:font-bold" }, [
+                _vm._v("Notifications ")
+              ]),
+              _vm._v(" "),
+              _c(
+                "p",
+                { staticClass: "rounded-full bg-gray-100 sm:p-2 px-3 sm:ml-4" },
+                [_vm._v("2")]
+              )
+            ])
+          ]
+        )
+      ])
     ])
   },
   function() {
@@ -69371,6 +69555,10 @@ var staticRenderFns = [
       _c("tr", { staticClass: "p-2 text-sm font-bold" }, [
         _c("td", { staticClass: "border-r border-blue-600 p-2" }, [
           _vm._v("id")
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "border-r border-blue-600 p-2" }, [
+          _vm._v("Company")
         ]),
         _vm._v(" "),
         _c("td", { staticClass: "border-r border-blue-600 p-2" }, [
@@ -69395,6 +69583,10 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("td", { staticClass: "border-r border-blue-600 p-2" }, [
           _vm._v("expected time")
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "border-r border-blue-600 p-2" }, [
+          _vm._v("Price")
         ]),
         _vm._v(" "),
         _c("td", { staticClass: "border-r border-blue-600 p-2" }, [
@@ -70267,7 +70459,7 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    (_vm.cars.length = 0)
+    _vm.schedules.length == 0
       ? _c("div", { staticClass: "px-40 py-10 text-lg text-center" }, [
           _c("img", { attrs: { src: "", alt: "", srcset: "" } }),
           _vm._v(" "),
@@ -70291,70 +70483,136 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    _c("div", { staticClass: " text-lg text-center flex mt-16" }, [
-      _vm._m(1),
-      _vm._v(" "),
-      _c("div", { staticClass: "w-full sm:w-9/12" }, [
-        _vm._m(2),
-        _vm._v(" "),
-        _vm._m(3),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "border border-blue-500 shadow-sm p-4 my-10" },
-          [
-            _vm._m(4),
-            _vm._v(" "),
-            _vm._m(5),
-            _vm._v(" "),
-            _c("div", { staticClass: "bg-gray-200 px-3" }, [
-              _vm._m(6),
+    _vm.schedules.length > 0
+      ? _c("div", { staticClass: " text-lg text-center flex mt-16" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "w-full sm:w-9/12" },
+            [
+              _vm._m(2),
               _vm._v(" "),
-              _c("div", { staticClass: "flex" }, [
-                _vm._m(7),
-                _vm._v(" "),
-                _c("div", { staticClass: "w-1/2" }, [
-                  _c("h6", { staticClass: "uppercase" }, [
-                    _vm._v("Seat legend")
+              _c("div", { staticClass: "flex justify-between mt-4" }, [
+                _c("div", { staticClass: "w-3/12 flex" }, [
+                  _c("span", { staticClass: "font-bold ml-1" }, [
+                    _vm._v(_vm._s(this.schedules[0].length) + " Buses ")
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "flex" }, [
-                    _c(
+                  _c("span", [_vm._v(" Found ")])
+                ]),
+                _vm._v(" "),
+                _vm._m(3)
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.schedules, function(schedule) {
+                return _c(
+                  "div",
+                  { key: schedule.id },
+                  _vm._l(schedule, function(sche) {
+                    return _c(
                       "div",
+                      {
+                        key: sche.id,
+                        staticClass:
+                          "border border-blue-500 shadow-sm p-4 my-10"
+                      },
                       [
-                        _c("Span", { staticClass: "w-6 h-4 bg-white mr-2" }),
-                        _vm._v(" Available seates")
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      [
-                        _c("Span", {
-                          staticClass: "w-6 h-4 bg-yellow-200 mr-2"
-                        }),
-                        _vm._v(" Selected seates")
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      [
-                        _c("Span", { staticClass: "w-6 h-4 bg-gray-700 mr-2" }),
-                        _vm._v(" Unavailable seates")
-                      ],
-                      1
+                        _c("div", { staticClass: "flex" }, [
+                          _c("div", { staticClass: "w-3/12" }, [
+                            _c("h4", [
+                              _vm._v(_vm._s(sche.operator_id) + " Cname")
+                            ]),
+                            _vm._v(" "),
+                            _c("p", [_vm._v("A/C Seater")])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "w-1/12" }, [
+                            _c("h4", [_vm._v(_vm._s(sche.departure_time))]),
+                            _vm._v(" "),
+                            _c("p", [_vm._v(_vm._s(sche.route_from))])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "w-1/12" }, [
+                            _vm._v(_vm._s(sche.journey_time))
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "w-1/12" }, [
+                            _c("h4", [_vm._v(_vm._s(sche.arrival_time))]),
+                            _vm._v(" "),
+                            _c("p", [_vm._v(_vm._s(sche.route_to))])
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(4, true),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "w-3/12" }, [
+                            _vm._v(_vm._s(sche.journey_price))
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(5, true)
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(6, true),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "bg-gray-200 px-3" }, [
+                          _vm._m(7, true),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "flex" }, [
+                            _vm._m(8, true),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "w-1/2" }, [
+                              _c("h6", { staticClass: "uppercase" }, [
+                                _vm._v("Seat legend")
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "flex" }, [
+                                _c(
+                                  "div",
+                                  [
+                                    _c("Span", {
+                                      staticClass: "w-6 h-4 bg-white mr-2"
+                                    }),
+                                    _vm._v(" Available seates")
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  [
+                                    _c("Span", {
+                                      staticClass: "w-6 h-4 bg-yellow-200 mr-2"
+                                    }),
+                                    _vm._v(" Selected seates")
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  [
+                                    _c("Span", {
+                                      staticClass: "w-6 h-4 bg-gray-700 mr-2"
+                                    }),
+                                    _vm._v(" Unavailable seates")
+                                  ],
+                                  1
+                                )
+                              ])
+                            ])
+                          ])
+                        ])
+                      ]
                     )
-                  ])
-                ])
-              ])
-            ])
-          ]
-        )
-      ])
-    ])
+                  }),
+                  0
+                )
+              })
+            ],
+            2
+          )
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -70528,66 +70786,36 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex justify-between mt-4" }, [
-      _c("div", { staticClass: "w-3/12 flex" }, [
-        _c("span", { staticClass: "font-bold ml-1" }, [_vm._v("4 Buses ")]),
-        _vm._v(" "),
-        _c("span", [_vm._v(" Found ")])
-      ]),
+    return _c("div", { staticClass: "w-9/12 flex justify-around" }, [
+      _c("span", { staticClass: "font-bold" }, [_vm._v("Sort By:")]),
       _vm._v(" "),
-      _c("div", { staticClass: "w-9/12 flex justify-around" }, [
-        _c("span", { staticClass: "font-bold" }, [_vm._v("Sort By:")]),
-        _vm._v(" "),
-        _c("span", [_vm._v("Departure")]),
-        _vm._v(" "),
-        _c("span", [_vm._v("Duration")]),
-        _vm._v(" "),
-        _c("span", [_vm._v("Arrival")]),
-        _vm._v(" "),
-        _c("span", [_vm._v("Fare")]),
-        _vm._v(" "),
-        _c("span", [_vm._v("Seats Available")])
-      ])
+      _c("span", [_vm._v("Departure")]),
+      _vm._v(" "),
+      _c("span", [_vm._v("Duration")]),
+      _vm._v(" "),
+      _c("span", [_vm._v("Arrival")]),
+      _vm._v(" "),
+      _c("span", [_vm._v("Fare")]),
+      _vm._v(" "),
+      _c("span", [_vm._v("Seats Available")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex" }, [
-      _c("div", { staticClass: "w-3/12" }, [
-        _c("h4", [_vm._v("BR Travels")]),
-        _vm._v(" "),
-        _c("p", [_vm._v("A/C Seater")])
-      ]),
+    return _c("div", { staticClass: "w-1/12" }, [
+      _c("span", { staticClass: "bg-red-500 p-2 text-white" }, [_vm._v("2.9")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-3/12" }, [
+      _c("p", [_vm._v("15 Seats available")]),
       _vm._v(" "),
-      _c("div", { staticClass: "w-1/12" }, [
-        _c("h4", [_vm._v("10:10")]),
-        _vm._v(" "),
-        _c("p", [_vm._v("Kimironko")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "w-1/12" }, [_vm._v("1:40min")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "w-1/12" }, [
-        _c("h4", [_vm._v("12:20")]),
-        _vm._v(" "),
-        _c("p", [_vm._v("Butare")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "w-1/12" }, [
-        _c("span", { staticClass: "bg-red-500 p-2 text-white" }, [
-          _vm._v("2.9")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "w-3/12" }, [_vm._v("INR 2499")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "w-3/12" }, [
-        _c("p", [_vm._v("15 Seats available")]),
-        _vm._v(" "),
-        _c("p", [_vm._v("8 Window")])
-      ])
+      _c("p", [_vm._v("8 Window")])
     ])
   },
   function() {
@@ -70611,7 +70839,7 @@ var staticRenderFns = [
       { staticClass: "flex justify-between border-b border-gray-7" },
       [
         _c("div", { staticClass: " py-3 px-1" }, [
-          _vm._v("\n                            Seat Prices "),
+          _vm._v("\n                                Seat Prices "),
           _c("span", { staticClass: "bg-gray-900 text-white mr-2 p-1 px-3" }, [
             _vm._v("All")
           ]),
@@ -70643,7 +70871,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", [
         _vm._v(
-          "c\n                                \n                            "
+          "c\n                                    \n                                "
         )
       ])
     ])

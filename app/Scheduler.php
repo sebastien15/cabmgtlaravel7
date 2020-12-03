@@ -16,6 +16,7 @@ class Scheduler extends Model
         'departure_time', 
         'arrival_time',
         'journey_time',
+        'journey_price',
         'message'
     ];
 

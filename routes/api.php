@@ -82,6 +82,7 @@ Route::delete('stationDestroyByRouteId/{id}',[stationController::class, 'destroy
 
 //schedulers
 
+Route::post('querySchedulers',[schedulerController::class, 'querySchedulers']);
 Route::get('schedulers', [schedulerController::class, 'index']);
 Route::get('schedulers/{id}', [schedulerController::class, 'show']);
 Route::get('schedulers/operator/{id}', [schedulerController::class, 'findByOperator']);
@@ -89,7 +90,6 @@ Route::get('schedulers/today', [schedulerController::class, 'getTodaysScheduler'
 Route::post('schedulers', [schedulerController::class, 'store']);
 Route::put('schedulers/{id}', [schedulerController::class, 'update']);
 Route::delete('schedulers/{id}',[schedulerController::class, 'destroy']);
-Route::get('querySchedulers',[schedulerController::class, 'querySchedulers']);
 
 // contact apis
 
