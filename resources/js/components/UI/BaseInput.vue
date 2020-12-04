@@ -11,6 +11,7 @@
                :placeholder="placeholder"
                :required="required"
                :class="className"
+               :id="id"
         >
     </label>
 </template>
@@ -27,7 +28,8 @@
                 type: String,
                 default: 'text',
             },
-            className: String
+            className: String,
+            id: String
         }
     }
 </script>

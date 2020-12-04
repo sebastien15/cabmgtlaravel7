@@ -17,9 +17,7 @@ class CreateStationsTable extends Migration
             $table->id();
             $table->unSignedBigInteger('route_id');
             $table->string('from');
-            $table->string('from_postcode')->nullable();
             $table->string('to');
-            $table->string('to_postcode')->nullable();
             $table->string('kilometers')->nullable();
             $table->string('price')->nullable();
             $table->string('time');

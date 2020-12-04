@@ -31,6 +31,6 @@ class HomeController extends Controller
     }
     public function operatorHome()
     {
-        return view('operatorHome');
+        return view('ui.operator.dashboard');
     }
 }

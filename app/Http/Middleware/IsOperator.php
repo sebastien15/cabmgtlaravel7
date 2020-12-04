@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class isOperator
+class IsOperator
 {
     /**
      * Handle an incoming request.
@@ -15,6 +15,10 @@ class isOperator
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if(auth()->user()->is_admin == 2){
+            return $next($request);
+        }
+
+        return redirect('/login');
     }
 }

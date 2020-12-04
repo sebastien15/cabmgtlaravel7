@@ -21,7 +21,7 @@
                 default: 'submit',
             },
             className: String,
-            styles: String
+            styles: String,
         }
     }
 </script>
