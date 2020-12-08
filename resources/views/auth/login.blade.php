@@ -7,7 +7,7 @@
             <div class="sm:p-12 text-center">
                 <div class="p-4 text-xl sm:text-2xl font-bold ">{{ __('Login') }}</div>
                 <div class="p-4">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="/login">
                         @csrf
                         <div class="flex flex-col sm:flex-row mb-4">
                             <label for="email" class="sm:w-4/12 text-md text-left">{{ __('E-Mail') }}</label>

@@ -51,8 +51,7 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
-
+                        </div>                        
                         <div class="flex flex-col sm:flex-row mb-4">
                             <label for="password-confirm" class="sm:w-4/12 text-md text-left">{{ __('Confirm Password') }}</label>
 
@@ -60,6 +59,12 @@
                                 <input id="password-confirm" type="password" class="bg-blue-100 w-full p-1 sm:p-3" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
+                        <input type="hidden" name="is_admin" value="0" id="role"/>
+                        <div class="flex justify-left text-blue-800">
+                            <input class="mr-2 mt-1" type="checkbox" id="operatorcheck" />
+                            <label for="operatorcheck">Register as an operator</label>
+                        </div>
+
 
                         <div class="flex flex-col sm:flex-row mb-0 justify-end">
                             <button type="submit" class="p-2 px-10 bg-blue-400 text-white text-lg">

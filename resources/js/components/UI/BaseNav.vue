@@ -60,7 +60,16 @@
                 </div>
                 <div class="hidden md:block">
                     <div class="flex">
-                        <button class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700" @click="logout">Logout</button>
+                          <a class="
+                                px-3 py-2 rounded-md text-sm font-medium
+                              text-gray-300 hover:text-white hover:bg-gray-700 
+                              focus:outline-none focus:text-white 
+                              focus:bg-gray-700" href="/login">Log in </a>
+                        <button class="
+                                px-3 py-2 rounded-md text-sm font-medium
+                              text-gray-300 hover:text-white hover:bg-gray-700 
+                              focus:outline-none focus:text-white 
+                              focus:bg-gray-700" @click="this.logout">Log out</button>                      
                     </div>
                 </div>
                 <div class="-ml-2 flex md:hidden">
@@ -170,7 +179,15 @@
             logout() {
                 axios.post('logout')
                     .then(() => location.reload());
-            }
+            },
+            // showlogin() {
+            //     let loginform = document.querySelector('#loginform');
+            //     let loginclose = document.querySelector('#loginclose');
+            //     loginform.classList.remove('hidden')
+            //     loginclose.addEventListener('click',()=>{
+            //         loginform.classList.add('hidden')
+            //     })
+            // }
         }
     }
 </script>

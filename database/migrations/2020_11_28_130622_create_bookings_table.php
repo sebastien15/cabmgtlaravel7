@@ -16,6 +16,7 @@ class CreateBookingsTable extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->unSignedBigInteger('user_id');
+            $table->unSignedBigInteger('scheduler_id');
             $table->unSignedBigInteger('route_id');
             $table->unSignedBigInteger('car_id');
             $table->string('seat_no');
@@ -29,6 +30,11 @@ class CreateBookingsTable extends Migration
             $table->string('dropoff_full_add');
             $table->string('custom_message');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('scheduler_id')->references('id')->on('schedulers');
+            $table->foreign('route_id')->references('id')->on('routes');
+            $table->foreign('car_id')->references('id')->on('cars');
         });
     }
 

@@ -1,53 +1,14 @@
 <template>
     <div>    
-        <div class="p-5 sm:flex justify-around mb-4">
-            <div class="sm:w-4/12 flex justify-between">
-                <div class="w-5/12 sm:w-1/2 bg-blue-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer">
-                    <div class="flex justify-around">
-                    <p class="text-sm sm:text-lg sm:font-bold">Pending bookings </p>
-                    <p class="rounded-full bg-blue-100 sm:p-2 px-3 sm:ml-4">2</p>
-                </div>             
-                </div>
-                <div class="w-5/12 sm:w-1/2 bg-blue-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer">
-                    <div class="flex justify-around">
-                    <a href="/operator/scheduler" class="text-sm sm:text-lg sm:font-bold">schedulers </a>
-                    <p class="rounded-full bg-blue-100 sm:p-2 px-3 sm:ml-4">2</p>
-                    </div>                              
-                </div>
-            </div>
-            <div class="sm:w-4/12 flex justify-between">
-                <div class="w-5/12 sm:w-1/2 bg-green-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer">
-                    <div class="flex justify-around">
-                    <p class="text-sm sm:text-lg sm:font-bold">Pending pays </p>
-                    <p class="rounded-full bg-green-100 sm:p-2 px-3 sm:ml-4">2</p>
-                    </div>         
-                </div>
-                <div class="w-5/12 sm:w-1/2 bg-gray-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer">
-                    <div class="flex justify-around">
-                        <a href="/operator/profile">
-                        <p class="text-sm sm:text-lg sm:font-bold">Profile </p>
-                        </a>
-                    <p class="rounded-full bg-gray-100 sm:p-2 px-3 sm:ml-4">2</p>
-                    </div>
-                </div>            
-            </div>
-            <div class="sm:w-4/12 flex justify-between">
-                <div class="w-5/12 sm:w-1/2 bg-gray-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer">
-                    <div class="flex justify-around">
-                    <p class="text-sm sm:text-lg sm:font-bold">Notifications </p>
-                    <p class="rounded-full bg-gray-100 sm:p-2 px-3 sm:ml-4">2</p>
-                    </div> 
-                </div>
-            </div>            
-        </div>
+        <navigations></navigations>
         <hr class="w-10/12 bg-blue-400 m-auto" style="height: 1px">
         <div class="flex flex-col sm:flex-row justify-around ">
             <div class="sm:w-10/12 p-2 md:pt-20 ">
-                <h4 class="text-xl font-bold mb-3">To day's Scheduler</h4>
-                <div class="overflow-x-auto ">
-                    <table class="border border-blue-900 ">
+                <h4 class="text-sm sm:text-xl font-bold mb-3">To day's Scheduler</h4>
+                <div class="overflow-x-auto">
+                    <table class="border border-blue-900 text">
                         <thead class="border border-blue-900 ">
-                            <tr class="p-2 text-sm font-bold">
+                            <tr class="p-2 text-xs sm:text-sm font-bold">
                                 <td class="border-r border-blue-600 p-2">id</td>
                                 <td class="border-r border-blue-600 p-2">Company</td>
                                 <td class="border-r border-blue-600 p-2">From</td>
@@ -61,7 +22,7 @@
                                 <td class="border-r border-blue-600 p-2">quick actions</td>
                             </tr>
                         </thead>
-                        <tbody class="border border-blue-400 border-t-0">
+                        <tbody class="border border-blue-400 border-t-0 text-xs sm:text-sm">
                             <tr class="p-2 " v-for="scheduler in schedulers" :key="scheduler.id">
                                 <td class="border-r border-blue-400 p-2">{{ scheduler.id }}</td>
                                 <td class="border-r border-blue-400 p-2">{{ scheduler.operator_company }}</td>
@@ -84,7 +45,7 @@
             </div>
             
             <div class="order-first sm:order-last sm:w-2/12 p-2 md:pt-20 ">
-                <button class="text-xl font-bold mb-3 border border-blue-400 text-blue-500 p-4 rounded-sm" @click="()=>{this.addSchedulerModel = !this.addSchedulerModel}">Add a Scheduler</button>
+                <button class="text-xs sm:text-md md:text-xl font-bold mb-3 border border-blue-400 text-blue-500 p-1 sm:p-3 md:p-4 rounded-sm" @click="()=>{this.addSchedulerModel = !this.addSchedulerModel}">Add a Scheduler</button>
             </div>
         </div>
         <!-- scheduler showing model -->
@@ -132,7 +93,7 @@
         </div>
         <!-- scheduler add model -->
         <div 
-            class="w-11/12 sm:w-8/12  bg-white border-blue-400 top-10 mt-5 md:mt-20 p-20 shadow-md"
+            class="w-full sm:w-8/12  bg-white border-blue-400 top-10 mt-4 md:mt-20 p-5 sm:p-10 md:p-20 shadow-md absolute"
             :class="[
                 addSchedulerModel ? 'absolute' : 'hidden',
             ]"
@@ -140,45 +101,59 @@
             <h2 class="text-2xl font-bold mb-4">Add a Scheduler</h2>
             <div class="border-b-blue-200 mb-10">
                 <form @submit.prevent="editMode? updateScheduler() : saveScheduler()">
-                    <div class="flex justify-between mb-2 sm:mb-4">
+                    <div class="flex flex-col sm:flex-row justify-between mb-2 sm:mb-4">
                         <input type="hidden" v-model="form.operator_id" name="operator_id" value="(user.id )"/>
-                        <input type="hidden" v-model="form.operator_car" name="operator_id" value="(operator.car_id )"/>
-                        <input type="hidden" v-model="form.operator_company" name="operator_id" value="(user.company_name )"/>
-                        <input class="w-5/12 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" type="text" v-model="form.route_from" name="route_from" placeholder="route_from"/>
-                        <input class="w-5/12 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" type="text" v-model="form.route_to" name="route_to" placeholder="route_to"/>
+                        <!-- <input type="hidden" v-model="form.operator_car" name="operator_car_id" />
+                        <input type="hidden" v-model="form.operator_company" name="operator_comany_name" value= operator[0].company_name/> -->
+                        <div class="w-full sm:w-5/12">
+                            <label class="text-md pb-2 mb-2">From:</label>
+                            <select class="w-full text-blue-800 text-sm sm:text-md 
+                                rounded-sm border border-blue-700 p-1 sm:px-2 sm:py-3 
+                                mb-2 sm:mb-0" v-model="form.route_from" name="route_from">
+                                <option  v-for="location in locations" :key="location.id" v-text="location.name" :value="location.name"></option>
+                            </select>
+                        </div>
+                        <div class="w-full sm:w-5/12">
+                            <label class="text-md pb-2 mb-2">To:</label>
+                            <select class="w-full text-blue-800 text-sm sm:text-md 
+                                rounded-sm border border-blue-700 p-1 sm:px-2 sm:py-3 
+                                mb-2 sm:mb-0" v-model="form.route_to" name="route_to">
+                                <option  v-for="location in locations" :key="location.id" v-text="location.name" :value="location.name"></option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="flex justify-between mb-2 sm:mb-4">
-                        <div class="w-3/12 flex flex-col">
+                    <div class="flex flex-col sm:flex-row justify-between mb-2 sm:mb-4">
+                        <div class="w-full sm:w-3/12 flex flex-col">
                             <label class="text-md pb-2 mb-2">Journey date</label>
-                            <input class=" text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" type="date" v-model="form.journey_date" name="journey_date" placeholder="journey_date"/>
+                            <input class=" w-full text-blue-800 text-sm sm:text-md rounded-sm border border-blue-700 p-1 sm:px-2 sm:py-3 mb-2 sm:mb-0" type="date" v-model="form.journey_date" name="journey_date" placeholder="journey_date"/>
                         </div>
-                        <div class="w-3/12 flex flex-col">
+                        <div class="w-full sm:w-3/12 flex flex-col">
                             <label class="text-md pb-2 mb-2">Depart time</label>
-                            <input class=" text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" @change="calcJourneytime()" type="time" v-model="form.departure_time" name="departure_time" placeholder="12/15"/>
+                            <input class=" w-full text-blue-800 text-sm sm:text-md rounded-sm border border-blue-700 p-1 sm:px-2 sm:py-3 mb-2 sm:mb-0" @change="calcJourneytime()" type="time" v-model="form.departure_time" name="departure_time" placeholder="12/15"/>
                         </div>
-                        <div class="w-3/12 flex flex-col">
+                        <div class="w-full sm:w-3/12 flex flex-col">
                             <label class="text-md pb-2 mb-2">Arrival time</label>
-                            <input class=" text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" @change="calcJourneytime()" type="time" v-model="form.arrival_time" name="arrival_time" placeholder="15/04"/>
+                            <input class=" w-full  text-blue-800 text-sm sm:text-md rounded-sm border border-blue-700 p-1 sm:px-2 sm:py-3 mb-2 sm:mb-0" @change="calcJourneytime()" type="time" v-model="form.arrival_time" name="arrival_time" placeholder="15/04"/>
                         </div>
                     </div>
-                    <div class="flex justify-between mb-2 sm:mb-4">
-                        <div class="w-3/12 flex flex-col">
+                    <div class="flex flex-col sm:flex-row justify-between mb-2 sm:mb-4">
+                        <div class="w-full sm:w-3/12 flex flex-col">
                             <label class="text-md pb-2 mb-2"> Expected journey price</label>
-                            <input class="w-5/12 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" type="text" v-model="form.journey_price" name="journey_price" placeholder="journey_price"/>
+                            <input class="w-full text-blue-800 text-sm sm:text-md rounded-sm border border-blue-700 p-1 sm:px-2 sm:py-3 mb-2 sm:mb-0" type="text" v-model="form.journey_price" name="journey_price" placeholder="journey_price"/>
                         </div>
-                        <div class="w-3/12 flex flex-col">
+                        <div class="w-full sm:w-3/12 flex flex-col">
                             <label class="text-md pb-2 mb-2"> Expected journey time</label>
-                            <input class="w-5/12 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" type="text" disabled v-model="form.journey_time" name="journey_time" placeholder="journey_time"/>
+                            <input class="w-full text-blue-800 text-sm sm:text-md rounded-sm border border-blue-700 p-1 sm:px-2 sm:py-3 mb-2 sm:mb-0" type="text" disabled v-model="form.journey_time" name="journey_time" placeholder="journey_time"/>
                         </div>
-                        <div class="w-3/12 flex flex-col">
+                        <div class="w-full sm:w-3/12 flex flex-col">
                             <label class="text-md pb-2 mb-2">some custom message</label>
-                            <textarea class=" text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" v-model="form.message" name="message">message</textarea>
+                            <textarea class=" w-full text-blue-800 text-sm sm:text-md rounded-sm border border-blue-700 p-1 sm:px-2 sm:py-3 mb-2 sm:mb-0" v-model="form.message" name="message">message</textarea>
                         </div>
                     </div>
-                    <div class="flex justify-items-start pt-10">
-                        <button type="submit" v-show="!editMode" class="p-2 rounded-md mr-3 text-md font-light border-2 border-blue-600 text-blue-600" >Save</button>
-                        <button type="submit" v-show="editMode" class="p-2 rounded-md mr-3 text-md font-light border-2 border-green-600 text-green-600" >Update</button>
-                        <a class="p-2 rounded-md mr-3 text-md font-light border-2 border-red-600 text-red-600" @click="()=>{this.addSchedulerModel = false}">Cancel</a>
+                    <div class="flex flex-col sm:flex-row justify-items-start pt-10 text-center">
+                        <button type="submit" v-show="!editMode" class="mb-1 sm:mb-0 p-1 sm:p-2 rounded-md sm:mr-3 text-sm sm:text-md font-light border-2 border-blue-600 text-blue-600" >Save</button>
+                        <button type="submit" v-show="editMode" class="mb-1 sm:mb-0 p-1 sm:p-2 rounded-md sm:mr-3 text-sm sm:text-md font-light border-2 border-green-600 text-green-600" >Update</button>
+                        <a class="p-1 sm:p-2 rounded-md sm:mr-3  text-sm sm:text-md font-light border-2 border-red-600 text-red-600" @click="()=>{this.addSchedulerModel = false}">Cancel</a>
                     </div>
                 </form>
             </div>
@@ -199,6 +174,7 @@ export default {
             addSchedulerModel: false,
             editMode: false,
             operator:'',
+            locations:{},
             form: new Form({
                     operator_id: this.user.id,
                     operator_company:'',
@@ -218,26 +194,28 @@ export default {
             allschedulers() {
                 axios.get("/api/schedulers").then( data => (this.schedulers = data.data))
             },
+            alllocations() {
+                axios.get("/api/locations").then( data => (this.locations = data.data))
+            },
             getTodaysScheduler() {
                 try {
                     axios.get("/schedulers/today").then( data => (this.schedulers = data.data))
                 } catch (error) {
                     console.log("her is the erro" + err.message)
                 }
-            },
+             },
             fetchOperator() {
                 try {
                     axios.get("/api/operatorinfo/").then( data => (
                         this.operator = data.data
                         )).then(()=>{
-                        this.form.operator_company = this.operator.company_name
-                        this.form.operator_car = this.operator.car_id
-                        console.log(this.operator)
+                        this.form.operator_company = this.operator[0].company_name
+                        this.form.operator_car = this.operator[0].car_id
                         })
                 } catch (error) {
                     console.log("her is the erro" + err.message)
                 }
-            },
+             },
             showSingleScheduler(id) {
                 this.showSingleSchedulerModel = !this.showSingleSchedulerModel,
                 axios.get("/api/schedulers/"+id).then( data=>(this.singleScheduler = data.data[0] ))
@@ -253,14 +231,17 @@ export default {
              },
             saveScheduler(){
                 this.$Progress.start()
-                this.form.post('/api/schedulers')
+                console.log(this.form)
+                this.form.post('/api/schedulers')                
                     .then(() => {
+                        console.log(this.form)
                         Fire.$emit('AfterCreatedUserLoadIt'); //custom events
                         Toast.fire({
                             icon: 'success',
                             title: 'Sheduler created successfully'
                         })
                         this.$Progress.finish()
+                        this.allschedulers()
                     })
                     .catch((error) => {
                         console.log(error.message)
@@ -330,9 +311,8 @@ export default {
                     let diffHour =arrHour - depHour;
                     let diffMin = arrMin - depMin;
                     this.form.journey_time = JSON.stringify(diffHour)+"hrs "+ JSON.stringify(diffMin) + "min"
-                    console.log(`dep hour is ${depHour} dep min is ${depMin} arr hour is ${arrHour} arr min is ${arrHour}`)
-                    console.log(`journey hour is ${diffHour} and journey min is ${diffMin}`)
-                    // console.log(new Date(depT))
+                    // console.log(`dep hour is ${depHour} dep min is ${depMin} arr hour is ${arrHour} arr min is ${arrHour}`)
+                    // console.log(`journey hour is ${diffHour} and journey min is ${diffMin}`)
                 }
              }
         },
@@ -340,6 +320,7 @@ export default {
         this.allschedulers()
         // this.getTodaysScheduler()
         this.fetchOperator()
+        this.alllocations()
     },
 }
 </script>

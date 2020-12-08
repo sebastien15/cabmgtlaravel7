@@ -2207,6 +2207,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "BaseNav",
   data: function data() {
@@ -2219,7 +2228,15 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('logout').then(function () {
         return location.reload();
       });
-    }
+    } // showlogin() {
+    //     let loginform = document.querySelector('#loginform');
+    //     let loginclose = document.querySelector('#loginclose');
+    //     loginform.classList.remove('hidden')
+    //     loginclose.addEventListener('click',()=>{
+    //         loginform.classList.add('hidden')
+    //     })
+    // }
+
   }
 });
 
@@ -2376,10 +2393,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/operator/dashboard.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/operator/dashboard.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/navigations.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/navigations.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2424,6 +2441,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "navigations",
+  methods: {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/operator/dashboard.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/operator/dashboard.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 //
 //
 //
@@ -2521,10 +2566,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/operator/profile.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/operator/profile.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/operator/location.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/operator/location.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2567,6 +2612,121 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "operatorscheduler",
+  props: ['user'],
+  data: function data() {
+    return {
+      locations: null,
+      singleLocation: {},
+      addLocationModel: false,
+      editMode: false,
+      operator: '',
+      form: new Form({
+        name: '',
+        loc_postcode: ''
+      })
+    };
+  },
+  methods: {
+    alllocations: function alllocations() {
+      var _this = this;
+
+      axios.get("/api/locations").then(function (data) {
+        return _this.locations = data.data;
+      });
+    },
+    saveLocation: function saveLocation() {
+      var _this2 = this;
+
+      this.$Progress.start();
+      this.form.post('/api/locations').then(function () {
+        Fire.$emit('AfterCreatedUserLoadIt'); //custom events
+
+        Toast.fire({
+          icon: 'success',
+          title: 'Sheduler created successfully'
+        });
+
+        _this2.$Progress.finish();
+
+        _this2.alllocations();
+      })["catch"](function (error) {
+        console.log(error.message);
+      });
+    },
+    deleteLocation: function deleteLocation(id) {
+      var _this3 = this;
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (response) {
+        if (response.isConfirmed) {
+          _this3.alllocations();
+
+          axios["delete"]("/api/locations/" + id).then(function (response) {
+            Swal.fire('Deleted!', 'Location deleted successfully', 'success');
+
+            _this3.alllocations();
+          })["catch"](function () {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
+              footer: '<a href>Why do I have this issue?</a>'
+            });
+
+            _this3.alllocations();
+          });
+        }
+      });
+    }
+  },
+  beforeMount: function beforeMount() {
+    this.alllocations();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/operator/profile.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/operator/profile.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 //
 //
 //
@@ -3344,31 +3504,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "operatorscheduler",
   props: ['user'],
@@ -3381,6 +3516,7 @@ __webpack_require__.r(__webpack_exports__);
       addSchedulerModel: false,
       editMode: false,
       operator: '',
+      locations: {},
       form: new Form({
         operator_id: this.user.id,
         operator_company: '',
@@ -3404,37 +3540,43 @@ __webpack_require__.r(__webpack_exports__);
         return _this.schedulers = data.data;
       });
     },
-    getTodaysScheduler: function getTodaysScheduler() {
+    alllocations: function alllocations() {
       var _this2 = this;
+
+      axios.get("/api/locations").then(function (data) {
+        return _this2.locations = data.data;
+      });
+    },
+    getTodaysScheduler: function getTodaysScheduler() {
+      var _this3 = this;
 
       try {
         axios.get("/schedulers/today").then(function (data) {
-          return _this2.schedulers = data.data;
+          return _this3.schedulers = data.data;
         });
       } catch (error) {
         console.log("her is the erro" + err.message);
       }
     },
     fetchOperator: function fetchOperator() {
-      var _this3 = this;
+      var _this4 = this;
 
       try {
         axios.get("/api/operatorinfo/").then(function (data) {
-          return _this3.operator = data.data;
+          return _this4.operator = data.data;
         }).then(function () {
-          _this3.form.operator_company = _this3.operator.company_name;
-          _this3.form.operator_car = _this3.operator.car_id;
-          console.log(_this3.operator);
+          _this4.form.operator_company = _this4.operator[0].company_name;
+          _this4.form.operator_car = _this4.operator[0].car_id;
         });
       } catch (error) {
         console.log("her is the erro" + err.message);
       }
     },
     showSingleScheduler: function showSingleScheduler(id) {
-      var _this4 = this;
+      var _this5 = this;
 
       this.showSingleSchedulerModel = !this.showSingleSchedulerModel, axios.get("/api/schedulers/" + id).then(function (data) {
-        return _this4.singleScheduler = data.data[0];
+        return _this5.singleScheduler = data.data[0];
       });
     },
     editModalWindow: function editModalWindow(singleScheduler) {
@@ -3447,10 +3589,12 @@ __webpack_require__.r(__webpack_exports__);
       this.form.Scheduler_id = this.singleScheduler.id;
     },
     saveScheduler: function saveScheduler() {
-      var _this5 = this;
+      var _this6 = this;
 
       this.$Progress.start();
+      console.log(this.form);
       this.form.post('/api/schedulers').then(function () {
+        console.log(_this6.form);
         Fire.$emit('AfterCreatedUserLoadIt'); //custom events
 
         Toast.fire({
@@ -3458,13 +3602,15 @@ __webpack_require__.r(__webpack_exports__);
           title: 'Sheduler created successfully'
         });
 
-        _this5.$Progress.finish();
+        _this6.$Progress.finish();
+
+        _this6.allschedulers();
       })["catch"](function (error) {
         console.log(error.message);
       });
     },
     updateScheduler: function updateScheduler() {
-      var _this6 = this;
+      var _this7 = this;
 
       this.form.put('/api/schedulers/' + this.form.Scheduler_id).then(function () {
         Toast.fire({
@@ -3473,13 +3619,13 @@ __webpack_require__.r(__webpack_exports__);
         });
         Fire.$emit('AfterCreatedUserLoadIt');
 
-        _this6.allschedulers();
+        _this7.allschedulers();
       })["catch"](function (error) {
         console.log(error.message);
       });
     },
     deleteScheduler: function deleteScheduler(id) {
-      var _this7 = this;
+      var _this8 = this;
 
       Swal.fire({
         title: 'Are you sure?',
@@ -3491,15 +3637,15 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Yes, delete it!'
       }).then(function (response) {
         if (response.isConfirmed) {
-          _this7.allschedulers();
+          _this8.allschedulers();
 
           axios["delete"]("/api/schedulers/" + id).then(function (response) {
             Swal.fire('Deleted!', 'Scheduler deleted successfully', 'success');
 
-            _this7.allschedulers();
+            _this8.allschedulers();
 
-            if (_this7.showSingleSchedulerModel) {
-              _this7.showSingleSchedulerModel = !_this7.showSingleSchedulerModel;
+            if (_this8.showSingleSchedulerModel) {
+              _this8.showSingleSchedulerModel = !_this8.showSingleSchedulerModel;
             }
           })["catch"](function () {
             Swal.fire({
@@ -3523,9 +3669,8 @@ __webpack_require__.r(__webpack_exports__);
         var arrMin = +arrTime.substr(3);
         var diffHour = arrHour - depHour;
         var diffMin = arrMin - depMin;
-        this.form.journey_time = JSON.stringify(diffHour) + "hrs " + JSON.stringify(diffMin) + "min";
-        console.log("dep hour is ".concat(depHour, " dep min is ").concat(depMin, " arr hour is ").concat(arrHour, " arr min is ").concat(arrHour));
-        console.log("journey hour is ".concat(diffHour, " and journey min is ").concat(diffMin)); // console.log(new Date(depT))
+        this.form.journey_time = JSON.stringify(diffHour) + "hrs " + JSON.stringify(diffMin) + "min"; // console.log(`dep hour is ${depHour} dep min is ${depMin} arr hour is ${arrHour} arr min is ${arrHour}`)
+        // console.log(`journey hour is ${diffHour} and journey min is ${diffMin}`)
       }
     }
   },
@@ -3533,6 +3678,7 @@ __webpack_require__.r(__webpack_exports__);
     this.allschedulers(); // this.getTodaysScheduler()
 
     this.fetchOperator();
+    this.alllocations();
   }
 });
 
@@ -4107,6 +4253,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "cabList",
   data: function data() {
@@ -4115,6 +4265,7 @@ __webpack_require__.r(__webpack_exports__);
       toName: null,
       date: null,
       schedules: [],
+      showSeats: false,
       form: new Form({
         from: '',
         to: '',
@@ -4128,7 +4279,6 @@ __webpack_require__.r(__webpack_exports__);
       this.toName = new URL(location.href).searchParams.get('to');
       this.date = new URL(location.href).searchParams.get('date');
       this.newdate = this.date.replaceAll(",", "-");
-      console.log("date now is " + this.newdate);
       this.form.from = this.fromName;
       this.form.to = this.toName;
       this.form.date = this.newdate;
@@ -4138,11 +4288,14 @@ __webpack_require__.r(__webpack_exports__);
 
       this.form.post("/api/querySchedulers").then(function (data) {
         return (// console.log(data.data)
-          _this.schedules = data.data, console.log(_this.schedules)
+          _this.schedules = data.data
         );
       })["catch"](function (error) {
         return console.log(error.message);
       });
+    },
+    showSeatesModel: function showSeatesModel() {
+      this.showSeats = !this.showSeats;
     }
   },
   beforeMount: function beforeMount() {
@@ -9059,6 +9212,112 @@ __webpack_require__.r(__webpack_exports__);
 
 })));
 //# sourceMappingURL=bootstrap.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/booking/cabList.vue?vue&type=style&index=0&id=0e3abaaa&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/front/booking/cabList.vue?vue&type=style&index=0&id=0e3abaaa&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".tags[data-v-0e3abaaa]{\n  font-size: 10px;\n}\n.closeModel[data-v-0e3abaaa]{\n  top: 0px;\n  right: 0px;\n}\r\n\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/lib/css-base.js":
+/*!*************************************************!*\
+  !*** ./node_modules/css-loader/lib/css-base.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
 
 
 /***/ }),
@@ -61706,6 +61965,545 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/booking/cabList.vue?vue&type=style&index=0&id=0e3abaaa&scoped=true&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/front/booking/cabList.vue?vue&type=style&index=0&id=0e3abaaa&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./cabList.vue?vue&type=style&index=0&id=0e3abaaa&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/booking/cabList.vue?vue&type=style&index=0&id=0e3abaaa&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/lib/addStyles.js":
+/*!****************************************************!*\
+  !*** ./node_modules/style-loader/lib/addStyles.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+
+var stylesInDom = {};
+
+var	memoize = function (fn) {
+	var memo;
+
+	return function () {
+		if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+		return memo;
+	};
+};
+
+var isOldIE = memoize(function () {
+	// Test for IE <= 9 as proposed by Browserhacks
+	// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
+	// Tests for existence of standard globals is to allow style-loader
+	// to operate correctly into non-standard environments
+	// @see https://github.com/webpack-contrib/style-loader/issues/177
+	return window && document && document.all && !window.atob;
+});
+
+var getTarget = function (target, parent) {
+  if (parent){
+    return parent.querySelector(target);
+  }
+  return document.querySelector(target);
+};
+
+var getElement = (function (fn) {
+	var memo = {};
+
+	return function(target, parent) {
+                // If passing function in options, then use it for resolve "head" element.
+                // Useful for Shadow Root style i.e
+                // {
+                //   insertInto: function () { return document.querySelector("#foo").shadowRoot }
+                // }
+                if (typeof target === 'function') {
+                        return target();
+                }
+                if (typeof memo[target] === "undefined") {
+			var styleTarget = getTarget.call(this, target, parent);
+			// Special case to return head of iframe instead of iframe itself
+			if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
+				try {
+					// This will throw an exception if access to iframe is blocked
+					// due to cross-origin restrictions
+					styleTarget = styleTarget.contentDocument.head;
+				} catch(e) {
+					styleTarget = null;
+				}
+			}
+			memo[target] = styleTarget;
+		}
+		return memo[target]
+	};
+})();
+
+var singleton = null;
+var	singletonCounter = 0;
+var	stylesInsertedAtTop = [];
+
+var	fixUrls = __webpack_require__(/*! ./urls */ "./node_modules/style-loader/lib/urls.js");
+
+module.exports = function(list, options) {
+	if (typeof DEBUG !== "undefined" && DEBUG) {
+		if (typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+	}
+
+	options = options || {};
+
+	options.attrs = typeof options.attrs === "object" ? options.attrs : {};
+
+	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+	// tags it will allow on a page
+	if (!options.singleton && typeof options.singleton !== "boolean") options.singleton = isOldIE();
+
+	// By default, add <style> tags to the <head> element
+        if (!options.insertInto) options.insertInto = "head";
+
+	// By default, add <style> tags to the bottom of the target
+	if (!options.insertAt) options.insertAt = "bottom";
+
+	var styles = listToStyles(list, options);
+
+	addStylesToDom(styles, options);
+
+	return function update (newList) {
+		var mayRemove = [];
+
+		for (var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+
+			domStyle.refs--;
+			mayRemove.push(domStyle);
+		}
+
+		if(newList) {
+			var newStyles = listToStyles(newList, options);
+			addStylesToDom(newStyles, options);
+		}
+
+		for (var i = 0; i < mayRemove.length; i++) {
+			var domStyle = mayRemove[i];
+
+			if(domStyle.refs === 0) {
+				for (var j = 0; j < domStyle.parts.length; j++) domStyle.parts[j]();
+
+				delete stylesInDom[domStyle.id];
+			}
+		}
+	};
+};
+
+function addStylesToDom (styles, options) {
+	for (var i = 0; i < styles.length; i++) {
+		var item = styles[i];
+		var domStyle = stylesInDom[item.id];
+
+		if(domStyle) {
+			domStyle.refs++;
+
+			for(var j = 0; j < domStyle.parts.length; j++) {
+				domStyle.parts[j](item.parts[j]);
+			}
+
+			for(; j < item.parts.length; j++) {
+				domStyle.parts.push(addStyle(item.parts[j], options));
+			}
+		} else {
+			var parts = [];
+
+			for(var j = 0; j < item.parts.length; j++) {
+				parts.push(addStyle(item.parts[j], options));
+			}
+
+			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+		}
+	}
+}
+
+function listToStyles (list, options) {
+	var styles = [];
+	var newStyles = {};
+
+	for (var i = 0; i < list.length; i++) {
+		var item = list[i];
+		var id = options.base ? item[0] + options.base : item[0];
+		var css = item[1];
+		var media = item[2];
+		var sourceMap = item[3];
+		var part = {css: css, media: media, sourceMap: sourceMap};
+
+		if(!newStyles[id]) styles.push(newStyles[id] = {id: id, parts: [part]});
+		else newStyles[id].parts.push(part);
+	}
+
+	return styles;
+}
+
+function insertStyleElement (options, style) {
+	var target = getElement(options.insertInto)
+
+	if (!target) {
+		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
+	}
+
+	var lastStyleElementInsertedAtTop = stylesInsertedAtTop[stylesInsertedAtTop.length - 1];
+
+	if (options.insertAt === "top") {
+		if (!lastStyleElementInsertedAtTop) {
+			target.insertBefore(style, target.firstChild);
+		} else if (lastStyleElementInsertedAtTop.nextSibling) {
+			target.insertBefore(style, lastStyleElementInsertedAtTop.nextSibling);
+		} else {
+			target.appendChild(style);
+		}
+		stylesInsertedAtTop.push(style);
+	} else if (options.insertAt === "bottom") {
+		target.appendChild(style);
+	} else if (typeof options.insertAt === "object" && options.insertAt.before) {
+		var nextSibling = getElement(options.insertAt.before, target);
+		target.insertBefore(style, nextSibling);
+	} else {
+		throw new Error("[Style Loader]\n\n Invalid value for parameter 'insertAt' ('options.insertAt') found.\n Must be 'top', 'bottom', or Object.\n (https://github.com/webpack-contrib/style-loader#insertat)\n");
+	}
+}
+
+function removeStyleElement (style) {
+	if (style.parentNode === null) return false;
+	style.parentNode.removeChild(style);
+
+	var idx = stylesInsertedAtTop.indexOf(style);
+	if(idx >= 0) {
+		stylesInsertedAtTop.splice(idx, 1);
+	}
+}
+
+function createStyleElement (options) {
+	var style = document.createElement("style");
+
+	if(options.attrs.type === undefined) {
+		options.attrs.type = "text/css";
+	}
+
+	if(options.attrs.nonce === undefined) {
+		var nonce = getNonce();
+		if (nonce) {
+			options.attrs.nonce = nonce;
+		}
+	}
+
+	addAttrs(style, options.attrs);
+	insertStyleElement(options, style);
+
+	return style;
+}
+
+function createLinkElement (options) {
+	var link = document.createElement("link");
+
+	if(options.attrs.type === undefined) {
+		options.attrs.type = "text/css";
+	}
+	options.attrs.rel = "stylesheet";
+
+	addAttrs(link, options.attrs);
+	insertStyleElement(options, link);
+
+	return link;
+}
+
+function addAttrs (el, attrs) {
+	Object.keys(attrs).forEach(function (key) {
+		el.setAttribute(key, attrs[key]);
+	});
+}
+
+function getNonce() {
+	if (false) {}
+
+	return __webpack_require__.nc;
+}
+
+function addStyle (obj, options) {
+	var style, update, remove, result;
+
+	// If a transform function was defined, run it on the css
+	if (options.transform && obj.css) {
+	    result = typeof options.transform === 'function'
+		 ? options.transform(obj.css) 
+		 : options.transform.default(obj.css);
+
+	    if (result) {
+	    	// If transform returns a value, use that instead of the original css.
+	    	// This allows running runtime transformations on the css.
+	    	obj.css = result;
+	    } else {
+	    	// If the transform function returns a falsy value, don't add this css.
+	    	// This allows conditional loading of css
+	    	return function() {
+	    		// noop
+	    	};
+	    }
+	}
+
+	if (options.singleton) {
+		var styleIndex = singletonCounter++;
+
+		style = singleton || (singleton = createStyleElement(options));
+
+		update = applyToSingletonTag.bind(null, style, styleIndex, false);
+		remove = applyToSingletonTag.bind(null, style, styleIndex, true);
+
+	} else if (
+		obj.sourceMap &&
+		typeof URL === "function" &&
+		typeof URL.createObjectURL === "function" &&
+		typeof URL.revokeObjectURL === "function" &&
+		typeof Blob === "function" &&
+		typeof btoa === "function"
+	) {
+		style = createLinkElement(options);
+		update = updateLink.bind(null, style, options);
+		remove = function () {
+			removeStyleElement(style);
+
+			if(style.href) URL.revokeObjectURL(style.href);
+		};
+	} else {
+		style = createStyleElement(options);
+		update = applyToTag.bind(null, style);
+		remove = function () {
+			removeStyleElement(style);
+		};
+	}
+
+	update(obj);
+
+	return function updateStyle (newObj) {
+		if (newObj) {
+			if (
+				newObj.css === obj.css &&
+				newObj.media === obj.media &&
+				newObj.sourceMap === obj.sourceMap
+			) {
+				return;
+			}
+
+			update(obj = newObj);
+		} else {
+			remove();
+		}
+	};
+}
+
+var replaceText = (function () {
+	var textStore = [];
+
+	return function (index, replacement) {
+		textStore[index] = replacement;
+
+		return textStore.filter(Boolean).join('\n');
+	};
+})();
+
+function applyToSingletonTag (style, index, remove, obj) {
+	var css = remove ? "" : obj.css;
+
+	if (style.styleSheet) {
+		style.styleSheet.cssText = replaceText(index, css);
+	} else {
+		var cssNode = document.createTextNode(css);
+		var childNodes = style.childNodes;
+
+		if (childNodes[index]) style.removeChild(childNodes[index]);
+
+		if (childNodes.length) {
+			style.insertBefore(cssNode, childNodes[index]);
+		} else {
+			style.appendChild(cssNode);
+		}
+	}
+}
+
+function applyToTag (style, obj) {
+	var css = obj.css;
+	var media = obj.media;
+
+	if(media) {
+		style.setAttribute("media", media)
+	}
+
+	if(style.styleSheet) {
+		style.styleSheet.cssText = css;
+	} else {
+		while(style.firstChild) {
+			style.removeChild(style.firstChild);
+		}
+
+		style.appendChild(document.createTextNode(css));
+	}
+}
+
+function updateLink (link, options, obj) {
+	var css = obj.css;
+	var sourceMap = obj.sourceMap;
+
+	/*
+		If convertToAbsoluteUrls isn't defined, but sourcemaps are enabled
+		and there is no publicPath defined then lets turn convertToAbsoluteUrls
+		on by default.  Otherwise default to the convertToAbsoluteUrls option
+		directly
+	*/
+	var autoFixUrls = options.convertToAbsoluteUrls === undefined && sourceMap;
+
+	if (options.convertToAbsoluteUrls || autoFixUrls) {
+		css = fixUrls(css);
+	}
+
+	if (sourceMap) {
+		// http://stackoverflow.com/a/26603875
+		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+	}
+
+	var blob = new Blob([css], { type: "text/css" });
+
+	var oldSrc = link.href;
+
+	link.href = URL.createObjectURL(blob);
+
+	if(oldSrc) URL.revokeObjectURL(oldSrc);
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/lib/urls.js":
+/*!***********************************************!*\
+  !*** ./node_modules/style-loader/lib/urls.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+/**
+ * When source maps are enabled, `style-loader` uses a link element with a data-uri to
+ * embed the css on the page. This breaks all relative urls because now they are relative to a
+ * bundle instead of the current page.
+ *
+ * One solution is to only use full urls, but that may be impossible.
+ *
+ * Instead, this function "fixes" the relative urls to be absolute according to the current page location.
+ *
+ * A rudimentary test suite is located at `test/fixUrls.js` and can be run via the `npm test` command.
+ *
+ */
+
+module.exports = function (css) {
+  // get current location
+  var location = typeof window !== "undefined" && window.location;
+
+  if (!location) {
+    throw new Error("fixUrls requires window.location");
+  }
+
+	// blank or null?
+	if (!css || typeof css !== "string") {
+	  return css;
+  }
+
+  var baseUrl = location.protocol + "//" + location.host;
+  var currentDir = baseUrl + location.pathname.replace(/\/[^\/]*$/, "/");
+
+	// convert each url(...)
+	/*
+	This regular expression is just a way to recursively match brackets within
+	a string.
+
+	 /url\s*\(  = Match on the word "url" with any whitespace after it and then a parens
+	   (  = Start a capturing group
+	     (?:  = Start a non-capturing group
+	         [^)(]  = Match anything that isn't a parentheses
+	         |  = OR
+	         \(  = Match a start parentheses
+	             (?:  = Start another non-capturing groups
+	                 [^)(]+  = Match anything that isn't a parentheses
+	                 |  = OR
+	                 \(  = Match a start parentheses
+	                     [^)(]*  = Match anything that isn't a parentheses
+	                 \)  = Match a end parentheses
+	             )  = End Group
+              *\) = Match anything and then a close parens
+          )  = Close non-capturing group
+          *  = Match anything
+       )  = Close capturing group
+	 \)  = Match a close parens
+
+	 /gi  = Get all matches, not the first.  Be case insensitive.
+	 */
+	var fixedCss = css.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi, function(fullMatch, origUrl) {
+		// strip quotes (if they exist)
+		var unquotedOrigUrl = origUrl
+			.trim()
+			.replace(/^"(.*)"$/, function(o, $1){ return $1; })
+			.replace(/^'(.*)'$/, function(o, $1){ return $1; });
+
+		// already a full url? no change
+		if (/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/|\s*$)/i.test(unquotedOrigUrl)) {
+		  return fullMatch;
+		}
+
+		// convert the url to a full url
+		var newUrl;
+
+		if (unquotedOrigUrl.indexOf("//") === 0) {
+		  	//TODO: should we add protocol?
+			newUrl = unquotedOrigUrl;
+		} else if (unquotedOrigUrl.indexOf("/") === 0) {
+			// path should be relative to the base url
+			newUrl = baseUrl + unquotedOrigUrl; // already starts with '/'
+		} else {
+			// path should be relative to current directory
+			newUrl = currentDir + unquotedOrigUrl.replace(/^\.\//, ""); // Strip leading './'
+		}
+
+		// send back the fixed url(...)
+		return "url(" + JSON.stringify(newUrl) + ")";
+	});
+
+	// send back the fixed css
+	return fixedCss;
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/sweetalert2/dist/sweetalert2.all.js":
 /*!**********************************************************!*\
   !*** ./node_modules/sweetalert2/dist/sweetalert2.all.js ***!
@@ -66412,13 +67210,23 @@ var render = function() {
         _c("div", { staticClass: "hidden md:block" }, [
           _c("div", { staticClass: "flex" }, [
             _c(
+              "a",
+              {
+                staticClass:
+                  "\n                            px-3 py-2 rounded-md text-sm font-medium\n                          text-gray-300 hover:text-white hover:bg-gray-700 \n                          focus:outline-none focus:text-white \n                          focus:bg-gray-700",
+                attrs: { href: "/login" }
+              },
+              [_vm._v("Log in ")]
+            ),
+            _vm._v(" "),
+            _c(
               "button",
               {
                 staticClass:
-                  "px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700",
-                on: { click: _vm.logout }
+                  "\n                            px-3 py-2 rounded-md text-sm font-medium\n                          text-gray-300 hover:text-white hover:bg-gray-700 \n                          focus:outline-none focus:text-white \n                          focus:bg-gray-700",
+                on: { click: this.logout }
               },
-              [_vm._v("Logout")]
+              [_vm._v("Log out")]
             )
           ])
         ]),
@@ -66975,6 +67783,197 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/navigations.vue?vue&type=template&id=39c46fe4&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/navigations.vue?vue&type=template&id=39c46fe4&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "p-5 sm:flex justify-around mb-4",
+        attrs: { id: "navigation" }
+      },
+      [
+        _c("div", { staticClass: "sm:w-4/12 flex justify-between" }, [
+          _c(
+            "div",
+            {
+              staticClass:
+                "w-5/12 sm:w-1/2 bg-blue-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
+            },
+            [
+              _c("div", { staticClass: "flex justify-around" }, [
+                _c("p", { staticClass: "text-sm sm:text-lg sm:font-bold" }, [
+                  _vm._v("Pending bookings ")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  {
+                    staticClass: "rounded-full bg-blue-100 sm:p-2 px-3 sm:ml-4"
+                  },
+                  [_vm._v("2")]
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "w-5/12 sm:w-1/2 bg-blue-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
+            },
+            [
+              _c("div", { staticClass: "flex justify-around" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "text-sm sm:text-lg sm:font-bold",
+                    attrs: { href: "/operator/scheduler" }
+                  },
+                  [_vm._v("schedulers ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  {
+                    staticClass: "rounded-full bg-blue-100 sm:p-2 px-3 sm:ml-4"
+                  },
+                  [_vm._v("2")]
+                )
+              ])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "sm:w-4/12 flex justify-between" }, [
+          _c(
+            "div",
+            {
+              staticClass:
+                "w-5/12 sm:w-1/2 bg-green-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
+            },
+            [
+              _c("div", { staticClass: "flex justify-around" }, [
+                _c("p", { staticClass: "text-sm sm:text-lg sm:font-bold" }, [
+                  _vm._v("Pending pays ")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  {
+                    staticClass: "rounded-full bg-green-100 sm:p-2 px-3 sm:ml-4"
+                  },
+                  [_vm._v("2")]
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "w-5/12 sm:w-1/2 bg-gray-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
+            },
+            [
+              _c("div", { staticClass: "flex justify-around" }, [
+                _c("a", { attrs: { href: "/operator/profile" } }, [
+                  _c("p", { staticClass: "text-sm sm:text-lg sm:font-bold" }, [
+                    _vm._v("Profile ")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  {
+                    staticClass: "rounded-full bg-gray-100 sm:p-2 px-3 sm:ml-4"
+                  },
+                  [_vm._v("2")]
+                )
+              ])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "sm:w-4/12 flex justify-between" }, [
+          _c(
+            "div",
+            {
+              staticClass:
+                "w-5/12 sm:w-1/2 bg-gray-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
+            },
+            [
+              _c("div", { staticClass: "flex justify-around" }, [
+                _c("a", { attrs: { href: "/operator/location" } }, [
+                  _c("p", { staticClass: "text-sm sm:text-lg sm:font-bold" }, [
+                    _vm._v("Locations ")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  {
+                    staticClass: "rounded-full bg-gray-100 sm:p-2 px-3 sm:ml-4"
+                  },
+                  [_vm._v("2")]
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "w-5/12 sm:w-1/2 bg-gray-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
+            },
+            [
+              _c("div", { staticClass: "flex justify-around" }, [
+                _c("p", { staticClass: "text-sm sm:text-lg sm:font-bold" }, [
+                  _vm._v("Notifications ")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  {
+                    staticClass: "rounded-full bg-gray-100 sm:p-2 px-3 sm:ml-4"
+                  },
+                  [_vm._v("2")]
+                )
+              ])
+            ]
+          )
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/operator/dashboard.vue?vue&type=template&id=89aadf18&scoped=true&":
 /*!***************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/operator/dashboard.vue?vue&type=template&id=89aadf18&scoped=true& ***!
@@ -66990,200 +67989,80 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("hr", {
-      staticClass: "w-10/12 bg-blue-400 m-auto",
-      staticStyle: { height: "1px" }
-    }),
-    _vm._v(" "),
-    _c("div", { staticClass: "flex flex-col sm:flex-col justify-around" }, [
-      _c("div", { staticClass: "sm:w-1/2 p-2 md:pt-20 " }, [
-        _c("div", { staticClass: "overflow-x-auto" }, [
-          _c("table", { staticClass: "border border-blue-900 " }, [
-            _vm._m(1),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              { staticClass: "border border-blue-400 border-t-0" },
-              _vm._l(_vm.bookings, function(booking) {
-                return _c("tr", { key: booking.id, staticClass: "p-2 " })
-              }),
-              0
-            )
-          ])
-        ])
-      ]),
+  return _c(
+    "div",
+    [
+      _c("navigations"),
       _vm._v(" "),
-      _c("div", { staticClass: "sm:w-1/2" }, [_vm._v(" Notifications area")])
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass:
-          "w-11/12 md:w-8/12 bg-white border-blue-400 top-0 mt-5 md:mt-20  p-20",
-        class: [_vm.showSingleBookingModel ? "absolute" : "hidden"]
-      },
-      [
-        _c("div", { staticClass: "border-b-blue-200 mb-10" }, [
-          _c("div", { staticClass: "flex justify-between mb-5" }, [
-            _c("p", { staticClass: "text-xl font-bold " }, [_vm._v("Book id")]),
-            _vm._v(" "),
-            _c(
-              "p",
-              {
-                staticClass: "cursor-pointer",
-                on: {
-                  click: function($event) {
-                    return _vm.showSingleBooking(1)
-                  }
-                }
-              },
-              [_c("i", { staticClass: "fa fa-times text-blue-700 text-3xl" })]
-            )
-          ]),
-          _vm._v(" "),
-          _c("p", [_vm._v("Hyedrabad to kigali")])
+      _c("hr", {
+        staticClass: "w-10/12 bg-blue-400 m-auto",
+        staticStyle: { height: "1px" }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex flex-col sm:flex-col justify-around" }, [
+        _c("div", { staticClass: "sm:w-1/2 p-2 md:pt-20 " }, [
+          _c("div", { staticClass: "overflow-x-auto" }, [
+            _c("table", { staticClass: "border border-blue-900 " }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                { staticClass: "border border-blue-400 border-t-0" },
+                _vm._l(_vm.bookings, function(booking) {
+                  return _c("tr", { key: booking.id, staticClass: "p-2 " })
+                }),
+                0
+              )
+            ])
+          ])
         ]),
         _vm._v(" "),
-        _vm._m(2),
-        _vm._v(" "),
-        _vm._m(3),
-        _vm._v(" "),
-        _vm._m(4)
-      ]
-    )
-  ])
+        _c("div", { staticClass: "sm:w-1/2" }, [_vm._v(" Notifications area")])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "w-11/12 md:w-8/12 bg-white border-blue-400 top-0 mt-5 md:mt-20  p-20",
+          class: [_vm.showSingleBookingModel ? "absolute" : "hidden"]
+        },
+        [
+          _c("div", { staticClass: "border-b-blue-200 mb-10" }, [
+            _c("div", { staticClass: "flex justify-between mb-5" }, [
+              _c("p", { staticClass: "text-xl font-bold " }, [
+                _vm._v("Book id")
+              ]),
+              _vm._v(" "),
+              _c(
+                "p",
+                {
+                  staticClass: "cursor-pointer",
+                  on: {
+                    click: function($event) {
+                      return _vm.showSingleBooking(1)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fa fa-times text-blue-700 text-3xl" })]
+              )
+            ]),
+            _vm._v(" "),
+            _c("p", [_vm._v("Hyedrabad to kigali")])
+          ]),
+          _vm._v(" "),
+          _vm._m(1),
+          _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
+          _vm._m(3)
+        ]
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-5 sm:flex justify-around mb-4" }, [
-      _c("div", { staticClass: "sm:w-4/12 flex justify-between" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "w-5/12 sm:w-1/2 bg-blue-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
-          },
-          [
-            _c("div", { staticClass: "flex justify-around" }, [
-              _c("p", { staticClass: "text-sm sm:text-lg sm:font-bold" }, [
-                _vm._v("Pending bookings ")
-              ]),
-              _vm._v(" "),
-              _c(
-                "p",
-                { staticClass: "rounded-full bg-blue-100 sm:p-2 px-3 sm:ml-4" },
-                [_vm._v("2")]
-              )
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "w-5/12 sm:w-1/2 bg-blue-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
-          },
-          [
-            _c("div", { staticClass: "flex justify-around" }, [
-              _c(
-                "a",
-                {
-                  staticClass: "text-sm sm:text-lg sm:font-bold",
-                  attrs: { href: "/operator/scheduler" }
-                },
-                [_vm._v("schedulers ")]
-              ),
-              _vm._v(" "),
-              _c(
-                "p",
-                { staticClass: "rounded-full bg-blue-100 sm:p-2 px-3 sm:ml-4" },
-                [_vm._v("2")]
-              )
-            ])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "sm:w-4/12 flex justify-between" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "w-5/12 sm:w-1/2 bg-green-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
-          },
-          [
-            _c("div", { staticClass: "flex justify-around" }, [
-              _c("p", { staticClass: "text-sm sm:text-lg sm:font-bold" }, [
-                _vm._v("Pending pays ")
-              ]),
-              _vm._v(" "),
-              _c(
-                "p",
-                {
-                  staticClass: "rounded-full bg-green-100 sm:p-2 px-3 sm:ml-4"
-                },
-                [_vm._v("2")]
-              )
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "w-5/12 sm:w-1/2 bg-gray-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
-          },
-          [
-            _c("div", { staticClass: "flex justify-around" }, [
-              _c("a", { attrs: { href: "/operator/profile" } }, [
-                _c("p", { staticClass: "text-sm sm:text-lg sm:font-bold" }, [
-                  _vm._v("Profile ")
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "p",
-                { staticClass: "rounded-full bg-gray-100 sm:p-2 px-3 sm:ml-4" },
-                [_vm._v("2")]
-              )
-            ])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "sm:w-4/12 flex justify-between" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "w-5/12 sm:w-1/2 bg-gray-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
-          },
-          [
-            _c("div", { staticClass: "flex justify-around" }, [
-              _c("p", { staticClass: "text-sm sm:text-lg sm:font-bold" }, [
-                _vm._v("Notifications ")
-              ]),
-              _vm._v(" "),
-              _c(
-                "p",
-                { staticClass: "rounded-full bg-gray-100 sm:p-2 px-3 sm:ml-4" },
-                [_vm._v("2")]
-              )
-            ])
-          ]
-        )
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -67283,6 +68162,305 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/operator/location.vue?vue&type=template&id=45e84985&scoped=true&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/operator/location.vue?vue&type=template&id=45e84985&scoped=true& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var this$1 = this
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("navigations"),
+      _vm._v(" "),
+      _c("hr", {
+        staticClass: "w-10/12 bg-blue-400 m-auto",
+        staticStyle: { height: "1px" }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex flex-col sm:flex-row justify-around " }, [
+        _c("div", { staticClass: "sm:w-10/12 p-2 md:pt-20 " }, [
+          _c("h4", { staticClass: "text-sm sm:text-xl font-bold mb-3" }, [
+            _vm._v("Locatioons")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "overflow-x-auto" }, [
+            _c("table", { staticClass: "border border-blue-900 text" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                {
+                  staticClass:
+                    "border border-blue-400 border-t-0 text-xs sm:text-sm"
+                },
+                _vm._l(_vm.locations, function(location) {
+                  return _c("tr", { key: location.id, staticClass: "p-2 " }, [
+                    _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
+                      _vm._v(_vm._s(location.id))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
+                      _vm._v(_vm._s(location.name))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
+                      _vm._v(_vm._s(location.loc_postcode))
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { staticClass: "border-r border-blue-400 flex p-2 " },
+                      [
+                        _c(
+                          "span",
+                          {
+                            staticClass: "cursor-pointer",
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteLocation(location.id)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(" Delete "),
+                            _c("i", {
+                              staticClass:
+                                "fa fa-trash ml-1 text-sm  md:text-lg text-red-500 cursor-pointer"
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                }),
+                0
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "order-first sm:order-last sm:w-2/12 p-2 md:pt-20 " },
+          [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "text-xs sm:text-md md:text-xl font-bold mb-3 border border-blue-400 text-blue-500 p-1 sm:p-3 md:p-4 rounded-sm",
+                on: {
+                  click: function() {
+                    this$1.addLocationModel = !this$1.addLocationModel
+                  }
+                }
+              },
+              [_vm._v("Add a Location")]
+            )
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "w-full sm:w-8/12  bg-white border-blue-400 top-10 mt-4 md:mt-20 p-5 sm:p-10 md:p-20 shadow-md absolute",
+          class: [_vm.addLocationModel ? "absolute" : "hidden"]
+        },
+        [
+          _c("h2", { staticClass: "text-2xl font-bold mb-4" }, [
+            _vm._v("Add a Location")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "border-b-blue-200 mb-10" }, [
+            _c(
+              "form",
+              {
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    _vm.editMode ? _vm.updateLocation() : _vm.saveLocation()
+                  }
+                }
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "flex flex-col sm:flex-row justify-between mb-2 sm:mb-4"
+                  },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.name,
+                          expression: "form.name"
+                        }
+                      ],
+                      staticClass:
+                        "w-full sm:w-5/12 text-blue-800 text-sm sm:text-md rounded-sm border border-blue-700 p-1 sm:px-2 sm:py-3 mb-2 sm:mb-0",
+                      attrs: {
+                        type: "text",
+                        name: "name",
+                        placeholder: "name"
+                      },
+                      domProps: { value: _vm.form.name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "name", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.loc_postcode,
+                          expression: "form.loc_postcode"
+                        }
+                      ],
+                      staticClass:
+                        "w-full sm:w-5/12 text-blue-800 text-sm sm:text-md rounded-sm border border-blue-700 p-1 sm:px-2 sm:py-3 mb-2 sm:mb-0",
+                      attrs: {
+                        type: "text",
+                        name: "loc_postcode",
+                        placeholder: "loc_postcode"
+                      },
+                      domProps: { value: _vm.form.loc_postcode },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.form,
+                            "loc_postcode",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "flex flex-col sm:flex-row justify-items-start pt-10 text-center"
+                  },
+                  [
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.editMode,
+                            expression: "!editMode"
+                          }
+                        ],
+                        staticClass:
+                          "mb-1 sm:mb-0 p-1 sm:p-2 rounded-md sm:mr-3 text-sm sm:text-md font-light border-2 border-blue-600 text-blue-600",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Save")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.editMode,
+                            expression: "editMode"
+                          }
+                        ],
+                        staticClass:
+                          "mb-1 sm:mb-0 p-1 sm:p-2 rounded-md sm:mr-3 text-sm sm:text-md font-light border-2 border-green-600 text-green-600",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Update")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "p-1 sm:p-2 rounded-md sm:mr-3  text-sm sm:text-md font-light border-2 border-red-600 text-red-600",
+                        on: {
+                          click: function() {
+                            this$1.addLocationModel = false
+                          }
+                        }
+                      },
+                      [_vm._v("Cancel")]
+                    )
+                  ]
+                )
+              ]
+            )
+          ])
+        ]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "border border-blue-900 " }, [
+      _c("tr", { staticClass: "p-2 text-xs sm:text-sm font-bold" }, [
+        _c("td", { staticClass: "border-r border-blue-600 p-2" }, [
+          _vm._v("id")
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "border-r border-blue-600 p-2" }, [
+          _vm._v("Name")
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "border-r border-blue-600 p-2" }, [
+          _vm._v("Post code")
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "border-r border-blue-600 p-2" }, [
+          _vm._v("quick actions")
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/operator/profile.vue?vue&type=template&id=4ef54f09&scoped=true&":
 /*!*************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/operator/profile.vue?vue&type=template&id=4ef54f09&scoped=true& ***!
@@ -67299,448 +68477,344 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("hr", {
-      staticClass: "w-10/12 bg-blue-400 m-auto",
-      staticStyle: { height: "1px" }
-    }),
-    _vm._v(" "),
-    _c("div", { staticClass: "p-5 sm:p-20" }, [
-      _vm.profileAdded
-        ? _c("ul", { staticClass: "list-none" }, [
-            _c("li", [
-              _c("span", { staticClass: "mr-2" }, [_vm._v("Names: ")]),
-              _vm._v(" "),
-              _c("span", [_vm._v(_vm._s(_vm.user.name))])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("span", { staticClass: "mr-2" }, [_vm._v("phone: ")]),
-              _vm._v(" "),
-              _c("span", [_vm._v(_vm._s(_vm.profile[0].phone))])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("span", { staticClass: "mr-2" }, [_vm._v("Company names: ")]),
-              _vm._v(" "),
-              _c("span", [_vm._v(_vm._s(_vm.profile[0].company_name))])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("span", { staticClass: "mr-2" }, [_vm._v("Car Type: ")]),
-              _vm._v(" "),
-              _c("span", [_vm._v(_vm._s(_vm.usercar[0].name))])
-            ])
-          ])
-        : _vm._e(),
+  return _c(
+    "div",
+    [
+      _c("navigations"),
       _vm._v(" "),
-      _c("div", { staticClass: "flex sm:justify-end p-4 mt-5" }, [
-        _c(
-          "button",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: !_vm.profileAdded,
-                expression: "!profileAdded"
-              }
-            ],
-            staticClass:
-              "w-full sm:w-3/12 py-2 px-4 border border-gray-600 text-gray-900",
-            on: {
-              click: function($event) {
-                return _vm.addProfile(_vm.user.id)
-              }
-            }
-          },
-          [_vm._v("Add Profile")]
-        ),
+      _c("hr", {
+        staticClass: "w-10/12 bg-blue-400 m-auto",
+        staticStyle: { height: "1px" }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "p-5 sm:p-20" }, [
+        _vm.profileAdded
+          ? _c("ul", { staticClass: "list-none" }, [
+              _c("li", [
+                _c("span", { staticClass: "mr-2" }, [_vm._v("Names: ")]),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(_vm.user.name))])
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c("span", { staticClass: "mr-2" }, [_vm._v("phone: ")]),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(_vm.profile[0].phone))])
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c("span", { staticClass: "mr-2" }, [
+                  _vm._v("Company names: ")
+                ]),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(_vm.profile[0].company_name))])
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c("span", { staticClass: "mr-2" }, [_vm._v("Car Type: ")]),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(_vm.usercar[0].name))])
+              ])
+            ])
+          : _vm._e(),
         _vm._v(" "),
-        _c(
-          "button",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.profileAdded,
-                expression: "profileAdded"
-              }
-            ],
-            staticClass:
-              "w-full sm:w-3/12 py-2 px-4 border border-blue-600 text-blue-900",
-            on: {
-              click: function($event) {
-                return _vm.editProfile(_vm.user.id, _vm.profile[0])
-              }
-            }
-          },
-          [_vm._v("Edit profile")]
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass:
-          "bg-white w-full border-blue-400 top-0 md:mt-20  p-2 sm:p-20",
-        class: [_vm.profileform ? "absolute" : "hidden"]
-      },
-      [
-        _c(
-          "h2",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: !_vm.editMode,
-                expression: "!editMode"
-              }
-            ],
-            staticClass: "text-2xl font-bold mb-4"
-          },
-          [_vm._v("Add a Profile")]
-        ),
-        _vm._v(" "),
-        _c(
-          "h2",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.editMode,
-                expression: "editMode"
-              }
-            ],
-            staticClass: "text-2xl font-bold mb-4"
-          },
-          [_vm._v("Edit a Profile")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "border-b-blue-200 mb-10" }, [
+        _c("div", { staticClass: "flex sm:justify-end p-4 mt-5" }, [
           _c(
-            "form",
+            "button",
             {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: !_vm.profileAdded,
+                  expression: "!profileAdded"
+                }
+              ],
+              staticClass:
+                "w-full sm:w-3/12 py-2 px-4 border border-gray-600 text-gray-900",
               on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  _vm.editMode
-                    ? _vm.updateProfile(_vm.profile[0].id)
-                    : _vm.addProfile()
+                click: function($event) {
+                  return _vm.addProfile(_vm.user.id)
                 }
               }
             },
-            [
-              _c("div", { staticClass: "flex flex-col justify-between mb-2" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.operator_id,
-                      expression: "form.operator_id"
-                    }
-                  ],
-                  attrs: {
-                    type: "hidden",
-                    name: "operator_id",
-                    placeholder: "company_name"
-                  },
-                  domProps: { value: _vm.form.operator_id },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "operator_id", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.company_name,
-                      expression: "form.company_name"
-                    }
-                  ],
-                  staticClass:
-                    "w-8/12 m-auto mb-3 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3",
-                  attrs: {
-                    type: "text",
-                    name: "company_name",
-                    placeholder: "company_name"
-                  },
-                  domProps: { value: _vm.form.company_name },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "company_name", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.phone,
-                      expression: "form.phone"
-                    }
-                  ],
-                  staticClass:
-                    "w-8/12 m-auto mb-3 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3",
-                  attrs: { type: "text", name: "phone", placeholder: "phone" },
-                  domProps: { value: _vm.form.phone },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "phone", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.car_id,
-                        expression: "form.car_id"
-                      }
-                    ],
-                    staticClass:
-                      "w-8/12 m-auto mb-3 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3",
-                    attrs: { name: "car_id" },
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.form,
-                          "car_id",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
-                    }
-                  },
-                  _vm._l(_vm.cars, function(car) {
-                    return _c("option", {
-                      key: car.id,
-                      domProps: { value: car.id, textContent: _vm._s(car.name) }
-                    })
-                  }),
-                  0
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "flex justify-items-start pt-10" }, [
-                _c(
-                  "button",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: !_vm.editMode,
-                        expression: "!editMode"
-                      }
-                    ],
-                    staticClass:
-                      "p-2 rounded-md mr-3 text-md font-light border-2 border-blue-600 text-blue-600",
-                    attrs: { type: "submit" }
-                  },
-                  [_vm._v("Save")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.editMode,
-                        expression: "editMode"
-                      }
-                    ],
-                    staticClass:
-                      "p-2 rounded-md mr-3 text-md font-light border-2 border-green-600 text-green-600",
-                    attrs: { type: "submit" }
-                  },
-                  [_vm._v("Update")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass:
-                      "p-2 rounded-md mr-3 text-md font-light border-2 border-red-600 text-red-600",
-                    on: {
-                      click: function() {
-                        this$1.profileform = !this$1.profileform
-                      }
-                    }
-                  },
-                  [_vm._v("Cancel")]
-                )
-              ])
-            ]
+            [_vm._v("Add Profile")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.profileAdded,
+                  expression: "profileAdded"
+                }
+              ],
+              staticClass:
+                "w-full sm:w-3/12 py-2 px-4 border border-blue-600 text-blue-900",
+              on: {
+                click: function($event) {
+                  return _vm.editProfile(_vm.user.id, _vm.profile[0])
+                }
+              }
+            },
+            [_vm._v("Edit profile")]
           )
         ])
-      ]
-    )
-  ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "bg-white w-full border-blue-400 top-0 md:mt-20  p-2 sm:p-20",
+          class: [_vm.profileform ? "absolute" : "hidden"]
+        },
+        [
+          _c(
+            "h2",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: !_vm.editMode,
+                  expression: "!editMode"
+                }
+              ],
+              staticClass: "text-2xl font-bold mb-4"
+            },
+            [_vm._v("Add a Profile")]
+          ),
+          _vm._v(" "),
+          _c(
+            "h2",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.editMode,
+                  expression: "editMode"
+                }
+              ],
+              staticClass: "text-2xl font-bold mb-4"
+            },
+            [_vm._v("Edit a Profile")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "border-b-blue-200 mb-10" }, [
+            _c(
+              "form",
+              {
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    _vm.editMode
+                      ? _vm.updateProfile(_vm.profile[0].id)
+                      : _vm.addProfile()
+                  }
+                }
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "flex flex-col justify-between mb-2" },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.operator_id,
+                          expression: "form.operator_id"
+                        }
+                      ],
+                      attrs: {
+                        type: "hidden",
+                        name: "operator_id",
+                        placeholder: "company_name"
+                      },
+                      domProps: { value: _vm.form.operator_id },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "operator_id", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.company_name,
+                          expression: "form.company_name"
+                        }
+                      ],
+                      staticClass:
+                        "w-8/12 m-auto mb-3 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3",
+                      attrs: {
+                        type: "text",
+                        name: "company_name",
+                        placeholder: "company_name"
+                      },
+                      domProps: { value: _vm.form.company_name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.form,
+                            "company_name",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.phone,
+                          expression: "form.phone"
+                        }
+                      ],
+                      staticClass:
+                        "w-8/12 m-auto mb-3 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3",
+                      attrs: {
+                        type: "text",
+                        name: "phone",
+                        placeholder: "phone"
+                      },
+                      domProps: { value: _vm.form.phone },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "phone", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.car_id,
+                            expression: "form.car_id"
+                          }
+                        ],
+                        staticClass:
+                          "w-8/12 m-auto mb-3 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3",
+                        attrs: { name: "car_id" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.form,
+                              "car_id",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      _vm._l(_vm.cars, function(car) {
+                        return _c("option", {
+                          key: car.id,
+                          domProps: {
+                            value: car.id,
+                            textContent: _vm._s(car.name)
+                          }
+                        })
+                      }),
+                      0
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex justify-items-start pt-10" }, [
+                  _c(
+                    "button",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: !_vm.editMode,
+                          expression: "!editMode"
+                        }
+                      ],
+                      staticClass:
+                        "p-2 rounded-md mr-3 text-md font-light border-2 border-blue-600 text-blue-600",
+                      attrs: { type: "submit" }
+                    },
+                    [_vm._v("Save")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.editMode,
+                          expression: "editMode"
+                        }
+                      ],
+                      staticClass:
+                        "p-2 rounded-md mr-3 text-md font-light border-2 border-green-600 text-green-600",
+                      attrs: { type: "submit" }
+                    },
+                    [_vm._v("Update")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass:
+                        "p-2 rounded-md mr-3 text-md font-light border-2 border-red-600 text-red-600",
+                      on: {
+                        click: function() {
+                          this$1.profileform = !this$1.profileform
+                        }
+                      }
+                    },
+                    [_vm._v("Cancel")]
+                  )
+                ])
+              ]
+            )
+          ])
+        ]
+      )
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-5 sm:flex justify-around mb-4" }, [
-      _c("div", { staticClass: "sm:w-4/12 flex justify-around" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "w-5/12 sm:w-5/12 bg-blue-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
-          },
-          [
-            _c("div", { staticClass: "flex justify-around" }, [
-              _c("p", { staticClass: "text-sm sm:text-lg sm:font-bold" }, [
-                _vm._v("Pending bookings ")
-              ]),
-              _vm._v(" "),
-              _c(
-                "p",
-                { staticClass: "rounded-full bg-blue-100 sm:p-2 px-3 sm:ml-4" },
-                [_vm._v("2")]
-              )
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "w-5/12 sm:w-5/12 bg-blue-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
-          },
-          [
-            _c("div", { staticClass: "flex justify-around" }, [
-              _c(
-                "a",
-                {
-                  staticClass: "text-sm sm:text-lg sm:font-bold",
-                  attrs: { href: "/operator/scheduler" }
-                },
-                [_vm._v("schedulers ")]
-              ),
-              _vm._v(" "),
-              _c(
-                "p",
-                { staticClass: "rounded-full bg-blue-100 sm:p-2 px-3 sm:ml-4" },
-                [_vm._v("2")]
-              )
-            ])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "sm:w-4/12 flex justify-around" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "w-5/12 sm:w-5/12 bg-green-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
-          },
-          [
-            _c("div", { staticClass: "flex justify-around" }, [
-              _c("p", { staticClass: "text-sm sm:text-lg sm:font-bold" }, [
-                _vm._v("Pending pays ")
-              ]),
-              _vm._v(" "),
-              _c(
-                "p",
-                {
-                  staticClass: "rounded-full bg-green-100 sm:p-2 px-3 sm:ml-4"
-                },
-                [_vm._v("2")]
-              )
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "w-5/12 sm:w-5/12 bg-gray-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
-          },
-          [
-            _c("div", { staticClass: "flex justify-around" }, [
-              _c("p", { staticClass: "text-sm sm:text-lg sm:font-bold" }, [
-                _vm._v("Profile ")
-              ]),
-              _vm._v(" "),
-              _c(
-                "p",
-                { staticClass: "rounded-full bg-gray-100 sm:p-2 px-3 sm:ml-4" },
-                [_vm._v("2")]
-              )
-            ])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "sm:w-4/12 flex justify-between" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "w-5/12 sm:w-1/2 bg-gray-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
-          },
-          [
-            _c("div", { staticClass: "flex justify-around" }, [
-              _c("p", { staticClass: "text-sm sm:text-lg sm:font-bold" }, [
-                _vm._v("Notifications ")
-              ]),
-              _vm._v(" "),
-              _c(
-                "p",
-                { staticClass: "rounded-full bg-gray-100 sm:p-2 px-3 sm:ml-4" },
-                [_vm._v("2")]
-              )
-            ])
-          ]
-        )
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -68738,821 +69812,773 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("hr", {
-      staticClass: "w-10/12 bg-blue-400 m-auto",
-      staticStyle: { height: "1px" }
-    }),
-    _vm._v(" "),
-    _c("div", { staticClass: "flex flex-col sm:flex-row justify-around " }, [
-      _c("div", { staticClass: "sm:w-10/12 p-2 md:pt-20 " }, [
-        _c("h4", { staticClass: "text-xl font-bold mb-3" }, [
-          _vm._v("To day's Scheduler")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "overflow-x-auto " }, [
-          _c("table", { staticClass: "border border-blue-900 " }, [
-            _vm._m(1),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              { staticClass: "border border-blue-400 border-t-0" },
-              _vm._l(_vm.schedulers, function(scheduler) {
-                return _c("tr", { key: scheduler.id, staticClass: "p-2 " }, [
-                  _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
-                    _vm._v(_vm._s(scheduler.id))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
-                    _vm._v(_vm._s(scheduler.operator_company))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
-                    _vm._v(_vm._s(scheduler.route_from))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
-                    _vm._v(_vm._s(scheduler.route_to))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
-                    _vm._v(_vm._s(scheduler.journey_date))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
-                    _vm._v(_vm._s(scheduler.departure_time))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
-                    _vm._v(_vm._s(scheduler.arrival_time))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
-                    _vm._v(_vm._s(scheduler.journey_time))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
-                    _vm._v(_vm._s(scheduler.journey_price))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
-                    _vm._v(_vm._s(scheduler.message))
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "border-r border-blue-400 flex p-2 " },
-                    [
-                      _c(
-                        "span",
-                        {
-                          staticClass: "cursor-pointer",
-                          on: {
-                            click: function($event) {
-                              return _vm.showSingleScheduler(scheduler.id)
-                            }
-                          }
-                        },
-                        [
-                          _c("i", {
-                            staticClass: "fa fa-eye text-xl text-blue-400 mr-2"
-                          })
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "span",
-                        {
-                          staticClass: "cursor-pointer",
-                          on: {
-                            click: function($event) {
-                              return _vm.deleteScheduler(scheduler.id)
-                            }
-                          }
-                        },
-                        [
-                          _c("i", {
-                            staticClass:
-                              "fa fa-trash text-2xl text-red-500 cursor-pointer"
-                          })
-                        ]
-                      )
-                    ]
-                  )
-                ])
-              }),
-              0
-            )
-          ])
-        ])
-      ]),
+  return _c(
+    "div",
+    [
+      _c("navigations"),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "order-first sm:order-last sm:w-2/12 p-2 md:pt-20 " },
-        [
-          _c(
-            "button",
-            {
-              staticClass:
-                "text-xl font-bold mb-3 border border-blue-400 text-blue-500 p-4 rounded-sm",
-              on: {
-                click: function() {
-                  this$1.addSchedulerModel = !this$1.addSchedulerModel
-                }
-              }
-            },
-            [_vm._v("Add a Scheduler")]
-          )
-        ]
-      )
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass:
-          "w-11/12 md:w-8/12 bg-white border-blue-400 top-0 mt-5 md:mt-20  p-20",
-        class: [_vm.showSingleSchedulerModel ? "absolute" : "hidden"]
-      },
-      [
-        _c("div", { staticClass: "border-b-blue-200 mb-10" }, [
-          _c("div", { staticClass: "flex justify-between mb-5" }, [
-            _c("p", { staticClass: "text-xl font-bold " }, [
-              _vm._v("Scheduler ")
-            ]),
-            _vm._v(" "),
-            _c(
-              "p",
-              {
-                staticClass: "cursor-pointer",
-                on: {
-                  click: function() {
-                    this$1.showsingleSchedulerModel = !this$1.showsingleSchedulerModel
-                  }
-                }
-              },
-              [_c("i", { staticClass: "fa fa-times text-blue-700 text-3xl" })]
-            )
+      _c("hr", {
+        staticClass: "w-10/12 bg-blue-400 m-auto",
+        staticStyle: { height: "1px" }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex flex-col sm:flex-row justify-around " }, [
+        _c("div", { staticClass: "sm:w-10/12 p-2 md:pt-20 " }, [
+          _c("h4", { staticClass: "text-sm sm:text-xl font-bold mb-3" }, [
+            _vm._v("To day's Scheduler")
           ]),
           _vm._v(" "),
-          _c("p", [
-            _c("span", { staticClass: "ml-2" }, [
-              _vm._v(_vm._s(_vm.singleScheduler.route_from))
-            ]),
-            _vm._v(" to "),
-            _c("span", { staticClass: "ml-2" }, [
-              _vm._v(_vm._s(_vm.singleScheduler.route_to))
+          _c("div", { staticClass: "overflow-x-auto" }, [
+            _c("table", { staticClass: "border border-blue-900 text" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                {
+                  staticClass:
+                    "border border-blue-400 border-t-0 text-xs sm:text-sm"
+                },
+                _vm._l(_vm.schedulers, function(scheduler) {
+                  return _c("tr", { key: scheduler.id, staticClass: "p-2 " }, [
+                    _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
+                      _vm._v(_vm._s(scheduler.id))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
+                      _vm._v(_vm._s(scheduler.operator_company))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
+                      _vm._v(_vm._s(scheduler.route_from))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
+                      _vm._v(_vm._s(scheduler.route_to))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
+                      _vm._v(_vm._s(scheduler.journey_date))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
+                      _vm._v(_vm._s(scheduler.departure_time))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
+                      _vm._v(_vm._s(scheduler.arrival_time))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
+                      _vm._v(_vm._s(scheduler.journey_time))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
+                      _vm._v(_vm._s(scheduler.journey_price))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "border-r border-blue-400 p-2" }, [
+                      _vm._v(_vm._s(scheduler.message))
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { staticClass: "border-r border-blue-400 flex p-2 " },
+                      [
+                        _c(
+                          "span",
+                          {
+                            staticClass: "cursor-pointer",
+                            on: {
+                              click: function($event) {
+                                return _vm.showSingleScheduler(scheduler.id)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", {
+                              staticClass:
+                                "fa fa-eye text-xl text-blue-400 mr-2"
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            staticClass: "cursor-pointer",
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteScheduler(scheduler.id)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", {
+                              staticClass:
+                                "fa fa-trash text-2xl text-red-500 cursor-pointer"
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                }),
+                0
+              )
             ])
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: " mb-10" }, [
-          _c("h3", [_vm._v("Scheduler info")]),
+        _c(
+          "div",
+          { staticClass: "order-first sm:order-last sm:w-2/12 p-2 md:pt-20 " },
+          [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "text-xs sm:text-md md:text-xl font-bold mb-3 border border-blue-400 text-blue-500 p-1 sm:p-3 md:p-4 rounded-sm",
+                on: {
+                  click: function() {
+                    this$1.addSchedulerModel = !this$1.addSchedulerModel
+                  }
+                }
+              },
+              [_vm._v("Add a Scheduler")]
+            )
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "w-11/12 md:w-8/12 bg-white border-blue-400 top-0 mt-5 md:mt-20  p-20",
+          class: [_vm.showSingleSchedulerModel ? "absolute" : "hidden"]
+        },
+        [
+          _c("div", { staticClass: "border-b-blue-200 mb-10" }, [
+            _c("div", { staticClass: "flex justify-between mb-5" }, [
+              _c("p", { staticClass: "text-xl font-bold " }, [
+                _vm._v("Scheduler ")
+              ]),
+              _vm._v(" "),
+              _c(
+                "p",
+                {
+                  staticClass: "cursor-pointer",
+                  on: {
+                    click: function() {
+                      this$1.showsingleSchedulerModel = !this$1.showsingleSchedulerModel
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fa fa-times text-blue-700 text-3xl" })]
+              )
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _c("span", { staticClass: "ml-2" }, [
+                _vm._v(_vm._s(_vm.singleScheduler.route_from))
+              ]),
+              _vm._v(" to "),
+              _c("span", { staticClass: "ml-2" }, [
+                _vm._v(_vm._s(_vm.singleScheduler.route_to))
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: " mb-10" }, [
+            _c("h3", [_vm._v("Scheduler info")]),
+            _vm._v(" "),
+            _c("div", [
+              _c("p", { staticClass: " font-bold" }, [
+                _vm._v("Expected departure Date:")
+              ]),
+              _c("p"),
+              _c("p", [_vm._v(_vm._s(_vm.singleScheduler.journey_date))]),
+              _vm._v(" "),
+              _c("p", { staticClass: " font-bold" }, [_vm._v("Company name:")]),
+              _c("p"),
+              _c("p", [_vm._v(_vm._s(_vm.singleScheduler.operator_company))]),
+              _vm._v(" "),
+              _c("p", { staticClass: " font-bold" }, [
+                _vm._v("Expected departure time:")
+              ]),
+              _c("p"),
+              _c("p", [_vm._v(_vm._s(_vm.singleScheduler.departure_time))]),
+              _vm._v(" "),
+              _c("p", { staticClass: " font-bold" }, [
+                _vm._v("Expected arrival time:")
+              ]),
+              _c("p"),
+              _c("p", [_vm._v(_vm._s(_vm.singleScheduler.arrival_time))]),
+              _vm._v(" "),
+              _c("p", { staticClass: " font-bold" }, [
+                _vm._v("Expected journey time:")
+              ]),
+              _c("p"),
+              _c("p", [_vm._v(_vm._s(_vm.singleScheduler.journey_time))]),
+              _vm._v(" "),
+              _c("p", { staticClass: " font-bold" }, [
+                _vm._v("Journey price:")
+              ]),
+              _c("p"),
+              _c("p", [_vm._v(_vm._s(_vm.singleScheduler.journey_price))]),
+              _vm._v(" "),
+              _c("p", { staticClass: "font-bold" }, [
+                _vm._v("Custom message to show passengers: ")
+              ]),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(_vm.singleScheduler.message))])
+            ])
+          ]),
           _vm._v(" "),
           _c("div", [
-            _c("p", { staticClass: " font-bold" }, [
-              _vm._v("Expected departure Date:")
-            ]),
-            _c("p"),
-            _c("p", [_vm._v(_vm._s(_vm.singleScheduler.journey_date))]),
+            _c("h3", [_vm._v("Quick actions")]),
             _vm._v(" "),
-            _c("p", { staticClass: " font-bold" }, [_vm._v("Company name:")]),
-            _c("p"),
-            _c("p", [_vm._v(_vm._s(_vm.singleScheduler.operator_company))]),
-            _vm._v(" "),
-            _c("p", { staticClass: " font-bold" }, [
-              _vm._v("Expected departure time:")
-            ]),
-            _c("p"),
-            _c("p", [_vm._v(_vm._s(_vm.singleScheduler.departure_time))]),
-            _vm._v(" "),
-            _c("p", { staticClass: " font-bold" }, [
-              _vm._v("Expected arrival time:")
-            ]),
-            _c("p"),
-            _c("p", [_vm._v(_vm._s(_vm.singleScheduler.arrival_time))]),
-            _vm._v(" "),
-            _c("p", { staticClass: " font-bold" }, [
-              _vm._v("Expected journey time:")
-            ]),
-            _c("p"),
-            _c("p", [_vm._v(_vm._s(_vm.singleScheduler.journey_time))]),
-            _vm._v(" "),
-            _c("p", { staticClass: " font-bold" }, [_vm._v("Journey price:")]),
-            _c("p"),
-            _c("p", [_vm._v(_vm._s(_vm.singleScheduler.journey_price))]),
-            _vm._v(" "),
-            _c("p", { staticClass: "font-bold" }, [
-              _vm._v("Custom message to show passengers: ")
-            ]),
-            _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(_vm.singleScheduler.message))])
+            _c("div", { staticClass: "flex justify-items-start pt-10" }, [
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "p-2 rounded-md mr-3 text-md font-light border-2 border-red-600 text-red-600",
+                  attrs: { type: "submit" },
+                  on: {
+                    click: function($event) {
+                      return _vm.deleteScheduler(_vm.singleScheduler.id)
+                    }
+                  }
+                },
+                [_vm._v("Delete")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "p-2 rounded-md mr-3 text-md font-light border-2 border-green-600 text-green-600",
+                  on: {
+                    click: function($event) {
+                      return _vm.editModalWindow(_vm.singleScheduler)
+                    }
+                  }
+                },
+                [_vm._v("Edit")]
+              )
+            ])
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", [
-          _c("h3", [_vm._v("Quick actions")]),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "w-full sm:w-8/12  bg-white border-blue-400 top-10 mt-4 md:mt-20 p-5 sm:p-10 md:p-20 shadow-md absolute",
+          class: [_vm.addSchedulerModel ? "absolute" : "hidden"]
+        },
+        [
+          _c("h2", { staticClass: "text-2xl font-bold mb-4" }, [
+            _vm._v("Add a Scheduler")
+          ]),
           _vm._v(" "),
-          _c("div", { staticClass: "flex justify-items-start pt-10" }, [
+          _c("div", { staticClass: "border-b-blue-200 mb-10" }, [
             _c(
-              "button",
+              "form",
               {
-                staticClass:
-                  "p-2 rounded-md mr-3 text-md font-light border-2 border-red-600 text-red-600",
-                attrs: { type: "submit" },
                 on: {
-                  click: function($event) {
-                    return _vm.deleteScheduler(_vm.singleScheduler.id)
+                  submit: function($event) {
+                    $event.preventDefault()
+                    _vm.editMode ? _vm.updateScheduler() : _vm.saveScheduler()
                   }
                 }
               },
-              [_vm._v("Delete")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "p-2 rounded-md mr-3 text-md font-light border-2 border-green-600 text-green-600",
-                on: {
-                  click: function($event) {
-                    return _vm.editModalWindow(_vm.singleScheduler)
-                  }
-                }
-              },
-              [_vm._v("Edit")]
-            )
-          ])
-        ])
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass:
-          "w-11/12 sm:w-8/12  bg-white border-blue-400 top-10 mt-5 md:mt-20 p-20 shadow-md",
-        class: [_vm.addSchedulerModel ? "absolute" : "hidden"]
-      },
-      [
-        _c("h2", { staticClass: "text-2xl font-bold mb-4" }, [
-          _vm._v("Add a Scheduler")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "border-b-blue-200 mb-10" }, [
-          _c(
-            "form",
-            {
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  _vm.editMode ? _vm.updateScheduler() : _vm.saveScheduler()
-                }
-              }
-            },
-            [
-              _c("div", { staticClass: "flex justify-between mb-2 sm:mb-4" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.operator_id,
-                      expression: "form.operator_id"
-                    }
-                  ],
-                  attrs: {
-                    type: "hidden",
-                    name: "operator_id",
-                    value: "(user.id )"
-                  },
-                  domProps: { value: _vm.form.operator_id },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "operator_id", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.operator_car,
-                      expression: "form.operator_car"
-                    }
-                  ],
-                  attrs: {
-                    type: "hidden",
-                    name: "operator_id",
-                    value: "(operator.car_id )"
-                  },
-                  domProps: { value: _vm.form.operator_car },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "operator_car", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.operator_company,
-                      expression: "form.operator_company"
-                    }
-                  ],
-                  attrs: {
-                    type: "hidden",
-                    name: "operator_id",
-                    value: "(user.company_name )"
-                  },
-                  domProps: { value: _vm.form.operator_company },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.form,
-                        "operator_company",
-                        $event.target.value
-                      )
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.route_from,
-                      expression: "form.route_from"
-                    }
-                  ],
-                  staticClass:
-                    "w-5/12 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3",
-                  attrs: {
-                    type: "text",
-                    name: "route_from",
-                    placeholder: "route_from"
-                  },
-                  domProps: { value: _vm.form.route_from },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "route_from", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.route_to,
-                      expression: "form.route_to"
-                    }
-                  ],
-                  staticClass:
-                    "w-5/12 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3",
-                  attrs: {
-                    type: "text",
-                    name: "route_to",
-                    placeholder: "route_to"
-                  },
-                  domProps: { value: _vm.form.route_to },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "route_to", $event.target.value)
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "flex justify-between mb-2 sm:mb-4" }, [
-                _c("div", { staticClass: "w-3/12 flex flex-col" }, [
-                  _c("label", { staticClass: "text-md pb-2 mb-2" }, [
-                    _vm._v("Journey date")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.journey_date,
-                        expression: "form.journey_date"
-                      }
-                    ],
+              [
+                _c(
+                  "div",
+                  {
                     staticClass:
-                      " text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3",
-                    attrs: {
-                      type: "date",
-                      name: "journey_date",
-                      placeholder: "journey_date"
-                    },
-                    domProps: { value: _vm.form.journey_date },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.form, "journey_date", $event.target.value)
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "w-3/12 flex flex-col" }, [
-                  _c("label", { staticClass: "text-md pb-2 mb-2" }, [
-                    _vm._v("Depart time")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.departure_time,
-                        expression: "form.departure_time"
-                      }
-                    ],
-                    staticClass:
-                      " text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3",
-                    attrs: {
-                      type: "time",
-                      name: "departure_time",
-                      placeholder: "12/15"
-                    },
-                    domProps: { value: _vm.form.departure_time },
-                    on: {
-                      change: function($event) {
-                        return _vm.calcJourneytime()
-                      },
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.form,
-                          "departure_time",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "w-3/12 flex flex-col" }, [
-                  _c("label", { staticClass: "text-md pb-2 mb-2" }, [
-                    _vm._v("Arrival time")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.arrival_time,
-                        expression: "form.arrival_time"
-                      }
-                    ],
-                    staticClass:
-                      " text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3",
-                    attrs: {
-                      type: "time",
-                      name: "arrival_time",
-                      placeholder: "15/04"
-                    },
-                    domProps: { value: _vm.form.arrival_time },
-                    on: {
-                      change: function($event) {
-                        return _vm.calcJourneytime()
-                      },
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.form, "arrival_time", $event.target.value)
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "flex justify-between mb-2 sm:mb-4" }, [
-                _c("div", { staticClass: "w-3/12 flex flex-col" }, [
-                  _c("label", { staticClass: "text-md pb-2 mb-2" }, [
-                    _vm._v(" Expected journey price")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.journey_price,
-                        expression: "form.journey_price"
-                      }
-                    ],
-                    staticClass:
-                      "w-5/12 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3",
-                    attrs: {
-                      type: "text",
-                      name: "journey_price",
-                      placeholder: "journey_price"
-                    },
-                    domProps: { value: _vm.form.journey_price },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.form, "journey_price", $event.target.value)
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "w-3/12 flex flex-col" }, [
-                  _c("label", { staticClass: "text-md pb-2 mb-2" }, [
-                    _vm._v(" Expected journey time")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.journey_time,
-                        expression: "form.journey_time"
-                      }
-                    ],
-                    staticClass:
-                      "w-5/12 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3",
-                    attrs: {
-                      type: "text",
-                      disabled: "",
-                      name: "journey_time",
-                      placeholder: "journey_time"
-                    },
-                    domProps: { value: _vm.form.journey_time },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.form, "journey_time", $event.target.value)
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "w-3/12 flex flex-col" }, [
-                  _c("label", { staticClass: "text-md pb-2 mb-2" }, [
-                    _vm._v("some custom message")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "textarea",
-                    {
+                      "flex flex-col sm:flex-row justify-between mb-2 sm:mb-4"
+                  },
+                  [
+                    _c("input", {
                       directives: [
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.form.message,
-                          expression: "form.message"
+                          value: _vm.form.operator_id,
+                          expression: "form.operator_id"
                         }
                       ],
-                      staticClass:
-                        " text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3",
-                      attrs: { name: "message" },
-                      domProps: { value: _vm.form.message },
+                      attrs: {
+                        type: "hidden",
+                        name: "operator_id",
+                        value: "(user.id )"
+                      },
+                      domProps: { value: _vm.form.operator_id },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(_vm.form, "message", $event.target.value)
+                          _vm.$set(_vm.form, "operator_id", $event.target.value)
                         }
                       }
-                    },
-                    [_vm._v("message")]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "flex justify-items-start pt-10" }, [
-                _c(
-                  "button",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: !_vm.editMode,
-                        expression: "!editMode"
-                      }
-                    ],
-                    staticClass:
-                      "p-2 rounded-md mr-3 text-md font-light border-2 border-blue-600 text-blue-600",
-                    attrs: { type: "submit" }
-                  },
-                  [_vm._v("Save")]
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "w-full sm:w-5/12" }, [
+                      _c("label", { staticClass: "text-md pb-2 mb-2" }, [
+                        _vm._v("From:")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.route_from,
+                              expression: "form.route_from"
+                            }
+                          ],
+                          staticClass:
+                            "w-full text-blue-800 text-sm sm:text-md \n                            rounded-sm border border-blue-700 p-1 sm:px-2 sm:py-3 \n                            mb-2 sm:mb-0",
+                          attrs: { name: "route_from" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.form,
+                                "route_from",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        _vm._l(_vm.locations, function(location) {
+                          return _c("option", {
+                            key: location.id,
+                            domProps: {
+                              value: location.name,
+                              textContent: _vm._s(location.name)
+                            }
+                          })
+                        }),
+                        0
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "w-full sm:w-5/12" }, [
+                      _c("label", { staticClass: "text-md pb-2 mb-2" }, [
+                        _vm._v("To:")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.route_to,
+                              expression: "form.route_to"
+                            }
+                          ],
+                          staticClass:
+                            "w-full text-blue-800 text-sm sm:text-md \n                            rounded-sm border border-blue-700 p-1 sm:px-2 sm:py-3 \n                            mb-2 sm:mb-0",
+                          attrs: { name: "route_to" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.form,
+                                "route_to",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        _vm._l(_vm.locations, function(location) {
+                          return _c("option", {
+                            key: location.id,
+                            domProps: {
+                              value: location.name,
+                              textContent: _vm._s(location.name)
+                            }
+                          })
+                        }),
+                        0
+                      )
+                    ])
+                  ]
                 ),
                 _vm._v(" "),
                 _c(
-                  "button",
+                  "div",
                   {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.editMode,
-                        expression: "editMode"
-                      }
-                    ],
                     staticClass:
-                      "p-2 rounded-md mr-3 text-md font-light border-2 border-green-600 text-green-600",
-                    attrs: { type: "submit" }
+                      "flex flex-col sm:flex-row justify-between mb-2 sm:mb-4"
                   },
-                  [_vm._v("Update")]
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "w-full sm:w-3/12 flex flex-col" },
+                      [
+                        _c("label", { staticClass: "text-md pb-2 mb-2" }, [
+                          _vm._v("Journey date")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.journey_date,
+                              expression: "form.journey_date"
+                            }
+                          ],
+                          staticClass:
+                            " w-full text-blue-800 text-sm sm:text-md rounded-sm border border-blue-700 p-1 sm:px-2 sm:py-3 mb-2 sm:mb-0",
+                          attrs: {
+                            type: "date",
+                            name: "journey_date",
+                            placeholder: "journey_date"
+                          },
+                          domProps: { value: _vm.form.journey_date },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "journey_date",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "w-full sm:w-3/12 flex flex-col" },
+                      [
+                        _c("label", { staticClass: "text-md pb-2 mb-2" }, [
+                          _vm._v("Depart time")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.departure_time,
+                              expression: "form.departure_time"
+                            }
+                          ],
+                          staticClass:
+                            " w-full text-blue-800 text-sm sm:text-md rounded-sm border border-blue-700 p-1 sm:px-2 sm:py-3 mb-2 sm:mb-0",
+                          attrs: {
+                            type: "time",
+                            name: "departure_time",
+                            placeholder: "12/15"
+                          },
+                          domProps: { value: _vm.form.departure_time },
+                          on: {
+                            change: function($event) {
+                              return _vm.calcJourneytime()
+                            },
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "departure_time",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "w-full sm:w-3/12 flex flex-col" },
+                      [
+                        _c("label", { staticClass: "text-md pb-2 mb-2" }, [
+                          _vm._v("Arrival time")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.arrival_time,
+                              expression: "form.arrival_time"
+                            }
+                          ],
+                          staticClass:
+                            " w-full  text-blue-800 text-sm sm:text-md rounded-sm border border-blue-700 p-1 sm:px-2 sm:py-3 mb-2 sm:mb-0",
+                          attrs: {
+                            type: "time",
+                            name: "arrival_time",
+                            placeholder: "15/04"
+                          },
+                          domProps: { value: _vm.form.arrival_time },
+                          on: {
+                            change: function($event) {
+                              return _vm.calcJourneytime()
+                            },
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "arrival_time",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ]
+                    )
+                  ]
                 ),
                 _vm._v(" "),
                 _c(
-                  "a",
+                  "div",
                   {
                     staticClass:
-                      "p-2 rounded-md mr-3 text-md font-light border-2 border-red-600 text-red-600",
-                    on: {
-                      click: function() {
-                        this$1.addSchedulerModel = false
-                      }
-                    }
+                      "flex flex-col sm:flex-row justify-between mb-2 sm:mb-4"
                   },
-                  [_vm._v("Cancel")]
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "w-full sm:w-3/12 flex flex-col" },
+                      [
+                        _c("label", { staticClass: "text-md pb-2 mb-2" }, [
+                          _vm._v(" Expected journey price")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.journey_price,
+                              expression: "form.journey_price"
+                            }
+                          ],
+                          staticClass:
+                            "w-full text-blue-800 text-sm sm:text-md rounded-sm border border-blue-700 p-1 sm:px-2 sm:py-3 mb-2 sm:mb-0",
+                          attrs: {
+                            type: "text",
+                            name: "journey_price",
+                            placeholder: "journey_price"
+                          },
+                          domProps: { value: _vm.form.journey_price },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "journey_price",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "w-full sm:w-3/12 flex flex-col" },
+                      [
+                        _c("label", { staticClass: "text-md pb-2 mb-2" }, [
+                          _vm._v(" Expected journey time")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.journey_time,
+                              expression: "form.journey_time"
+                            }
+                          ],
+                          staticClass:
+                            "w-full text-blue-800 text-sm sm:text-md rounded-sm border border-blue-700 p-1 sm:px-2 sm:py-3 mb-2 sm:mb-0",
+                          attrs: {
+                            type: "text",
+                            disabled: "",
+                            name: "journey_time",
+                            placeholder: "journey_time"
+                          },
+                          domProps: { value: _vm.form.journey_time },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "journey_time",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "w-full sm:w-3/12 flex flex-col" },
+                      [
+                        _c("label", { staticClass: "text-md pb-2 mb-2" }, [
+                          _vm._v("some custom message")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "textarea",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.message,
+                                expression: "form.message"
+                              }
+                            ],
+                            staticClass:
+                              " w-full text-blue-800 text-sm sm:text-md rounded-sm border border-blue-700 p-1 sm:px-2 sm:py-3 mb-2 sm:mb-0",
+                            attrs: { name: "message" },
+                            domProps: { value: _vm.form.message },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "message",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          },
+                          [_vm._v("message")]
+                        )
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "flex flex-col sm:flex-row justify-items-start pt-10 text-center"
+                  },
+                  [
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.editMode,
+                            expression: "!editMode"
+                          }
+                        ],
+                        staticClass:
+                          "mb-1 sm:mb-0 p-1 sm:p-2 rounded-md sm:mr-3 text-sm sm:text-md font-light border-2 border-blue-600 text-blue-600",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Save")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.editMode,
+                            expression: "editMode"
+                          }
+                        ],
+                        staticClass:
+                          "mb-1 sm:mb-0 p-1 sm:p-2 rounded-md sm:mr-3 text-sm sm:text-md font-light border-2 border-green-600 text-green-600",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Update")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "p-1 sm:p-2 rounded-md sm:mr-3  text-sm sm:text-md font-light border-2 border-red-600 text-red-600",
+                        on: {
+                          click: function() {
+                            this$1.addSchedulerModel = false
+                          }
+                        }
+                      },
+                      [_vm._v("Cancel")]
+                    )
+                  ]
                 )
-              ])
-            ]
-          )
-        ])
-      ]
-    )
-  ])
+              ]
+            )
+          ])
+        ]
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-5 sm:flex justify-around mb-4" }, [
-      _c("div", { staticClass: "sm:w-4/12 flex justify-between" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "w-5/12 sm:w-1/2 bg-blue-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
-          },
-          [
-            _c("div", { staticClass: "flex justify-around" }, [
-              _c("p", { staticClass: "text-sm sm:text-lg sm:font-bold" }, [
-                _vm._v("Pending bookings ")
-              ]),
-              _vm._v(" "),
-              _c(
-                "p",
-                { staticClass: "rounded-full bg-blue-100 sm:p-2 px-3 sm:ml-4" },
-                [_vm._v("2")]
-              )
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "w-5/12 sm:w-1/2 bg-blue-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
-          },
-          [
-            _c("div", { staticClass: "flex justify-around" }, [
-              _c(
-                "a",
-                {
-                  staticClass: "text-sm sm:text-lg sm:font-bold",
-                  attrs: { href: "/operator/scheduler" }
-                },
-                [_vm._v("schedulers ")]
-              ),
-              _vm._v(" "),
-              _c(
-                "p",
-                { staticClass: "rounded-full bg-blue-100 sm:p-2 px-3 sm:ml-4" },
-                [_vm._v("2")]
-              )
-            ])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "sm:w-4/12 flex justify-between" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "w-5/12 sm:w-1/2 bg-green-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
-          },
-          [
-            _c("div", { staticClass: "flex justify-around" }, [
-              _c("p", { staticClass: "text-sm sm:text-lg sm:font-bold" }, [
-                _vm._v("Pending pays ")
-              ]),
-              _vm._v(" "),
-              _c(
-                "p",
-                {
-                  staticClass: "rounded-full bg-green-100 sm:p-2 px-3 sm:ml-4"
-                },
-                [_vm._v("2")]
-              )
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "w-5/12 sm:w-1/2 bg-gray-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
-          },
-          [
-            _c("div", { staticClass: "flex justify-around" }, [
-              _c("a", { attrs: { href: "/operator/profile" } }, [
-                _c("p", { staticClass: "text-sm sm:text-lg sm:font-bold" }, [
-                  _vm._v("Profile ")
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "p",
-                { staticClass: "rounded-full bg-gray-100 sm:p-2 px-3 sm:ml-4" },
-                [_vm._v("2")]
-              )
-            ])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "sm:w-4/12 flex justify-between" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "w-5/12 sm:w-1/2 bg-gray-300 rounded-md mb-2 sm:mb-0 p-2 sm:p-5 sm:py-10 cursor-pointer"
-          },
-          [
-            _c("div", { staticClass: "flex justify-around" }, [
-              _c("p", { staticClass: "text-sm sm:text-lg sm:font-bold" }, [
-                _vm._v("Notifications ")
-              ]),
-              _vm._v(" "),
-              _c(
-                "p",
-                { staticClass: "rounded-full bg-gray-100 sm:p-2 px-3 sm:ml-4" },
-                [_vm._v("2")]
-              )
-            ])
-          ]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "border border-blue-900 " }, [
-      _c("tr", { staticClass: "p-2 text-sm font-bold" }, [
+      _c("tr", { staticClass: "p-2 text-xs sm:text-sm font-bold" }, [
         _c("td", { staticClass: "border-r border-blue-600 p-2" }, [
           _vm._v("id")
         ]),
@@ -70422,34 +71448,49 @@ var render = function() {
       "div",
       {
         staticClass:
-          "p-5 border-0 border-b-2 border-b-red-900 flex align-middle"
+          "p-2 sm:p-5 border-0 border-b-2 border-b-red-900 flex align-middle justify-between sm:justify-start"
       },
       [
-        _c("span", { staticClass: "mr-5 mt-3 font-semibold" }, [
-          _vm._v(_vm._s(this.fromName))
-        ]),
+        _c(
+          "span",
+          { staticClass: " mt-3 sm:font-semibold text-sm sm:text-md" },
+          [_vm._v(_vm._s(this.fromName))]
+        ),
         _vm._v(" "),
         _vm._m(0),
         _vm._v(" "),
-        _c("span", { staticClass: "mr-5 mt-3 font-semibold" }, [
-          _vm._v(" " + _vm._s(this.toName))
-        ]),
-        _vm._v(" "),
-        _c("span", { staticClass: "mr-5 mt-3 font-semibold" }, [_vm._v("<")]),
-        _vm._v(" "),
-        _c("span", { staticClass: "mr-5 mt-3 font-semibold" }, [
-          _vm._v(_vm._s(this.date))
-        ]),
-        _vm._v(" "),
-        _c("span", { staticClass: "mr-5 mt-3 font-semibold" }, [_vm._v(">")]),
+        _c(
+          "span",
+          { staticClass: " mt-3 sm:font-semibold text-sm sm:text-md" },
+          [_vm._v(" " + _vm._s(this.toName))]
+        ),
         _vm._v(" "),
         _c(
           "span",
-          { staticClass: "mr-5 font-semibold" },
+          { staticClass: " mt-3 sm:font-semibold text-sm sm:text-md" },
+          [_vm._v("<")]
+        ),
+        _vm._v(" "),
+        _c(
+          "span",
+          { staticClass: " mt-3 sm:font-semibold text-sm sm:text-md" },
+          [_vm._v(_vm._s(this.date))]
+        ),
+        _vm._v(" "),
+        _c(
+          "span",
+          { staticClass: " mt-3 sm:font-semibold text-sm sm:text-md" },
+          [_vm._v(">")]
+        ),
+        _vm._v(" "),
+        _c(
+          "span",
+          { staticClass: " font-semibold text-sm sm:text-md" },
           [
             _c("base-button", {
               attrs: {
-                className: "border border-1 border-red-500 p-2 bg-transparent",
+                className:
+                  "border border-1 border-red-500 p-1 sm:p-2 bg-transparent",
                 text: "modify"
               }
             })
@@ -70484,7 +71525,7 @@ var render = function() {
       : _vm._e(),
     _vm._v(" "),
     _vm.schedules.length > 0
-      ? _c("div", { staticClass: " text-lg text-center flex mt-16" }, [
+      ? _c("div", { staticClass: " text-lg text-center flex mt-16 px-1" }, [
           _vm._m(1),
           _vm._v(" "),
           _c(
@@ -70493,17 +71534,27 @@ var render = function() {
             [
               _vm._m(2),
               _vm._v(" "),
-              _c("div", { staticClass: "flex justify-between mt-4" }, [
-                _c("div", { staticClass: "w-3/12 flex" }, [
-                  _c("span", { staticClass: "font-bold ml-1" }, [
-                    _vm._v(_vm._s(this.schedules[0].length) + " Buses ")
-                  ]),
+              _c(
+                "div",
+                {
+                  staticClass: "flex flex-col sm:flex-row justify-between mt-4"
+                },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "w-full sm:w-3/12 flex text-sm sm:text-md" },
+                    [
+                      _c("span", { staticClass: "font-bold ml-1" }, [
+                        _vm._v(_vm._s(this.schedules[0].length) + " Buses ")
+                      ]),
+                      _vm._v(" "),
+                      _c("span", [_vm._v(" Found ")])
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("span", [_vm._v(" Found ")])
-                ]),
-                _vm._v(" "),
-                _vm._m(3)
-              ]),
+                  _vm._m(3)
+                ]
+              ),
               _vm._v(" "),
               _vm._l(_vm.schedules, function(schedule) {
                 return _c(
@@ -70515,93 +71566,141 @@ var render = function() {
                       {
                         key: sche.id,
                         staticClass:
-                          "border border-blue-500 shadow-sm p-4 my-10"
+                          "border border-blue-500 shadow-sm p-1 sm:p-4 my-10"
                       },
                       [
-                        _c("div", { staticClass: "flex" }, [
-                          _c("div", { staticClass: "w-3/12" }, [
-                            _c("h4", [
-                              _vm._v(_vm._s(sche.operator_id) + " Cname")
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "flex overflow-x-hidden text-xs sm:text-md w-72 sm:w-full"
+                          },
+                          [
+                            _c("div", { staticClass: "sm:w-3/12 mr-2" }, [
+                              _c("h4", [_vm._v(_vm._s(sche.operator_company))])
                             ]),
                             _vm._v(" "),
-                            _c("p", [_vm._v("A/C Seater")])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "w-1/12" }, [
-                            _c("h4", [_vm._v(_vm._s(sche.departure_time))]),
+                            _c("div", { staticClass: "sm:w-1/12 mr-2" }, [
+                              _c("h4", [_vm._v(_vm._s(sche.departure_time))]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v(_vm._s(sche.route_from))])
+                            ]),
                             _vm._v(" "),
-                            _c("p", [_vm._v(_vm._s(sche.route_from))])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "w-1/12" }, [
-                            _vm._v(_vm._s(sche.journey_time))
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "w-1/12" }, [
-                            _c("h4", [_vm._v(_vm._s(sche.arrival_time))]),
+                            _c("div", { staticClass: "sm:w-1/12 mr-2" }, [
+                              _vm._v(_vm._s(sche.journey_time))
+                            ]),
                             _vm._v(" "),
-                            _c("p", [_vm._v(_vm._s(sche.route_to))])
-                          ]),
-                          _vm._v(" "),
-                          _vm._m(4, true),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "w-3/12" }, [
-                            _vm._v(_vm._s(sche.journey_price))
-                          ]),
-                          _vm._v(" "),
-                          _vm._m(5, true)
+                            _c("div", { staticClass: "sm:w-1/12 mr-2" }, [
+                              _c("h4", [_vm._v(_vm._s(sche.arrival_time))]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v(_vm._s(sche.route_to))])
+                            ]),
+                            _vm._v(" "),
+                            _vm._m(4, true),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "sm:w-3/12" }, [
+                              _vm._v(_vm._s(sche.journey_price))
+                            ]),
+                            _vm._v(" "),
+                            _vm._m(5, true)
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "flex justify-end mt-2" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "p-1 sm:p-3 sm:py-2 text-sm sm:text-md bg-red-500 border border-red-500 text-white",
+                              on: {
+                                click: function($event) {
+                                  return _vm.showSeatesModel()
+                                }
+                              }
+                            },
+                            [_vm._v("view Seats")]
+                          )
                         ]),
                         _vm._v(" "),
-                        _vm._m(6, true),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "bg-gray-200 px-3" }, [
-                          _vm._m(7, true),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "flex" }, [
-                            _vm._m(8, true),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "w-1/2" }, [
-                              _c("h6", { staticClass: "uppercase" }, [
-                                _vm._v("Seat legend")
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "flex" }, [
-                                _c(
-                                  "div",
-                                  [
-                                    _c("Span", {
-                                      staticClass: "w-6 h-4 bg-white mr-2"
-                                    }),
-                                    _vm._v(" Available seates")
-                                  ],
-                                  1
-                                ),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "bg-gray-200 px-3",
+                            class: [_vm.showSeats ? "relative" : "hidden"]
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "flex justify-between border-b border-gray-7"
+                              },
+                              [
+                                _vm._m(6, true),
                                 _vm._v(" "),
                                 _c(
                                   "div",
-                                  [
-                                    _c("Span", {
-                                      staticClass: "w-6 h-4 bg-yellow-200 mr-2"
-                                    }),
-                                    _vm._v(" Selected seates")
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  [
-                                    _c("Span", {
-                                      staticClass: "w-6 h-4 bg-gray-700 mr-2"
-                                    }),
-                                    _vm._v(" Unavailable seates")
-                                  ],
-                                  1
+                                  {
+                                    staticClass:
+                                      "font-hairline border border-gray-900 text-gray-900 p-1 sm:py-1 sm:px-3 rounded-full absolute closeModel",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.showSeatesModel()
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("X")]
                                 )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "flex" }, [
+                              _vm._m(7, true),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "w-1/2" }, [
+                                _c("h6", { staticClass: "uppercase" }, [
+                                  _vm._v("Seat legend")
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "flex" }, [
+                                  _c(
+                                    "div",
+                                    [
+                                      _c("Span", {
+                                        staticClass: "w-6 h-4 bg-white mr-2"
+                                      }),
+                                      _vm._v(" Available seates")
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    [
+                                      _c("Span", {
+                                        staticClass:
+                                          "w-6 h-4 bg-yellow-200 mr-2"
+                                      }),
+                                      _vm._v(" Selected seates")
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    [
+                                      _c("Span", {
+                                        staticClass: "w-6 h-4 bg-gray-700 mr-2"
+                                      }),
+                                      _vm._v(" Unavailable seates")
+                                    ],
+                                    1
+                                  )
+                                ])
                               ])
                             ])
-                          ])
-                        ])
+                          ]
+                        )
                       ]
                     )
                   }),
@@ -70620,9 +71719,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "mr-5 mt-3 font-semibold" }, [
-      _c("i", { staticClass: "fa fa-arrows-h" })
-    ])
+    return _c(
+      "span",
+      { staticClass: " mt-3 sm:font-semibold text-sm sm:text-md" },
+      [_c("i", { staticClass: "fa fa-arrows-h" })]
+    )
   },
   function() {
     var _vm = this
@@ -70778,7 +71879,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "border-b border-blue-400 text-left text-md py-4" },
+      {
+        staticClass:
+          "border-b border-blue-400 text-left text-sm md:text-md py-4"
+      },
       [_c("h4", [_vm._v("All bus ratings include safety as a major factor")])]
     )
   },
@@ -70786,25 +71890,66 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-9/12 flex justify-around" }, [
-      _c("span", { staticClass: "font-bold" }, [_vm._v("Sort By:")]),
-      _vm._v(" "),
-      _c("span", [_vm._v("Departure")]),
-      _vm._v(" "),
-      _c("span", [_vm._v("Duration")]),
-      _vm._v(" "),
-      _c("span", [_vm._v("Arrival")]),
-      _vm._v(" "),
-      _c("span", [_vm._v("Fare")]),
-      _vm._v(" "),
-      _c("span", [_vm._v("Seats Available")])
-    ])
+    return _c(
+      "div",
+      {
+        staticClass: "w-full sm:w-9/12 flex justify-around text-sm sm:text-md"
+      },
+      [
+        _c("span", { staticClass: "font-bold" }, [_vm._v("Sort By:")]),
+        _vm._v(" "),
+        _c(
+          "span",
+          {
+            staticClass:
+              "text-xs sm:text-md rounded-md border border-gray-300 px-1 tags"
+          },
+          [_vm._v("Departure")]
+        ),
+        _vm._v(" "),
+        _c(
+          "span",
+          {
+            staticClass:
+              "text-xs sm:text-md rounded-md border border-gray-300 px-1 tags"
+          },
+          [_vm._v("Duration")]
+        ),
+        _vm._v(" "),
+        _c(
+          "span",
+          {
+            staticClass:
+              "text-xs sm:text-md rounded-md border border-gray-300 px-1 tags"
+          },
+          [_vm._v("Arrival")]
+        ),
+        _vm._v(" "),
+        _c(
+          "span",
+          {
+            staticClass:
+              "text-xs sm:text-md rounded-md border border-gray-300 px-1 tags"
+          },
+          [_vm._v("Fare")]
+        ),
+        _vm._v(" "),
+        _c(
+          "span",
+          {
+            staticClass:
+              "text-xs sm:text-md rounded-md border border-gray-300 px-1 tags"
+          },
+          [_vm._v("Seats Available")]
+        )
+      ]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-1/12" }, [
+    return _c("div", { staticClass: "w-1/12 hidden sm:block" }, [
       _c("span", { staticClass: "bg-red-500 p-2 text-white" }, [_vm._v("2.9")])
     ])
   },
@@ -70812,7 +71957,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-3/12" }, [
+    return _c("div", { staticClass: "sm:w-3/12" }, [
       _c("p", [_vm._v("15 Seats available")]),
       _vm._v(" "),
       _c("p", [_vm._v("8 Window")])
@@ -70822,43 +71967,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex justify-end mt-2" }, [
-      _c(
-        "button",
-        { staticClass: "p-3 py-2 bg-red-500 border border-red-500 text-white" },
-        [_vm._v("view Seats")]
-      )
+    return _c("div", { staticClass: " py-3 px-1" }, [
+      _vm._v("\n                                Seat Prices "),
+      _c("span", { staticClass: "bg-gray-900 text-white mr-2 p-1 px-3" }, [
+        _vm._v("All")
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "bg-white border border-gray-900 p-1" }, [
+        _vm._v("3283")
+      ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "flex justify-between border-b border-gray-7" },
-      [
-        _c("div", { staticClass: " py-3 px-1" }, [
-          _vm._v("\n                                Seat Prices "),
-          _c("span", { staticClass: "bg-gray-900 text-white mr-2 p-1 px-3" }, [
-            _vm._v("All")
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "bg-white border border-gray-900 p-1" }, [
-            _vm._v("3283")
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "font-hairline border border-gray-900 text-gray-900 py-1 px-3 rounded-full"
-          },
-          [_vm._v("X")]
-        )
-      ]
-    )
   },
   function() {
     var _vm = this
@@ -71321,14 +72439,14 @@ var staticRenderFns = [
       "div",
       {
         staticClass:
-          "sm:px-40 p-8 sm:py-10 text-lg bg-blue-200 flex flex-col sm:flex-row text-center justify-center"
+          "md:px-40 p-8 md:py-10 text-lg bg-blue-200 flex flex-col sm:flex-row text-center justify-center"
       },
       [
         _c(
           "div",
           {
             staticClass:
-              "p-4 sm:p-8 sm:w-3/12 shadow-md sm:shadow-none hover:shadow-lg hover:w-4/12 cursor-pointer bg-white mb-10 sm:mr-4"
+              "p-4 sm:p-8 sm:w-4/12 md:w-3/12 shadow-md sm:shadow-none hover:shadow-lg hover:w-4/12 cursor-pointer bg-white mb-10 sm:mr-4"
           },
           [
             _c("h2", { staticClass: "font-semibold text-2xl mb-4" }, [
@@ -71347,7 +72465,7 @@ var staticRenderFns = [
           "div",
           {
             staticClass:
-              "p-4 sm:p-8 sm:w-3/12 shadow-md sm:shadow-none hover:shadow-lg hover:w-4/12 cursor-pointer bg-white mb-10 sm:mr-4"
+              "p-4 sm:p-8 sm:w-4/12 md:w-3/12 shadow-md sm:shadow-none hover:shadow-lg hover:w-4/12 cursor-pointer bg-white mb-10 sm:mr-4"
           },
           [
             _c("h2", { staticClass: "font-semibold text-2xl mb-4" }, [
@@ -71366,7 +72484,7 @@ var staticRenderFns = [
           "div",
           {
             staticClass:
-              "p-4 sm:p-8 sm:w-3/12 shadow-md sm:shadow-none hover:shadow-lg hover:w-4/12 cursor-pointer bg-white mb-10 sm:mr-4"
+              "p-4 sm:p-8 sm:w-4/12 md:w-3/12 shadow-md sm:shadow-none hover:shadow-lg hover:w-4/12 cursor-pointer bg-white mb-10 sm:mr-4"
           },
           [
             _c("h2", { staticClass: "font-semibold text-2xl mb-4" }, [
@@ -86955,6 +88073,8 @@ Vue.component('base-input', __webpack_require__(/*! ./components/UI/BaseInput */
 Vue.component('base-button', __webpack_require__(/*! ./components/UI/BaseButton */ "./resources/js/components/UI/BaseButton.vue")["default"]);
 Vue.component('base-sidebar', __webpack_require__(/*! ./components/UI/BaseSidebar */ "./resources/js/components/UI/BaseSidebar.vue")["default"]);
 Vue.component('base-footer', __webpack_require__(/*! ./components/front/BaseFooter */ "./resources/js/components/front/BaseFooter.vue")["default"]);
+Vue.component('navigations', __webpack_require__(/*! ./components/admin/navigations */ "./resources/js/components/admin/navigations.vue")["default"]); //ui finished
+
 Vue.component('about-page', __webpack_require__(/*! ./components/front/aboutPage */ "./resources/js/components/front/aboutPage.vue")["default"]);
 Vue.component('contactus-page', __webpack_require__(/*! ./components/front/contactusPage */ "./resources/js/components/front/contactusPage.vue")["default"]);
 Vue.component('offers-page', __webpack_require__(/*! ./components/front/offersPage */ "./resources/js/components/front/offersPage.vue")["default"]);
@@ -86972,7 +88092,8 @@ Vue.component('cab-list', __webpack_require__(/*! ./components/front/booking/cab
 Vue.component('operatordashboard', __webpack_require__(/*! ./components/admin/operator/dashboard */ "./resources/js/components/admin/operator/dashboard.vue")["default"]);
 Vue.component('routesandstations', __webpack_require__(/*! ./components/admin/operator/routesAndStations */ "./resources/js/components/admin/operator/routesAndStations.vue")["default"]);
 Vue.component('operatorscheduler', __webpack_require__(/*! ./components/admin/operator/scheduler */ "./resources/js/components/admin/operator/scheduler.vue")["default"]);
-Vue.component('operatorprofile', __webpack_require__(/*! ./components/admin/operator/profile */ "./resources/js/components/admin/operator/profile.vue")["default"]); // operator components ends
+Vue.component('operatorprofile', __webpack_require__(/*! ./components/admin/operator/profile */ "./resources/js/components/admin/operator/profile.vue")["default"]);
+Vue.component('operatorlocation', __webpack_require__(/*! ./components/admin/operator/location */ "./resources/js/components/admin/operator/location.vue")["default"]); // operator components ends
 
 Vue.component('car', __webpack_require__(/*! ./components/admin/superAdmin/car */ "./resources/js/components/admin/superAdmin/car.vue")["default"]);
 /**
@@ -87515,6 +88636,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/admin/navigations.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/admin/navigations.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _navigations_vue_vue_type_template_id_39c46fe4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./navigations.vue?vue&type=template&id=39c46fe4&scoped=true& */ "./resources/js/components/admin/navigations.vue?vue&type=template&id=39c46fe4&scoped=true&");
+/* harmony import */ var _navigations_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./navigations.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/navigations.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _navigations_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _navigations_vue_vue_type_template_id_39c46fe4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _navigations_vue_vue_type_template_id_39c46fe4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "39c46fe4",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/admin/navigations.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/navigations.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/admin/navigations.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_navigations_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./navigations.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/navigations.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_navigations_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/navigations.vue?vue&type=template&id=39c46fe4&scoped=true&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/admin/navigations.vue?vue&type=template&id=39c46fe4&scoped=true& ***!
+  \**************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_navigations_vue_vue_type_template_id_39c46fe4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./navigations.vue?vue&type=template&id=39c46fe4&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/navigations.vue?vue&type=template&id=39c46fe4&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_navigations_vue_vue_type_template_id_39c46fe4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_navigations_vue_vue_type_template_id_39c46fe4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/admin/operator/dashboard.vue":
 /*!**************************************************************!*\
   !*** ./resources/js/components/admin/operator/dashboard.vue ***!
@@ -87579,6 +88769,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_dashboard_vue_vue_type_template_id_89aadf18_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_dashboard_vue_vue_type_template_id_89aadf18_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/operator/location.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/admin/operator/location.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _location_vue_vue_type_template_id_45e84985_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./location.vue?vue&type=template&id=45e84985&scoped=true& */ "./resources/js/components/admin/operator/location.vue?vue&type=template&id=45e84985&scoped=true&");
+/* harmony import */ var _location_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./location.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/operator/location.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _location_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _location_vue_vue_type_template_id_45e84985_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _location_vue_vue_type_template_id_45e84985_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "45e84985",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/admin/operator/location.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/operator/location.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/admin/operator/location.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_location_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./location.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/operator/location.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_location_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/operator/location.vue?vue&type=template&id=45e84985&scoped=true&":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/components/admin/operator/location.vue?vue&type=template&id=45e84985&scoped=true& ***!
+  \********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_location_vue_vue_type_template_id_45e84985_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./location.vue?vue&type=template&id=45e84985&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/operator/location.vue?vue&type=template&id=45e84985&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_location_vue_vue_type_template_id_45e84985_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_location_vue_vue_type_template_id_45e84985_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -88078,7 +89337,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cabList_vue_vue_type_template_id_0e3abaaa_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./cabList.vue?vue&type=template&id=0e3abaaa&scoped=true& */ "./resources/js/components/front/booking/cabList.vue?vue&type=template&id=0e3abaaa&scoped=true&");
 /* harmony import */ var _cabList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cabList.vue?vue&type=script&lang=js& */ "./resources/js/components/front/booking/cabList.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _cabList_vue_vue_type_style_index_0_id_0e3abaaa_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./cabList.vue?vue&type=style&index=0&id=0e3abaaa&scoped=true&lang=css& */ "./resources/js/components/front/booking/cabList.vue?vue&type=style&index=0&id=0e3abaaa&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -88086,7 +89347,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _cabList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _cabList_vue_vue_type_template_id_0e3abaaa_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
   _cabList_vue_vue_type_template_id_0e3abaaa_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -88115,6 +89376,22 @@ component.options.__file = "resources/js/components/front/booking/cabList.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_cabList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./cabList.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/booking/cabList.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_cabList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/front/booking/cabList.vue?vue&type=style&index=0&id=0e3abaaa&scoped=true&lang=css&":
+/*!********************************************************************************************************************!*\
+  !*** ./resources/js/components/front/booking/cabList.vue?vue&type=style&index=0&id=0e3abaaa&scoped=true&lang=css& ***!
+  \********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_cabList_vue_vue_type_style_index_0_id_0e3abaaa_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./cabList.vue?vue&type=style&index=0&id=0e3abaaa&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/booking/cabList.vue?vue&type=style&index=0&id=0e3abaaa&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_cabList_vue_vue_type_style_index_0_id_0e3abaaa_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_cabList_vue_vue_type_style_index_0_id_0e3abaaa_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_cabList_vue_vue_type_style_index_0_id_0e3abaaa_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_cabList_vue_vue_type_style_index_0_id_0e3abaaa_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
 
 /***/ }),
 

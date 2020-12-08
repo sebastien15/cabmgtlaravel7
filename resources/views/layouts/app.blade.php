@@ -67,5 +67,13 @@
             </main>
         {{-- </div> --}}
     </div>
+    <script>
+        let operatorcheck = document.querySelector("#operatorcheck");
+        console.log(operatorcheck)
+        operatorcheck.addEventListener('change',()=>{
+            console.log('working')
+            let operator = document.querySelector("#role")
+        })
+    </script>
 </body>
 </html>
