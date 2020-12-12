@@ -44,9 +44,9 @@ Route::post('bookings', [bookingController::class, 'store']);
 Route::put('bookings/{id}', [bookingController::class, 'update']);
 Route::delete('bookings/{id}',[bookingController::class, 'destroy']);
 
-Route::get('bookings/{id}',[bookingController::class, 'destroy']);
-Route::get('bookings/{id}',[bookingController::class, 'destroy']);
-Route::get('bookings/{id}',[bookingController::class, 'destroy']);
+Route::get('bookings/findByUser/{id}',[bookingController::class, 'findByUser']);
+Route::get('bookings/findUnpaidByUser/{id}',[bookingController::class, 'findUnpaidByUser']);
+Route::get('bookings/findPendingByUser/{id}',[bookingController::class, 'findPendingByUser']);
 
 // Car routes
 

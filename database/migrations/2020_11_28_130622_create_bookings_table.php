@@ -22,6 +22,7 @@ class CreateBookingsTable extends Migration
             $table->string('loc_from');
             $table->string('loc_to');
             $table->string('seat_no');
+            $table->integer('price');
             $table->boolean('payed');
             $table->boolean('approved')->nullable();
             $table->integer('nbr_people')->nullable();
