@@ -44,6 +44,10 @@ Route::post('bookings', [bookingController::class, 'store']);
 Route::put('bookings/{id}', [bookingController::class, 'update']);
 Route::delete('bookings/{id}',[bookingController::class, 'destroy']);
 
+Route::get('bookings/{id}',[bookingController::class, 'destroy']);
+Route::get('bookings/{id}',[bookingController::class, 'destroy']);
+Route::get('bookings/{id}',[bookingController::class, 'destroy']);
+
 // Car routes
 
 Route::get('cars', [carController::class, 'index']);
