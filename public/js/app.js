@@ -2216,8 +2216,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "BaseNav",
+  props: ['user'],
   data: function data() {
     return {
       isOpen: false
@@ -2228,15 +2235,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('logout').then(function () {
         return location.reload();
       });
-    } // showlogin() {
-    //     let loginform = document.querySelector('#loginform');
-    //     let loginclose = document.querySelector('#loginclose');
-    //     loginform.classList.remove('hidden')
-    //     loginclose.addEventListener('click',()=>{
-    //         loginform.classList.add('hidden')
-    //     })
-    // }
-
+    }
   }
 });
 
@@ -3592,7 +3591,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this6 = this;
 
       this.$Progress.start();
-      console.log(this.form);
       this.form.post('/api/schedulers').then(function () {
         console.log(_this6.form);
         Fire.$emit('AfterCreatedUserLoadIt'); //custom events
@@ -4257,8 +4255,177 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "cabList",
+  props: ['user'],
   data: function data() {
     return {
       fromName: null,
@@ -4266,10 +4433,29 @@ __webpack_require__.r(__webpack_exports__);
       date: null,
       schedules: [],
       showSeats: false,
+      seatNumber: null,
       form: new Form({
         from: '',
         to: '',
         date: ''
+      }),
+      bookForm: new Form({
+        user_id: null,
+        route_id: null,
+        loc_from: null,
+        loc_to: null,
+        scheduler_id: null,
+        car_id: null,
+        seat_no: null,
+        payed: null,
+        approved: null,
+        nbr_people: null,
+        nbr_luggage: null,
+        pickup_date: null,
+        pickup_time: null,
+        pickup_full_add: null,
+        dropoff_full_add: null,
+        custom_message: null
       })
     };
   },
@@ -4294,8 +4480,67 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(error.message);
       });
     },
-    showSeatesModel: function showSeatesModel() {
+    showSeatesModel: function showSeatesModel(schedule) {
       this.showSeats = !this.showSeats;
+      this.getSeats(schedule);
+    },
+    getSeats: function getSeats(schedule) {
+      var _this2 = this;
+
+      var seats = document.querySelectorAll(".seats");
+      seats.forEach(function (element) {
+        element.addEventListener('click', function () {
+          seats.forEach(function (element) {
+            element.classList.remove("booked");
+          });
+          element.classList.toggle("booked");
+          _this2.seatNumber = element.dataset.seatNumber;
+
+          _this2.assignToForm(_this2.seatNumber, schedule);
+        });
+      });
+    },
+    assignToForm: function assignToForm(seatNumber, schedule) {
+      var _this3 = this;
+
+      try {
+        var id = schedule;
+        axios.get("/api/schedulers/" + id).then(function (data) {
+          _this3.bookForm.user_id = _this3.user.id;
+          _this3.bookForm.loc_from = _this3.fromName;
+          _this3.bookForm.loc_to = _this3.toName;
+          _this3.bookForm.scheduler_id = data.data[0].id;
+          _this3.bookForm.seat_no = seatNumber;
+          _this3.bookForm.payed = false;
+          _this3.bookForm.car_id = data.data[0].operator_car;
+          _this3.bookForm.nbr_people = 1;
+          _this3.bookForm.nbr_luggage = 1;
+          _this3.bookForm.pickup_date = _this3.newdate;
+          _this3.bookForm.pickup_time = data.data[0].departure_time;
+          _this3.bookForm.pickup_full_add = null;
+          _this3.bookForm.dropoff_full_add = null;
+          _this3.bookForm.custom_message = null;
+        });
+      } catch (error) {
+        console.log(error.message);
+      }
+    },
+    book: function book() {
+      var _this4 = this;
+
+      this.$Progress.start();
+      this.bookForm.post('/api/bookings').then(function () {
+        Fire.$emit('AfterCreatedUserLoadIt'); //custom events
+
+        Toast.fire({
+          icon: 'success',
+          title: 'Booked successfully'
+        });
+
+        _this4.$Progress.finish();
+      })["catch"](function (error) {
+        console.log(error.message);
+      });
     }
   },
   beforeMount: function beforeMount() {
@@ -4671,6 +4916,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "siteMapPage"
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/userPage.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/front/userPage.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "userPage",
+  props: ['user'],
+  data: function data() {
+    return {};
+  }
 });
 
 /***/ }),
@@ -9228,7 +9498,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".tags[data-v-0e3abaaa]{\n  font-size: 10px;\n}\n.closeModel[data-v-0e3abaaa]{\n  top: 0px;\n  right: 0px;\n}\r\n\r\n", ""]);
+exports.push([module.i, ".tags[data-v-0e3abaaa]{\n  font-size: 10px;\n}\n.closeModel[data-v-0e3abaaa]{\n  top: 0px;\n  right: 0px;\n}\n.car_svg[data-v-0e3abaaa] {\n  enable-background:new 0 0 800 500;\n  max-height: 200px;\n  max-width: 300px;\n}\n.st0[data-v-0e3abaaa]{\n  fill: none;\n  stroke:lightgreen;\n  stroke-width:2;\n  stroke-miterlimit:10;\n  cursor:pointer;\n}\n.seats[data-v-0e3abaaa]{\n  fill:lightgreen;\n  stroke:green;\n  stroke-width:2;\n  stroke-miterlimit:10;\n}\n.booked[data-v-0e3abaaa]{\n  fill:red;\n  stroke:red;\n  stroke-width:2;\n  stroke-miterlimit:10;\n}\n.st1[data-v-0e3abaaa]{\n  font-family:'lato';\n}\n.st2[data-v-0e3abaaa]{\n  font-size:60px;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -67209,25 +67479,46 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "hidden md:block" }, [
           _c("div", { staticClass: "flex" }, [
-            _c(
-              "a",
-              {
-                staticClass:
-                  "\n                            px-3 py-2 rounded-md text-sm font-medium\n                          text-gray-300 hover:text-white hover:bg-gray-700 \n                          focus:outline-none focus:text-white \n                          focus:bg-gray-700",
-                attrs: { href: "/login" }
-              },
-              [_vm._v("Log in ")]
-            ),
+            !_vm.user
+              ? _c(
+                  "a",
+                  {
+                    staticClass:
+                      "\n                          px-3 py-2 rounded-md text-sm font-medium\n                          text-gray-300 hover:text-white hover:bg-gray-700 \n                          focus:outline-none focus:text-white \n                          focus:bg-gray-700",
+                    attrs: { href: "/login" }
+                  },
+                  [_vm._v("Log in \n                    ")]
+                )
+              : _vm._e(),
             _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "\n                            px-3 py-2 rounded-md text-sm font-medium\n                          text-gray-300 hover:text-white hover:bg-gray-700 \n                          focus:outline-none focus:text-white \n                          focus:bg-gray-700",
-                on: { click: this.logout }
-              },
-              [_vm._v("Log out")]
-            )
+            _vm.user
+              ? _c(
+                  "span",
+                  {
+                    staticClass:
+                      "\n                          px-3 py-2 rounded-md text-sm font-medium text-gray-300\n                        hover:text-white"
+                  },
+                  [
+                    _vm._v("Welcome "),
+                    _c("span", { staticClass: "mx-1" }, [
+                      _vm._v(_vm._s(_vm.user.name))
+                    ]),
+                    _vm._v("!\n                    ")
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.user
+              ? _c(
+                  "button",
+                  {
+                    staticClass:
+                      "\n                          px-3 py-2 rounded-md text-sm font-medium\n                          text-gray-300 hover:text-white hover:bg-gray-700 \n                          focus:outline-none focus:text-white \n                          focus:bg-gray-700",
+                    on: { click: this.logout }
+                  },
+                  [_vm._v("Log out\n                    ")]
+                )
+              : _vm._e()
           ])
         ]),
         _vm._v(" "),
@@ -71205,7 +71496,7 @@ var staticRenderFns = [
         "div",
         {
           staticClass:
-            "bg-indigo-900 pt-16 flex flex-col sm:flex-row text-blue-200 px-6 sm:px-20 mt-20 text-center"
+            "bg-indigo-900 pt-16 flex flex-col sm:flex-row text-blue-200 px-6 sm:px-20 mt-20 "
         },
         [
           _c("div", { staticClass: "sm:w-1/3" }, [
@@ -71299,7 +71590,7 @@ var staticRenderFns = [
         ]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "text-center bg-indigo-900 text-white" }, [
+      _c("div", { staticClass: "bg-indigo-900 text-white text-center" }, [
         _c("p", [_vm._v("Ⓒ 2020 ibibogroup All rights reserved")])
       ])
     ])
@@ -71512,7 +71803,7 @@ var render = function() {
           _vm._v(" "),
           _c("p", [
             _vm._v(
-              "\n            All cabs on this route are full. Please search for another \n            date or try again later. Inconvenience caused is regretted\n        "
+              "\n                All cabs on this route are full. Please search for another \n                date or try again later. Inconvenience caused is regretted\n            "
             )
           ]),
           _vm._v(" "),
@@ -71602,7 +71893,16 @@ var render = function() {
                               _vm._v(_vm._s(sche.journey_price))
                             ]),
                             _vm._v(" "),
-                            _vm._m(5, true)
+                            _c("div", { staticClass: "sm:w-3/12" }, [
+                              _c("p", [_vm._v("15 Seats available")]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("8 Window")]),
+                              _vm._v(
+                                " \n                                " +
+                                  _vm._s(sche.operator_car) +
+                                  "                \n                            "
+                              )
+                            ])
                           ]
                         ),
                         _vm._v(" "),
@@ -71614,7 +71914,7 @@ var render = function() {
                                 "p-1 sm:p-3 sm:py-2 text-sm sm:text-md bg-red-500 border border-red-500 text-white",
                               on: {
                                 click: function($event) {
-                                  return _vm.showSeatesModel()
+                                  return _vm.showSeatesModel(sche.id)
                                 }
                               }
                             },
@@ -71633,19 +71933,19 @@ var render = function() {
                               "div",
                               {
                                 staticClass:
-                                  "flex justify-between border-b border-gray-7"
+                                  "flex justify-between border-b border-gray-7 mt-2"
                               },
                               [
-                                _vm._m(6, true),
+                                _vm._m(5, true),
                                 _vm._v(" "),
                                 _c(
                                   "div",
                                   {
                                     staticClass:
-                                      "font-hairline border border-gray-900 text-gray-900 p-1 sm:py-1 sm:px-3 rounded-full absolute closeModel",
+                                      "font-hairline border border-gray-900 text-gray-900 p-1 sm:py-1 sm:px-3 rounded-full absolute closeModel cursor-pointer",
                                     on: {
                                       click: function($event) {
-                                        return _vm.showSeatesModel()
+                                        return _vm.showSeatesModel(sche.id)
                                       }
                                     }
                                   },
@@ -71654,51 +71954,827 @@ var render = function() {
                               ]
                             ),
                             _vm._v(" "),
-                            _c("div", { staticClass: "flex" }, [
-                              _vm._m(7, true),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "w-1/2" }, [
-                                _c("h6", { staticClass: "uppercase" }, [
-                                  _vm._v("Seat legend")
+                            _c(
+                              "div",
+                              { staticClass: "flex flex-col sm:flex-row" },
+                              [
+                                _c("div", { staticClass: "w-full sm:w-1/2" }, [
+                                  _c(
+                                    "h6",
+                                    {
+                                      staticClass:
+                                        "text-blue-600 text-xs sm:text-sm md:text-md font-light mb-2"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "Click on an Available seat to proceed with your transaction."
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", [
+                                    _c(
+                                      "svg",
+                                      {
+                                        staticClass: "car_svg",
+                                        class: [
+                                          sche.operator_car != 3
+                                            ? "hidden"
+                                            : "relative"
+                                        ],
+                                        attrs: {
+                                          version: "1.1",
+                                          id: "Layer_1",
+                                          "xmlns:x": "&ns_extend;",
+                                          "xmlns:i": "&ns_ai;",
+                                          "xmlns:graph": "&ns_graphs;",
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          "xmlns:xlink":
+                                            "http://www.w3.org/1999/xlink",
+                                          x: "0px",
+                                          y: "0px",
+                                          viewBox: "0 0 800 500",
+                                          "xml:space": "preserve"
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "g",
+                                          { attrs: { id: "Layer_1_1_" } },
+                                          [
+                                            _c("rect", {
+                                              staticClass: "st0",
+                                              attrs: {
+                                                id: "border",
+                                                x: "36.8",
+                                                y: "40.3",
+                                                width: "703.2",
+                                                height: "429.2"
+                                              }
+                                            })
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "driver" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0",
+                                            attrs: {
+                                              id: "XMLID_1_",
+                                              x: "112.7",
+                                              y: "61.7",
+                                              width: "125.4",
+                                              height: "186.5"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "text",
+                                            {
+                                              staticClass: "st1 st2 st3",
+                                              attrs: {
+                                                id: "XMLID_2_",
+                                                transform:
+                                                  "matrix(0 -0.8255 1 0 193.167 205.8369)"
+                                              }
+                                            },
+                                            [_vm._v("Driver")]
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat_1" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_6_",
+                                              x: "111.8",
+                                              y: "373.7",
+                                              width: "126.6",
+                                              height: "80.6",
+                                              "data-seatNumber": "1"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat_2" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_3_",
+                                              x: "113.6",
+                                              y: "270.7",
+                                              width: "122.4",
+                                              height: "82.2",
+                                              "data-seatNumber": "2"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat_3" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_18_",
+                                              x: "333.7",
+                                              y: "371.1",
+                                              width: "118.2",
+                                              height: "83.2",
+                                              "data-seatNumber": "3"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat_4" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_19_",
+                                              x: "333.7",
+                                              y: "266.1",
+                                              width: "118.2",
+                                              height: "81",
+                                              "data-seatNumber": "4"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat_5" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_12_",
+                                              x: "333.7",
+                                              y: "165.5",
+                                              width: "118.2",
+                                              height: "81",
+                                              "data-seatNumber": "5"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat_6" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_15_",
+                                              x: "334.9",
+                                              y: "63.6",
+                                              width: "114.3",
+                                              height: "82.6",
+                                              "data-seatNumber": "6"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat_7" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_10_",
+                                              x: "540.3",
+                                              y: "367.9",
+                                              width: "118.3",
+                                              height: "86.4",
+                                              "data-seatNumber": "7"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat_8" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_13_",
+                                              x: "540.9",
+                                              y: "265.4",
+                                              width: "118.3",
+                                              height: "85.3",
+                                              "data-seatNumber": "8"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat_9" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_7_",
+                                              x: "541.8",
+                                              y: "161.6",
+                                              width: "118.3",
+                                              height: "83",
+                                              "data-seatNumber": "9"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat_10" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_8_",
+                                              x: "540.3",
+                                              y: "63.6",
+                                              width: "118.3",
+                                              height: "83",
+                                              "data-seatNumber": "10"
+                                            }
+                                          })
+                                        ])
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "svg",
+                                      {
+                                        staticClass: "car_svg",
+                                        class: [
+                                          sche.operator_car != 2
+                                            ? "hidden"
+                                            : "relative"
+                                        ],
+                                        attrs: {
+                                          version: "1.1",
+                                          id: "Layer_2",
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          "xmlns:xlink":
+                                            "http://www.w3.org/1999/xlink",
+                                          x: "0px",
+                                          y: "0px",
+                                          viewBox: "0 0 800 500",
+                                          "xml:space": "preserve"
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "g",
+                                          { attrs: { id: "Layer_1_1_" } },
+                                          [
+                                            _c("rect", {
+                                              staticClass: "st0 ",
+                                              attrs: {
+                                                id: "border",
+                                                x: "18.8",
+                                                y: "9.8",
+                                                width: "750.8",
+                                                height: "473.5"
+                                              }
+                                            })
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "driver" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_1_",
+                                              x: "68.9",
+                                              y: "23",
+                                              width: "124.6",
+                                              height: "201.7"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "text",
+                                            {
+                                              staticClass: "st1 st2 st3",
+                                              attrs: {
+                                                id: "XMLID_2_",
+                                                transform:
+                                                  "matrix(0 -0.8101 1 0 154.1362 171.8828)"
+                                              }
+                                            },
+                                            [_vm._v("Driver")]
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat1" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_6_",
+                                              x: "68.9",
+                                              y: "369.5",
+                                              width: "124.6",
+                                              height: "100.1",
+                                              "data-seatNumber": "1"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat2" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_3_",
+                                              x: "68.9",
+                                              y: "247.7",
+                                              width: "124.6",
+                                              height: "100.1",
+                                              "data-seatNumber": "2"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat_3" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_18_",
+                                              x: "269.2",
+                                              y: "369.5",
+                                              width: "105",
+                                              height: "102.7",
+                                              "data-seatNumber": "3"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat_4" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_26_",
+                                              x: "269.2",
+                                              y: "246.7",
+                                              width: "105",
+                                              height: "102.1",
+                                              "data-seatNumber": "4"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat_5" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_12_",
+                                              x: "269.2",
+                                              y: "140.1",
+                                              width: "105",
+                                              height: "93.1",
+                                              "data-seatNumber": "5"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat_6" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_23_",
+                                              x: "270.3",
+                                              y: "27.9",
+                                              width: "101.5",
+                                              height: "91.8",
+                                              "data-seatNumber": "6"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat_7" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_4_",
+                                              x: "424.5",
+                                              y: "368.2",
+                                              width: "105",
+                                              height: "102.7",
+                                              "data-seatNumber": "7"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat_8" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_20_",
+                                              x: "424.5",
+                                              y: "140.1",
+                                              width: "105",
+                                              height: "93.1",
+                                              "data-seatNumber": "8"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat_9" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_8_",
+                                              x: "424.5",
+                                              y: "27.9",
+                                              width: "105",
+                                              height: "91.8",
+                                              "data-seatNumber": "9"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat_10" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_16_",
+                                              x: "579",
+                                              y: "368.2",
+                                              width: "105",
+                                              height: "102.7",
+                                              "data-seatNumber": "10"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat_11" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_14_",
+                                              x: "579",
+                                              y: "246.4",
+                                              width: "105",
+                                              height: "102.7",
+                                              "data-seatNumber": "11"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat_12" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_11_",
+                                              x: "579",
+                                              y: "140.1",
+                                              width: "105",
+                                              height: "91.8",
+                                              "data-seatNumber": "12"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat_13" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_9_",
+                                              x: "579",
+                                              y: "27.9",
+                                              width: "105",
+                                              height: "91.8",
+                                              "data-seatNumber": "13"
+                                            }
+                                          })
+                                        ])
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "svg",
+                                      {
+                                        staticClass: "car_svg",
+                                        class: [
+                                          sche.operator_car != 1
+                                            ? "hidden"
+                                            : "relative"
+                                        ],
+                                        attrs: {
+                                          version: "1.1",
+                                          id: "Layer_3",
+                                          "xmlns:x": "&ns_extend;",
+                                          "xmlns:i": "&ns_ai;",
+                                          "xmlns:graph": "&ns_graphs;",
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          "xmlns:xlink":
+                                            "http://www.w3.org/1999/xlink",
+                                          x: "0px",
+                                          y: "0px",
+                                          viewBox: "0 0 800 500",
+                                          "xml:space": "preserve"
+                                        }
+                                      },
+                                      [
+                                        _c("g", { attrs: { id: "Layer1" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0",
+                                            attrs: {
+                                              id: "border",
+                                              x: "36.8",
+                                              y: "18.7",
+                                              width: "750.8",
+                                              height: "473.5"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "driver" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_1_",
+                                              x: "109.9",
+                                              y: "32.9",
+                                              width: "157.4",
+                                              height: "254.7"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "text",
+                                            {
+                                              staticClass: "st1 st2 st3",
+                                              attrs: {
+                                                id: "XMLID_2_",
+                                                transform:
+                                                  "matrix(0 -0.8101 1 0 217.5601 220.9087)"
+                                              }
+                                            },
+                                            [_vm._v("Driver")]
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat1" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_3_",
+                                              x: "109.6",
+                                              y: "346.2",
+                                              width: "153.1",
+                                              height: "130.3",
+                                              "data-seatNumber": "1"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat2" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_18_",
+                                              x: "348.2",
+                                              y: "378.4",
+                                              width: "105",
+                                              height: "102.7",
+                                              "data-seatNumber": "2"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat3" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_26_",
+                                              x: "348.2",
+                                              y: "255.5",
+                                              width: "105",
+                                              height: "102.1",
+                                              "data-seatNumber": "3"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat4" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_12_",
+                                              x: "348.2",
+                                              y: "149",
+                                              width: "105",
+                                              height: "93.1",
+                                              "data-seatNumber": "4"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat5" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_23_",
+                                              x: "349.3",
+                                              y: "36.8",
+                                              width: "101.5",
+                                              height: "91.8",
+                                              "data-seatNumber": "5"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat6" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_4_",
+                                              x: "542.5",
+                                              y: "351.3",
+                                              width: "131.3",
+                                              height: "128.4",
+                                              "data-seatNumber": "6"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat7" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_20_",
+                                              x: "542.5",
+                                              y: "186.8",
+                                              width: "128.9",
+                                              height: "114.3",
+                                              "data-seatNumber": "7"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("g", { attrs: { id: "seat8" } }, [
+                                          _c("rect", {
+                                            staticClass: "st0 seats",
+                                            attrs: {
+                                              id: "XMLID_8_",
+                                              x: "542.5",
+                                              y: "36.8",
+                                              width: "131.3",
+                                              height: "114.8",
+                                              "data-seatNumber": "8"
+                                            }
+                                          })
+                                        ])
+                                      ]
+                                    )
+                                  ])
                                 ]),
                                 _vm._v(" "),
-                                _c("div", { staticClass: "flex" }, [
-                                  _c(
-                                    "div",
-                                    [
-                                      _c("Span", {
-                                        staticClass: "w-6 h-4 bg-white mr-2"
-                                      }),
-                                      _vm._v(" Available seates")
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    [
-                                      _c("Span", {
-                                        staticClass:
-                                          "w-6 h-4 bg-yellow-200 mr-2"
-                                      }),
-                                      _vm._v(" Selected seates")
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    [
-                                      _c("Span", {
-                                        staticClass: "w-6 h-4 bg-gray-700 mr-2"
-                                      }),
-                                      _vm._v(" Unavailable seates")
-                                    ],
-                                    1
-                                  )
-                                ])
-                              ])
-                            ])
+                                _c(
+                                  "div",
+                                  { staticClass: "w-full sm:w-1/2 text-sm" },
+                                  [
+                                    _c("h6", { staticClass: "uppercase" }, [
+                                      _vm._v("Seat legend")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "flex" }, [
+                                      _c(
+                                        "div",
+                                        [
+                                          _c("Span", {
+                                            staticClass: "w-6 h-4 bg-white mr-2"
+                                          }),
+                                          _vm._v(" Available")
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        [
+                                          _c("Span", {
+                                            staticClass:
+                                              "w-6 h-4 bg-yellow-200 mr-2"
+                                          }),
+                                          _vm._v(" Selected")
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        [
+                                          _c("Span", {
+                                            staticClass:
+                                              "w-6 h-4 bg-gray-700 mr-2"
+                                          }),
+                                          _vm._v(" Booked")
+                                        ],
+                                        1
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _vm._m(6, true),
+                                    _vm._v(" "),
+                                    _vm.seatNumber
+                                      ? _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "flex flex-col shadow-md p-2 py-3 text-sm my-2"
+                                          },
+                                          [
+                                            _c(
+                                              "h3",
+                                              {
+                                                staticClass: "text-left",
+                                                on: { click: schedule }
+                                              },
+                                              [_vm._v("Book summary")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c("br"),
+                                            _vm._v(" "),
+                                            _c("div", { staticClass: "flex" }, [
+                                              _c(
+                                                "p",
+                                                { staticClass: " mr-1" },
+                                                [_vm._v(_vm._s(sche.route_to))]
+                                              ),
+                                              _vm._v(" to "),
+                                              _c("p", { staticClass: "mx-2" }, [
+                                                _vm._v(
+                                                  _vm._s(sche.route_from) + " "
+                                                )
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("p", [
+                                                _vm._v(_vm._s(sche.price))
+                                              ])
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("div", { staticClass: "flex" }, [
+                                              _c("p", [
+                                                _vm._v("Seat N"),
+                                                _c("sup", [_vm._v("o")]),
+                                                _vm._v(
+                                                  ": " +
+                                                    _vm._s(_vm.seatNumber) +
+                                                    " "
+                                                )
+                                              ])
+                                            ]),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass: "flex justify-end"
+                                              },
+                                              [
+                                                _vm.user
+                                                  ? _c(
+                                                      "button",
+                                                      {
+                                                        staticClass:
+                                                          "px-3 py-2 text-green border border-green-900",
+                                                        on: {
+                                                          click: function(
+                                                            $event
+                                                          ) {
+                                                            return _vm.book()
+                                                          }
+                                                        }
+                                                      },
+                                                      [_vm._v("Book")]
+                                                    )
+                                                  : _vm._e(),
+                                                _vm._v(" "),
+                                                !_vm.user
+                                                  ? _c("div", [
+                                                      !_vm.user
+                                                        ? _c(
+                                                            "a",
+                                                            {
+                                                              staticClass:
+                                                                "text-blue-700 mr-1 cursor-pointer",
+                                                              attrs: {
+                                                                href:
+                                                                  "/register"
+                                                              }
+                                                            },
+                                                            [_vm._v("register")]
+                                                          )
+                                                        : _vm._e(),
+                                                      _vm._v(
+                                                        "\n                                                You have an account? click "
+                                                      ),
+                                                      !_vm.user
+                                                        ? _c(
+                                                            "a",
+                                                            {
+                                                              staticClass:
+                                                                "text-blue-700 mx-1 cursor-pointer",
+                                                              attrs: {
+                                                                href: "/login"
+                                                              }
+                                                            },
+                                                            [_vm._v("login")]
+                                                          )
+                                                        : _vm._e()
+                                                    ])
+                                                  : _vm._e()
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  ]
+                                )
+                              ]
+                            )
                           ]
                         )
                       ]
@@ -71957,18 +73033,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "sm:w-3/12" }, [
-      _c("p", [_vm._v("15 Seats available")]),
-      _vm._v(" "),
-      _c("p", [_vm._v("8 Window")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: " py-3 px-1" }, [
-      _vm._v("\n                                Seat Prices "),
+      _vm._v("\n                                    Seat Prices "),
       _c("span", { staticClass: "bg-gray-900 text-white mr-2 p-1 px-3" }, [
         _vm._v("All")
       ]),
@@ -71982,16 +73048,21 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-1/2" }, [
-      _c("h6", { staticClass: "text-blue-600 text-md font-light mb-2" }, [
-        _vm._v("Click on an Available seat to proceed with your transaction.")
-      ]),
+    return _c("div", { staticClass: "flex mt-1 w-6 h-4" }, [
+      _c("div", {
+        staticClass: "h-4 w-3 mr-1 bg-green-600",
+        staticStyle: { "min-height": "20px", "min-width": "20px" }
+      }),
       _vm._v(" "),
-      _c("div", [
-        _vm._v(
-          "c\n                                    \n                                "
-        )
-      ])
+      _c("div", {
+        staticClass: "h-4 w-3 mr-1 bg-red-700",
+        staticStyle: { "min-height": "20px", "min-width": "20px" }
+      }),
+      _vm._v(" "),
+      _c("div", {
+        staticClass: "h-4 w-3 mr-1 bg-red-700",
+        staticStyle: { "min-height": "20px", "min-width": "20px" }
+      })
     ])
   }
 ]
@@ -72590,6 +73661,32 @@ render._withStripped = true
 /*!********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/front/siteMapPage.vue?vue&type=template&id=70d147ba&scoped=true& ***!
   \********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "px-40 py-10 text-lg" }, [
+    _vm._v("\n    offersPage\n")
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/userPage.vue?vue&type=template&id=edaa35aa&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/front/userPage.vue?vue&type=template&id=edaa35aa&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -88080,6 +89177,7 @@ Vue.component('contactus-page', __webpack_require__(/*! ./components/front/conta
 Vue.component('offers-page', __webpack_require__(/*! ./components/front/offersPage */ "./resources/js/components/front/offersPage.vue")["default"]);
 Vue.component('values-page', __webpack_require__(/*! ./components/front/valuesPage */ "./resources/js/components/front/valuesPage.vue")["default"]);
 Vue.component('siteMap-page', __webpack_require__(/*! ./components/front/siteMapPage */ "./resources/js/components/front/siteMapPage.vue")["default"]);
+Vue.component('user-page', __webpack_require__(/*! ./components/front/userPage */ "./resources/js/components/front/userPage.vue")["default"]);
 Vue.component('banner', __webpack_require__(/*! ./components/front/home/banner */ "./resources/js/components/front/home/banner.vue")["default"]);
 Vue.component('offers', __webpack_require__(/*! ./components/front/home/offers */ "./resources/js/components/front/home/offers.vue")["default"]);
 Vue.component('promise', __webpack_require__(/*! ./components/front/home/promise */ "./resources/js/components/front/home/promise.vue")["default"]);
@@ -90029,6 +91127,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_siteMapPage_vue_vue_type_template_id_70d147ba_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_siteMapPage_vue_vue_type_template_id_70d147ba_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/front/userPage.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/components/front/userPage.vue ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _userPage_vue_vue_type_template_id_edaa35aa_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./userPage.vue?vue&type=template&id=edaa35aa&scoped=true& */ "./resources/js/components/front/userPage.vue?vue&type=template&id=edaa35aa&scoped=true&");
+/* harmony import */ var _userPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./userPage.vue?vue&type=script&lang=js& */ "./resources/js/components/front/userPage.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _userPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _userPage_vue_vue_type_template_id_edaa35aa_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _userPage_vue_vue_type_template_id_edaa35aa_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "edaa35aa",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/front/userPage.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/front/userPage.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/front/userPage.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_userPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./userPage.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/userPage.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_userPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/front/userPage.vue?vue&type=template&id=edaa35aa&scoped=true&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/front/userPage.vue?vue&type=template&id=edaa35aa&scoped=true& ***!
+  \***********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_userPage_vue_vue_type_template_id_edaa35aa_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./userPage.vue?vue&type=template&id=edaa35aa&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/userPage.vue?vue&type=template&id=edaa35aa&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_userPage_vue_vue_type_template_id_edaa35aa_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_userPage_vue_vue_type_template_id_edaa35aa_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

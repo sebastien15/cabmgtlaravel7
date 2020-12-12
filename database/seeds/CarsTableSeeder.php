@@ -35,5 +35,13 @@ class CarsTableSeeder extends Seeder
             'luggage_place' => 2,
             'status' => 5,
         ]);
+        DB::table('cars')->insert([
+            'name' => 'INNOVA',
+            'description' => 1,
+            'image' => 'adakfasdfasf',
+            'seates' => 4,
+            'luggage_place' => 2,
+            'status' => 5,
+        ]);
     }
 }

@@ -30,6 +30,7 @@ Route::view('/contactus', 'ui.contactus');
 Route::view('/offers', 'ui.offers');
 Route::view('/values', 'ui.values');
 Route::view('/siteMap', 'ui.siteMap');
+Route::view('/user/dashboard', 'ui.userPage')->name('operator.home')->middleware('auth');
 Route::view('/book', 'ui.book');
 
 //operator start

@@ -72,6 +72,7 @@ Vue.component('contactus-page', require('./components/front/contactusPage').defa
 Vue.component('offers-page', require('./components/front/offersPage').default);
 Vue.component('values-page', require('./components/front/valuesPage').default);
 Vue.component('siteMap-page', require('./components/front/siteMapPage').default);
+Vue.component('user-page', require('./components/front/userPage').default);
 Vue.component('banner', require('./components/front/home/banner').default);
 Vue.component('offers', require('./components/front/home/offers').default);
 Vue.component('promise', require('./components/front/home/promise').default);

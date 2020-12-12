@@ -231,7 +231,6 @@ export default {
              },
             saveScheduler(){
                 this.$Progress.start()
-                console.log(this.form)
                 this.form.post('/api/schedulers')                
                     .then(() => {
                         console.log(this.form)

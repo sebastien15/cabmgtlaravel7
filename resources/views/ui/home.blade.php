@@ -1,6 +1,6 @@
 @extends('layouts.front')
 
-@section('content')
+@section('content')                                     
 <banner></banner>
 <offers></offers>
 <promise></promise>

@@ -12,43 +12,123 @@ class LocationsTableSeeder extends Seeder
     public function run()
     {
         DB::table('locations')->insert([
-            'name' => 'Kimironko',
+            'name' => 'Itanaga',
             'loc_postcode' => 13,
         ]);
         DB::table('locations')->insert([
-            'name' => 'Kacyiru',
+            'name' => 'Ziro',
             'loc_postcode' => 17,
         ]);
         DB::table('locations')->insert([
-            'name' => 'Kimironko',
+            'name' => 'Pasighat',
             'loc_postcode' => 16,
         ]);
         DB::table('locations')->insert([
-            'name' => 'Rwamagana',
+            'name' => 'Aalo',
             'loc_postcode' => 14,
         ]);
         DB::table('locations')->insert([
-            'name' => 'Huye',
+            'name' => 'Basax',
             'loc_postcode' => 13,
         ]);
         DB::table('locations')->insert([
-            'name' => 'Gisenyi',
+            'name' => 'Kamba',
             'loc_postcode' => 13,
         ]);
         DB::table('locations')->insert([
-            'name' => 'Nyagatare',
+            'name' => 'Khansa',
             'loc_postcode' => 13,
         ]);
         DB::table('locations')->insert([
-            'name' => 'Rusizi',
+            'name' => 'luwahati airport',
             'loc_postcode' => 13,
         ]);
         DB::table('locations')->insert([
-            'name' => 'Musanze',
+            'name' => 'tezu',
             'loc_postcode' => 13,
         ]);
         DB::table('locations')->insert([
-            'name' => 'Nyabugogo',
+            'name' => 'Namsai',
+            'loc_postcode' => 13,
+        ]);
+        DB::table('locations')->insert([
+            'name' => 'Roing',
+            'loc_postcode' => 13,
+        ]);
+        DB::table('locations')->insert([
+            'name' => 'Likhabali',
+            'loc_postcode' => 13,
+        ]);
+        DB::table('locations')->insert([
+            'name' => 'Deamali',
+            'loc_postcode' => 13,
+        ]);
+        DB::table('locations')->insert([
+            'name' => 'Changlang',
+            'loc_postcode' => 13,
+        ]);
+        DB::table('locations')->insert([
+            'name' => 'Bamdila',
+            'loc_postcode' => 13,
+        ]);
+        DB::table('locations')->insert([
+            'name' => 'Yingkiong',
+            'loc_postcode' => 13,
+        ]);
+        DB::table('locations')->insert([
+            'name' => 'Palin',
+            'loc_postcode' => 13,
+        ]);
+        DB::table('locations')->insert([
+            'name' => 'Sangram',
+            'loc_postcode' => 13,
+        ]);
+        DB::table('locations')->insert([
+            'name' => 'Kaying',
+            'loc_postcode' => 13,
+        ]);
+        DB::table('locations')->insert([
+            'name' => 'Passi-parlo',
+            'loc_postcode' => 13,
+        ]);
+        DB::table('locations')->insert([
+            'name' => 'Kolosiang',
+            'loc_postcode' => 13,
+        ]);
+        DB::table('locations')->insert([
+            'name' => 'Nyapin',
+            'loc_postcode' => 13,
+        ]);
+        DB::table('locations')->insert([
+            'name' => 'Sejasa',
+            'loc_postcode' => 13,
+        ]);
+        DB::table('locations')->insert([
+            'name' => 'Longding',
+            'loc_postcode' => 13,
+        ]);
+        DB::table('locations')->insert([
+            'name' => 'tinsukia',
+            'loc_postcode' => 13,
+        ]);
+        DB::table('locations')->insert([
+            'name' => 'kanubari',
+            'loc_postcode' => 13,
+        ]);
+        DB::table('locations')->insert([
+            'name' => 'tinsukia',
+            'loc_postcode' => 13,
+        ]);
+        DB::table('locations')->insert([
+            'name' => 'seppa',
+            'loc_postcode' => 13,
+        ]);
+        DB::table('locations')->insert([
+            'name' => 'tawang',
+            'loc_postcode' => 13,
+        ]);
+        DB::table('locations')->insert([
+            'name' => 'sagalee',
             'loc_postcode' => 13,
         ]);
     }

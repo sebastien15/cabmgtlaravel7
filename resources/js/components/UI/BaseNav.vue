@@ -60,16 +60,22 @@
                 </div>
                 <div class="hidden md:block">
                     <div class="flex">
-                          <a class="
-                                px-3 py-2 rounded-md text-sm font-medium
+                        <a class="
+                              px-3 py-2 rounded-md text-sm font-medium
                               text-gray-300 hover:text-white hover:bg-gray-700 
                               focus:outline-none focus:text-white 
-                              focus:bg-gray-700" href="/login">Log in </a>
+                              focus:bg-gray-700" href="/login" v-if="!user">Log in 
+                        </a>
+                        <span v-if="user" class="
+                              px-3 py-2 rounded-md text-sm font-medium text-gray-300
+                            hover:text-white">Welcome <span class="mx-1">{{user.name}}</span>!
+                        </span>
                         <button class="
-                                px-3 py-2 rounded-md text-sm font-medium
+                              px-3 py-2 rounded-md text-sm font-medium
                               text-gray-300 hover:text-white hover:bg-gray-700 
                               focus:outline-none focus:text-white 
-                              focus:bg-gray-700" @click="this.logout">Log out</button>                      
+                              focus:bg-gray-700" v-if="user" @click="this.logout">Log out
+                        </button>                      
                     </div>
                 </div>
                 <div class="-ml-2 flex md:hidden">
@@ -170,6 +176,7 @@
 <script>
     export default {
         name: "BaseNav",
+        props: ['user'],
         data() {
             return {
                 isOpen: false
@@ -180,14 +187,6 @@
                 axios.post('logout')
                     .then(() => location.reload());
             },
-            // showlogin() {
-            //     let loginform = document.querySelector('#loginform');
-            //     let loginclose = document.querySelector('#loginclose');
-            //     loginform.classList.remove('hidden')
-            //     loginclose.addEventListener('click',()=>{
-            //         loginform.classList.add('hidden')
-            //     })
-            // }
         }
     }
 </script>
