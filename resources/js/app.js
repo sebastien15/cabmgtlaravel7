@@ -64,11 +64,15 @@ Vue.component('base-input', require('./components/UI/BaseInput').default);
 Vue.component('base-button', require('./components/UI/BaseButton').default);
 Vue.component('base-sidebar', require('./components/UI/BaseSidebar').default);
 Vue.component('base-footer', require('./components/front/BaseFooter').default);
+Vue.component('navigations', require('./components/admin/navigations').default);
+//ui finished
+
 Vue.component('about-page', require('./components/front/aboutPage').default);
 Vue.component('contactus-page', require('./components/front/contactusPage').default);
 Vue.component('offers-page', require('./components/front/offersPage').default);
 Vue.component('values-page', require('./components/front/valuesPage').default);
 Vue.component('siteMap-page', require('./components/front/siteMapPage').default);
+Vue.component('user-page', require('./components/front/userPage').default);
 Vue.component('banner', require('./components/front/home/banner').default);
 Vue.component('offers', require('./components/front/home/offers').default);
 Vue.component('promise', require('./components/front/home/promise').default);
@@ -84,6 +88,7 @@ Vue.component('operatordashboard', require('./components/admin/operator/dashboar
 Vue.component('routesandstations', require('./components/admin/operator/routesAndStations').default);
 Vue.component('operatorscheduler', require('./components/admin/operator/scheduler').default);
 Vue.component('operatorprofile', require('./components/admin/operator/profile').default);
+Vue.component('operatorlocation', require('./components/admin/operator/location').default);
 
 // operator components ends
 

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="bg-indigo-900 pt-16 flex flex-col sm:flex-row text-blue-200 px-6 sm:px-20 mt-20 text-center">
+        <div class="bg-indigo-900 pt-16 flex flex-col sm:flex-row text-blue-200 px-6 sm:px-20 mt-20 ">
                 <div class="sm:w-1/3">
                     <h3 class="text-blue-400 text-xl mb-5">About redBus</h3>
                     <ul class="text-sm">
@@ -43,7 +43,7 @@
                     </div>
                 </div>
         </div>
-        <div class="text-center bg-indigo-900 text-white">
+        <div class="bg-indigo-900 text-white text-center">
             <p>Ⓒ 2020 ibibogroup All rights reserved</p>
         </div>
     </div>

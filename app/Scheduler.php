@@ -19,5 +19,8 @@ class Scheduler extends Model
         'journey_price',
         'message'
     ];
-
+    public function bookings()
+    {
+        return $this->hasMany('App\Booking');
+    }
 }

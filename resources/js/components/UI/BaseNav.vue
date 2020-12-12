@@ -60,7 +60,22 @@
                 </div>
                 <div class="hidden md:block">
                     <div class="flex">
-                        <button class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700" @click="logout">Logout</button>
+                        <a class="
+                              px-3 py-2 rounded-md text-sm font-medium
+                              text-gray-300 hover:text-white hover:bg-gray-700 
+                              focus:outline-none focus:text-white 
+                              focus:bg-gray-700" href="/login" v-if="!user">Log in 
+                        </a>
+                        <span v-if="user" class="
+                              px-3 py-2 rounded-md text-sm font-medium text-gray-300
+                            hover:text-white">Welcome <span class="mx-1">{{user.name}}</span>!
+                        </span>
+                        <button class="
+                              px-3 py-2 rounded-md text-sm font-medium
+                              text-gray-300 hover:text-white hover:bg-gray-700 
+                              focus:outline-none focus:text-white 
+                              focus:bg-gray-700" v-if="user" @click="this.logout">Log out
+                        </button>                      
                     </div>
                 </div>
                 <div class="-ml-2 flex md:hidden">
@@ -161,6 +176,7 @@
 <script>
     export default {
         name: "BaseNav",
+        props: ['user'],
         data() {
             return {
                 isOpen: false
@@ -170,7 +186,7 @@
             logout() {
                 axios.post('logout')
                     .then(() => location.reload());
-            }
+            },
         }
     }
 </script>

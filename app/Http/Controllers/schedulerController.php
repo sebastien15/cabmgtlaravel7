@@ -55,6 +55,19 @@ class schedulerController extends Controller
     
     public function store(Request $request)
     {
+        // $validatedData = $request->validate([
+        //     'operator_id' => 'required',
+        //     'operator_car' => 'required',
+        //     'operator_company' => 'required',
+        //     'route_from' => 'required',
+        //     'route_to' => 'required',
+        //     'journey_date' => 'required',
+        //     'departure_time' => 'required',
+        //     'arrival_time' => 'required',
+        //     'journey_time' => 'required',
+        //     'journey_price' => 'required',
+        //     'message' => 'required',
+        //     ]);
         $scheduler = new Scheduler;
  
         $scheduler->operator_id       = $request->operator_id;

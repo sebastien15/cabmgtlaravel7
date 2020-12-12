@@ -15,19 +15,22 @@ class bookingController extends Controller
         return response()->json(
             $bookings
         );
-    }
+     }
 
     public function create()
     {
         //
-    }
+     }
 
     public function store(Request $request)
     {
         $booking = new Booking;
- 
+
         $booking->user_id          = $request->user_id;
         $booking->route_id         = $request->route_id;
+        $booking->scheduler_id     = $request->scheduler_id;
+        $booking->loc_from         = $request->loc_from;
+        $booking->loc_to           = $request->loc_to;
         $booking->car_id           = $request->car_id;
         $booking->seat_no          = $request->seat_no;
         $booking->payed            = $request->payed;
@@ -46,7 +49,7 @@ class bookingController extends Controller
             "message" => "booking created",
             $booking
         ], 201);
-    }
+     }
     public function show($id)
     {
         if (Booking::where('id', $id)->exists()) {
@@ -57,11 +60,11 @@ class bookingController extends Controller
               "message" => "booking not found"
             ], 404);
         }
-    }
+     }
     public function edit($id)
     {
         //
-    }
+     }
 
     public function update(Request $request, $id)
     {
@@ -71,6 +74,9 @@ class bookingController extends Controller
 
             $booking->user_id          = is_null($request->user_id) ? $booking->user_id : $request->user_id;
             $booking->route_id         = is_null($request->route_id) ? $booking->route_id : $request->route_id;
+            $booking->scheduler_id     = is_null($request->scheduler_id) ? $booking->scheduler_id : $request->scheduler_id;
+            $booking->loc_from         = is_null($request->loc_from) ? $booking->loc_from : $request->loc_from;
+            $booking->loc_to           = is_null($request->loc_to) ? $booking->loc_to : $request->loc_to;
             $booking->car_id           = is_null($request->car_id) ? $booking->car_id : $request->car_id;
             $booking->seat_no          = is_null($request->seat_no) ? $booking->seat_no : $request->seat_no;
             $booking->payed            = is_null($request->payed) ? $booking->payed : $request->payed;
@@ -94,7 +100,19 @@ class bookingController extends Controller
                 "message" => "booking not found"
             ], 404);
         };
-    }
+     }
+
+    public function findByScheduler($id)
+    {
+        if (Booking::where('scheduler_id', $id)->exists()) {
+            $booking = Booking::where('scheduler_id', $id)->get()->toJson(JSON_PRETTY_PRINT);
+            return response($booking, 200);
+        } else {
+            return response()->json([
+              "message" => "booking not found"
+            ], 404);
+        }
+     }
 
     public function destroy($id)
     {
@@ -110,7 +128,7 @@ class bookingController extends Controller
               "message" => "booking not found"
             ], 404);
         }
-    }
+     }
 
    
 }
