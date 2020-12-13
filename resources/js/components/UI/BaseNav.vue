@@ -27,7 +27,7 @@
                                text-gray-300 hover:text-white 
                                hover:bg-gray-700 focus:outline-none 
                                focus:text-white focus:bg-gray-700">About us</a>
-                            <a href="/contactus"
+                            <!-- <a href="/contactus"
                                class="mx-1 
                                px-3 py-2 rounded-md 
                                text-sm font-medium 
@@ -54,7 +54,7 @@
                                text-sm font-medium 
                                text-gray-300 hover:text-white 
                                hover:bg-gray-700 focus:outline-none 
-                               focus:text-white focus:bg-gray-700">Site Map</a>
+                               focus:text-white focus:bg-gray-700">Site Map</a> -->
                         </div>
                     </div>
                 </div>
@@ -126,7 +126,7 @@
                    focus:outline-none 
                    focus:text-white 
                    focus:bg-gray-700">About us</a>
-                <a href="/contactus"
+                <!-- <a href="/contactus"
                    class="
                    mt-1 block px-3 py-2 
                    rounded-md text-base 
@@ -135,8 +135,8 @@
                    hover:bg-gray-700 
                    focus:outline-none 
                    focus:text-white 
-                   focus:bg-gray-700">contact us</a>
-                <a href="/values"
+                   focus:bg-gray-700">contact us</a> -->
+                <!-- <a href="/values"
                    class="
                    mt-1 block px-3 py-2 
                    rounded-md text-base 
@@ -145,8 +145,8 @@
                    hover:bg-gray-700 
                    focus:outline-none 
                    focus:text-white 
-                   focus:bg-gray-700">Our values</a>
-                <a href="/offers"
+                   focus:bg-gray-700">Our values</a> -->
+                <!-- <a href="/offers"
                    class="
                    mt-1 block px-3 py-2 
                    rounded-md text-base 
@@ -155,8 +155,8 @@
                    hover:bg-gray-700 
                    focus:outline-none 
                    focus:text-white 
-                   focus:bg-gray-700">Offers</a>
-                <a href="/siteMap"
+                   focus:bg-gray-700">Offers</a> -->
+                <!-- <a href="/siteMap"
                    class="
                    mt-1 block px-3 py-2 
                    rounded-md text-base 
@@ -165,7 +165,7 @@
                    hover:bg-gray-700 
                    focus:outline-none 
                    focus:text-white 
-                   focus:bg-gray-700">Site map</a>
+                   focus:bg-gray-700">Site map</a> -->
                 <!-- <button class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
                    @click="logout">Logout</button> -->
             </div>
