@@ -40,6 +40,10 @@ Route::view('/operator/scheduler','ui.operator.scheduler')->name('operator.sched
 Route::view('/operator/profile','ui.operator.profile')->name('operator.scheduler')->middleware('auth')->middleware('is_operator');
 Route::view('/operator/location','ui.operator.location')->name('operator.location')->middleware('auth')->middleware('is_operator');
 
+//user pages
+Route::view('/user/dashboard','ui.user.dashboard')->middleware('auth');
+Route::view('/user/profile','ui.user.profile')->middleware('auth');
+
 //super admin pages
 Route::view('/operator/routesAndStations','ui.admin.routesAndStations');
 Route::view('/admin/car','ui.admin.car');

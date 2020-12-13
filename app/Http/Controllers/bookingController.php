@@ -33,6 +33,7 @@ class bookingController extends Controller
         $booking->loc_to           = $request->loc_to;
         $booking->car_id           = $request->car_id;
         $booking->seat_no          = $request->seat_no;
+        $booking->price            = $request->price;
         $booking->payed            = $request->payed;
         $booking->approved         = $request->approved;
         $booking->nbr_people       = $request->nbr_people;
@@ -79,6 +80,7 @@ class bookingController extends Controller
             $booking->loc_to           = is_null($request->loc_to) ? $booking->loc_to : $request->loc_to;
             $booking->car_id           = is_null($request->car_id) ? $booking->car_id : $request->car_id;
             $booking->seat_no          = is_null($request->seat_no) ? $booking->seat_no : $request->seat_no;
+            $booking->price            = is_null($request->price) ? $booking->price : $request->price;
             $booking->payed            = is_null($request->payed) ? $booking->payed : $request->payed;
             $booking->approved         = is_null($request->approved) ? $booking->approved : $request->approved;
             $booking->nbr_people       = is_null($request->nbr_people) ? $booking->nbr_people : $request->nbr_people;
@@ -113,6 +115,46 @@ class bookingController extends Controller
             ], 404);
         }
      }
+
+    public function findByUser($id)
+    {
+         if (Booking::where('user_id', $id)->exists()) {
+             $booking = Booking::where('user_id', $id)->get()->toJson(JSON_PRETTY_PRINT);
+             return response($booking, 200);
+         } else {
+             return response()->json([
+               "message" => "booking not found"
+             ], 404);
+         }
+      }
+    public function findUnpaidByUser($id)
+    {
+         if (Booking::where('user_id', $id)->exists()) {
+             $booking = Booking::where('user_id', $id)
+                                 ->where('payed', false)
+                                 ->orWhere('payed', null)
+                                 ->get()->toJson(JSON_PRETTY_PRINT);
+             return response($booking, 200);
+         } else {
+             return response()->json([
+               "message" => "booking not found"
+             ], 404);
+         }
+      }
+    public function findPendingByUser($id)
+    {
+         if (Booking::where('user_id', $id)->exists()) {
+             $booking = Booking::where('user_id', $id)
+                                 ->where("approved", false)
+                                 ->orWhere('approved', null)
+                                 ->get()->toJson(JSON_PRETTY_PRINT);
+             return response($booking, 200);
+         } else {
+             return response()->json([
+               "message" => "booking not found"
+             ], 404);
+         }
+      }
 
     public function destroy($id)
     {

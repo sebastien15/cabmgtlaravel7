@@ -360,6 +360,7 @@ export default {
                 scheduler_id:null, 
                 car_id:null, 
                 seat_no:null, 
+                price:null, 
                 payed:null, 
                 approved:null, 
                 nbr_people:null, 
@@ -414,6 +415,7 @@ export default {
                     this.bookForm.loc_to          = this.toName;
                     this.bookForm.scheduler_id    = data.data[0].id;
                     this.bookForm.seat_no         = seatNumber;
+                    this.bookForm.price           = data.data[0].journey_price;
                     this.bookForm.payed           = false;
                     this.bookForm.car_id          = data.data[0].operator_car;
                     this.bookForm.nbr_people      = 1;

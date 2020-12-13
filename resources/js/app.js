@@ -58,6 +58,7 @@ import { routes } from './routes';
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 Vue.component('base-nav', require('./components/UI/BaseNav').default);
+Vue.component('user-base-nav', require('./components/UI/userBaseNav').default);
 Vue.component('base-header', require('./components/UI/BaseHeader').default);
 Vue.component('base-panel', require('./components/UI/BasePanel').default);
 Vue.component('base-input', require('./components/UI/BaseInput').default);
@@ -82,9 +83,14 @@ Vue.component('book-header', require('./components/front/booking/bookheader').de
 Vue.component('no-cab', require('./components/front/booking/noCab').default);
 Vue.component('cab-list', require('./components/front/booking/cabList').default);
 
-// operator components starts
 
-Vue.component('operatordashboard', require('./components/admin/operator/dashboard').default);
+// user components starts
+
+Vue.component('user-dashboard', require('./components/user/dashboard').default);
+Vue.component('user-profile', require('./components/user/profile').default);
+
+
+// operator components userponent('operatordashboard', require('./components/admin/operator/dashboard').default);
 Vue.component('routesandstations', require('./components/admin/operator/routesAndStations').default);
 Vue.component('operatorscheduler', require('./components/admin/operator/scheduler').default);
 Vue.component('operatorprofile', require('./components/admin/operator/profile').default);
