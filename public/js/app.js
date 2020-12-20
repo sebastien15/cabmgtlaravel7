@@ -68539,7 +68539,36 @@ var render = function() {
                   [_vm._v("Help")]
                 ),
                 _vm._v(" "),
-                _vm._m(1)
+                !_vm.dropOpen
+                  ? _c(
+                      "div",
+                      {
+                        staticClass:
+                          "absolute bg-red-500 text-gray-300 flex flex-col mt-3"
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "text-sm hover:bg-red-800 px-3 mt-4 hover:text-white",
+                            attrs: { href: "#contactus" }
+                          },
+                          [_vm._v("Contact")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "text-sm hover:bg-red-800 px-3 hover:text-white",
+                            attrs: { href: "#fandq" }
+                          },
+                          [_vm._v("F&Q")]
+                        )
+                      ]
+                    )
+                  : _vm._e()
               ]),
               _vm._v(" "),
               _vm.user
@@ -68689,7 +68718,7 @@ var render = function() {
         ],
         staticClass: "block md:hidden"
       },
-      [_vm._m(2)]
+      [_vm._m(1)]
     )
   ])
 }
@@ -68706,36 +68735,6 @@ var staticRenderFns = [
         })
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "absolute bg-red-500 text-gray-300 flex flex-col" },
-      [
-        _c(
-          "a",
-          {
-            staticClass:
-              "my-3 text-sm hover:bg-red-800 px-3 py-1 hover:text-white",
-            attrs: { href: "contactus" }
-          },
-          [_vm._v("Contact")]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass:
-              "my-3 text-sm hover:bg-red-800 px-3 py-1 hover:text-white",
-            attrs: { href: "/siteMap" }
-          },
-          [_vm._v("F&Q")]
-        )
-      ]
-    )
   },
   function() {
     var _vm = this
@@ -74591,7 +74590,8 @@ var staticRenderFns = [
       "div",
       {
         staticClass:
-          "px-10 sm:px-40 py-10 sm:py-30 text-lg text-center mt-10 sm:mt-40 text-gray-700"
+          "px-10 sm:px-40 py-10 sm:py-30 text-lg text-center mt-10 sm:mt-40 text-gray-700",
+        attrs: { id: "contactus" }
       },
       [
         _c("p", { staticClass: "font-bold mb-4" }, [_vm._v("CONTACT US")]),
@@ -74659,94 +74659,98 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "px-10 sm:px-40 py-10 text-lg" }, [
-      _c("h2", { staticClass: "font-semibold text-lg p-3" }, [_vm._v("FAQ")]),
-      _vm._v(" "),
-      _c(
-        "h3",
-        {
-          staticClass:
-            "border-l-4 border-blue-600 bg-blue-100 pl-3 p-2 mb-3 mt-10 text-md font-semibold"
-        },
-        [_vm._v("What is RideMe?")]
-      ),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v(
-          "\n        RideMe is a new e-hailing service launched in Lagos on June 15th. RideMe connects drivers with riders giving the riders comfort, style and fair rates while providing the drivers and partners a tool for total business ownership.\n        "
+    return _c(
+      "div",
+      { staticClass: "px-10 sm:px-40 py-10 text-lg", attrs: { id: "fandq" } },
+      [
+        _c("h2", { staticClass: "font-semibold text-lg p-3" }, [_vm._v("FAQ")]),
+        _vm._v(" "),
+        _c(
+          "h3",
+          {
+            staticClass:
+              "border-l-4 border-blue-600 bg-blue-100 pl-3 p-2 mb-3 mt-10 text-md font-semibold"
+          },
+          [_vm._v("What is RideMe?")]
         ),
-        _c("br"),
-        _vm._v(
-          "At RideMe, we believe happy drivers and partners make happy riders \n    "
-        )
-      ]),
-      _vm._v(" "),
-      _c(
-        "h3",
-        {
-          staticClass:
-            "border-l-4 border-blue-600 bg-blue-100 pl-3 p-2 mb-3 mt-10 text-md font-semibold"
-        },
-        [_vm._v("Do you accept card payments?")]
-      ),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v(
-          "\n        Yes! RideMe accepts card payments. We also pay our drivers on the same day for card trips. No need to haggle riders for cash as you won’t need to wait 7 days to receive your earnings for card trips.\n    "
-        )
-      ]),
-      _vm._v(" "),
-      _c(
-        "h3",
-        {
-          staticClass:
-            "border-l-4 border-blue-600 bg-blue-100 pl-3 p-2 mb-3 mt-10 text-md font-semibold"
-        },
-        [_vm._v("What documents are required to drive with RideMe?")]
-      ),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v(
-          "\n        You need a valid driver’s license and identification photograph\n    "
-        )
-      ]),
-      _vm._v(" "),
-      _c(
-        "h3",
-        {
-          staticClass:
-            "border-l-4 border-blue-600 bg-blue-100 pl-3 p-2 mb-3 mt-10 text-md font-semibold"
-        },
-        [_vm._v("What kind of cars are accepted on RideMe?")]
-      ),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v(
-          "\n        We accept all Sedan and SUVs not later than 2003 model.\n    "
-        )
-      ]),
-      _vm._v(" "),
-      _c(
-        "h3",
-        {
-          staticClass:
-            "border-l-4 border-blue-600 bg-blue-100 pl-3 p-2 mb-3 mt-10 text-md font-semibold"
-        },
-        [_vm._v("Accepted vehicle documents:")]
-      ),
-      _vm._v(" "),
-      _c("p", { staticClass: "pl-3" }, [
-        _c("ul", { staticClass: "list-disc" }, [
-          _c("li", [_vm._v("Vehicle license")]),
-          _vm._v(" "),
-          _c("li", [_vm._v("Vehicle insurance")]),
-          _vm._v(" "),
-          _c("li", [_vm._v("Road worthiness certificate")]),
-          _vm._v(" "),
-          _c("li", [_vm._v("Proof of ownership")])
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "\n        RideMe is a new e-hailing service launched in Lagos on June 15th. RideMe connects drivers with riders giving the riders comfort, style and fair rates while providing the drivers and partners a tool for total business ownership.\n        "
+          ),
+          _c("br"),
+          _vm._v(
+            "At RideMe, we believe happy drivers and partners make happy riders \n    "
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "h3",
+          {
+            staticClass:
+              "border-l-4 border-blue-600 bg-blue-100 pl-3 p-2 mb-3 mt-10 text-md font-semibold"
+          },
+          [_vm._v("Do you accept card payments?")]
+        ),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "\n        Yes! RideMe accepts card payments. We also pay our drivers on the same day for card trips. No need to haggle riders for cash as you won’t need to wait 7 days to receive your earnings for card trips.\n    "
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "h3",
+          {
+            staticClass:
+              "border-l-4 border-blue-600 bg-blue-100 pl-3 p-2 mb-3 mt-10 text-md font-semibold"
+          },
+          [_vm._v("What documents are required to drive with RideMe?")]
+        ),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "\n        You need a valid driver’s license and identification photograph\n    "
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "h3",
+          {
+            staticClass:
+              "border-l-4 border-blue-600 bg-blue-100 pl-3 p-2 mb-3 mt-10 text-md font-semibold"
+          },
+          [_vm._v("What kind of cars are accepted on RideMe?")]
+        ),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "\n        We accept all Sedan and SUVs not later than 2003 model.\n    "
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "h3",
+          {
+            staticClass:
+              "border-l-4 border-blue-600 bg-blue-100 pl-3 p-2 mb-3 mt-10 text-md font-semibold"
+          },
+          [_vm._v("Accepted vehicle documents:")]
+        ),
+        _vm._v(" "),
+        _c("p", { staticClass: "pl-3" }, [
+          _c("ul", { staticClass: "list-disc" }, [
+            _c("li", [_vm._v("Vehicle license")]),
+            _vm._v(" "),
+            _c("li", [_vm._v("Vehicle insurance")]),
+            _vm._v(" "),
+            _c("li", [_vm._v("Road worthiness certificate")]),
+            _vm._v(" "),
+            _c("li", [_vm._v("Proof of ownership")])
+          ])
         ])
-      ])
-    ])
+      ]
+    )
   }
 ]
 render._withStripped = true

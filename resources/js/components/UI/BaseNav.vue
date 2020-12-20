@@ -33,9 +33,9 @@
                                text-gray-300 hover:text-white 
                                hover:bg-gray-700 focus:outline-none 
                                focus:text-white focus:bg-gray-700" id="dropTrigger" @click="this.selfInvoking">Help</span>
-                                <div class="absolute bg-red-500 text-gray-300 flex flex-col">
-                                    <a href="contactus" class="my-3 text-sm hover:bg-red-800 px-3 py-1 hover:text-white">Contact</a>
-                                    <a href="/siteMap" class="my-3 text-sm hover:bg-red-800 px-3 py-1 hover:text-white">F&Q</a>
+                                <div class="absolute bg-red-500 text-gray-300 flex flex-col mt-3" v-if="!dropOpen">
+                                    <a href="#contactus" class="text-sm hover:bg-red-800 px-3 mt-4 hover:text-white">Contact</a>
+                                    <a href="#fandq" class="text-sm hover:bg-red-800 px-3 hover:text-white">F&Q</a>
                                 </div>
                                </div>
                             <a href="/user/dashboard" v-if="user"

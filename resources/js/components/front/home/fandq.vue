@@ -1,5 +1,5 @@
 <template>
-    <div class="px-10 sm:px-40 py-10 text-lg">
+    <div class="px-10 sm:px-40 py-10 text-lg" id="fandq">
         <h2 class="font-semibold text-lg p-3">FAQ</h2>
         <h3 class="border-l-4 border-blue-600 bg-blue-100 pl-3 p-2 mb-3 mt-10 text-md font-semibold">What is RideMe?</h3>
         <p>

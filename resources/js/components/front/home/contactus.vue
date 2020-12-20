@@ -1,5 +1,5 @@
 <template>
-    <div class="px-10 sm:px-40 py-10 sm:py-30 text-lg text-center mt-10 sm:mt-40 text-gray-700">
+    <div class="px-10 sm:px-40 py-10 sm:py-30 text-lg text-center mt-10 sm:mt-40 text-gray-700" id="contactus">
         <p class="font-bold mb-4">CONTACT US</p>
         <p class="font-medium my-4 ">It's easy to find us</p>
         <div class="flex w-6/12 m-auto justify-between">
