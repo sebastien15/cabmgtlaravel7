@@ -27,6 +27,32 @@
                                text-gray-300 hover:text-white 
                                hover:bg-gray-700 focus:outline-none 
                                focus:text-white focus:bg-gray-700">About us</a>
+                            <div class="relative mx-1">
+                                <span class="px-3 py-2 rounded-md 
+                               text-sm font-medium cursor-pointer
+                               text-gray-300 hover:text-white 
+                               hover:bg-gray-700 focus:outline-none 
+                               focus:text-white focus:bg-gray-700" id="dropTrigger" @click="this.selfInvoking">Help</span>
+                                <div class="absolute bg-red-500 text-gray-300 flex flex-col">
+                                    <a href="contactus" class="my-3 text-sm hover:bg-red-800 px-3 py-1 hover:text-white">Contact</a>
+                                    <a href="/siteMap" class="my-3 text-sm hover:bg-red-800 px-3 py-1 hover:text-white">F&Q</a>
+                                </div>
+                               </div>
+                            <a href="/user/dashboard" v-if="user"
+                               class="mx-1 
+                               px-3 py-2 rounded-md 
+                               text-sm font-medium 
+                               text-gray-300 hover:text-white 
+                               hover:bg-gray-700 focus:outline-none 
+                               focus:text-white focus:bg-gray-700">Dashboard</a>
+                            <a href="/user/profile" v-if="user"
+                               class="mx-1 
+                               px-3 py-2 rounded-md 
+                               text-sm font-medium 
+                               text-gray-300 hover:text-white 
+                               hover:bg-gray-700 focus:outline-none 
+                               focus:text-white focus:bg-gray-700">Profile</a>
+                               
                             <!-- <a href="/contactus"
                                class="mx-1 
                                px-3 py-2 rounded-md 
@@ -179,7 +205,8 @@
         props: ['user'],
         data() {
             return {
-                isOpen: false
+                isOpen: false,
+                dropOpen: false,
             }
         },
         methods: {
@@ -187,6 +214,10 @@
                 axios.post('logout')
                     .then(() => location.reload());
             },
+            selfInvoking(){
+                this.dropOpen = !this.dropOpen
+                console.log(this.dropOpen)
+            }
         }
     }
 </script>

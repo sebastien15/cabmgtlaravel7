@@ -110,3 +110,11 @@ Route::get('operatorinfo/{id}', [operatorinfoController::class, 'show']);
 Route::post('operatorinfo', [operatorinfoController::class, 'store']);
 Route::put('operatorinfo/{id}', [operatorinfoController::class, 'update']);
 Route::delete('operatorinfo/{id}',[operatorinfoController::class, 'destroy']);
+
+
+//escrow apis
+
+Route::post('/buy', function(){
+    return response()
+            ->view('testbuy');
+});

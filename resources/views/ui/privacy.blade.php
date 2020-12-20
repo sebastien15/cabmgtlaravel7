@@ -1,5 +1,4 @@
 @extends('layouts.front')
-
 @section('content')
-<offers-page></offers-page>
+<privacy></privacy>
 @endsection

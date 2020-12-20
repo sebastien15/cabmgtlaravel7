@@ -3,6 +3,6 @@
 @section('content')                                     
 <banner></banner>
 <offers></offers>
-<promise></promise>
-<safety></safety>
+<fandq></fandq>
+<contactus></contactus>
 @endsection

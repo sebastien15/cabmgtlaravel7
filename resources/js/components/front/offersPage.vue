@@ -1,6 +1,6 @@
 <template>
     <div class="px-40 py-10 text-lg">
-        offersPage
+        terms page
     </div>
 </template>
 
@@ -12,4 +12,3 @@ export default {
 <style scoped>
 
 </style>
-
