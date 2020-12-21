@@ -1,6 +1,6 @@
 <template>
     <div class="px-40 py-10 text-lg">
-        offersPage
+        siteMap
     </div>
 </template>
 

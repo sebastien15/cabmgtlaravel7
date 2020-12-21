@@ -27,9 +27,10 @@ Route::get('/schedulers/today','schedulerController@getTodaysScheduler');
 Route::view('/', 'ui.home');
 Route::view('/about', 'ui.about');
 Route::view('/contactus', 'ui.contactus');
-Route::view('/offers', 'ui.offers');
+Route::view('/terms', 'ui.terms');
 Route::view('/values', 'ui.values');
-Route::view('/siteMap', 'ui.siteMap');
+Route::view('/f&q', 'ui.siteMap');
+Route::view('/privacy', 'ui.privacy');
 Route::view('/user/dashboard', 'ui.userPage')->name('operator.home')->middleware('auth');
 Route::view('/book', 'ui.book');
 

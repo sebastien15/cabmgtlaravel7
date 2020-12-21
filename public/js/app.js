@@ -2222,12 +2222,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "BaseNav",
   props: ['user'],
   data: function data() {
     return {
-      isOpen: false
+      isOpen: false,
+      dropOpen: false
     };
   },
   methods: {
@@ -2235,6 +2262,10 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('logout').then(function () {
         return location.reload();
       });
+    },
+    selfInvoking: function selfInvoking() {
+      this.dropOpen = !this.dropOpen;
+      console.log(this.dropOpen);
     }
   }
 });
@@ -4029,6 +4060,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "BaseFooter"
 });
@@ -4044,6 +4082,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -4842,6 +4882,92 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/home/contactus.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/front/home/contactus.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "contactus"
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/home/fandq.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/front/home/fandq.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "fandq"
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/home/offers.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/front/home/offers.vue?vue&type=script&lang=js& ***!
@@ -4881,48 +5007,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/home/promise.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/front/home/promise.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: "header"
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/home/safety.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/front/home/safety.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: "safety"
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/offersPage.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/front/offersPage.vue?vue&type=script&lang=js& ***!
@@ -4944,6 +5028,85 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/privacy.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/front/privacy.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "privacy"
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/siteMapPage.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/front/siteMapPage.vue?vue&type=script&lang=js& ***!
@@ -4961,6 +5124,363 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "siteMapPage"
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/termsPage.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/front/termsPage.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "termsPage"
 });
 
 /***/ }),
@@ -5452,14 +5972,65 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "userDashboard",
   props: ['user'],
   data: function data() {
-    return {};
+    return {
+      userinfo: new Form({
+        firstName: '',
+        secondName: '',
+        telephone: '',
+        homeAddress: ''
+      })
+    };
   },
-  methods: {
-    upload_image: function upload_image() {}
+  methods: {// upload_image(){
+    // }
   }
 });
 
@@ -67931,7 +68502,101 @@ var render = function() {
   return _c("nav", { staticClass: "bg-red-500" }, [
     _c("div", { staticClass: "container mx-auto px-4 sm:px-6 lg:px-8" }, [
       _c("div", { staticClass: "flex items-center justify-between h-20" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "flex items-center" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "hidden md:block" }, [
+            _c("div", { staticClass: "mx-10 flex items-baseline" }, [
+              _c(
+                "a",
+                {
+                  staticClass:
+                    "mx-1 \n                           px-3 py-2 rounded-md \n                           text-sm font-medium \n                           text-gray-300 hover:text-white \n                           hover:bg-gray-700 focus:outline-none \n                           focus:text-white focus:bg-gray-700",
+                  attrs: { href: "/" }
+                },
+                [_vm._v("Home")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass:
+                    "mx-1 \n                           px-3 py-2 rounded-md \n                           text-sm font-medium \n                           text-gray-300 hover:text-white \n                           hover:bg-gray-700 focus:outline-none \n                           focus:text-white focus:bg-gray-700",
+                  attrs: { href: "/about" }
+                },
+                [_vm._v("About us")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "relative mx-1" }, [
+                _c(
+                  "span",
+                  {
+                    staticClass:
+                      "px-3 py-2 rounded-md \n                           text-sm font-medium cursor-pointer\n                           text-gray-300 hover:text-white \n                           hover:bg-gray-700 focus:outline-none \n                           focus:text-white focus:bg-gray-700",
+                    attrs: { id: "dropTrigger" },
+                    on: { click: this.selfInvoking }
+                  },
+                  [_vm._v("Help")]
+                ),
+                _vm._v(" "),
+                !_vm.dropOpen
+                  ? _c(
+                      "div",
+                      {
+                        staticClass:
+                          "absolute bg-red-500 text-gray-300 flex flex-col mt-3"
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "text-sm hover:bg-red-800 px-3 mt-4 hover:text-white",
+                            attrs: { href: "#contactus" }
+                          },
+                          [_vm._v("Contact")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "text-sm hover:bg-red-800 px-3 hover:text-white",
+                            attrs: { href: "#fandq" }
+                          },
+                          [_vm._v("F&Q")]
+                        )
+                      ]
+                    )
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _vm.user
+                ? _c(
+                    "a",
+                    {
+                      staticClass:
+                        "mx-1 \n                           px-3 py-2 rounded-md \n                           text-sm font-medium \n                           text-gray-300 hover:text-white \n                           hover:bg-gray-700 focus:outline-none \n                           focus:text-white focus:bg-gray-700",
+                      attrs: { href: "/user/dashboard" }
+                    },
+                    [_vm._v("Dashboard")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.user
+                ? _c(
+                    "a",
+                    {
+                      staticClass:
+                        "mx-1 \n                           px-3 py-2 rounded-md \n                           text-sm font-medium \n                           text-gray-300 hover:text-white \n                           hover:bg-gray-700 focus:outline-none \n                           focus:text-white focus:bg-gray-700",
+                      attrs: { href: "/user/profile" }
+                    },
+                    [_vm._v("Profile")]
+                  )
+                : _vm._e()
+            ])
+          ])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "hidden md:block" }, [
           _c("div", { staticClass: "flex" }, [
@@ -68062,38 +68727,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex items-center" }, [
-      _c("div", { staticClass: "flex-shrink-0" }, [
-        _c("a", { staticClass: "flex items-center", attrs: { href: "/" } }, [
-          _c("img", {
-            staticClass: "w-16 h-12",
-            attrs: { src: "/images/logo.png", alt: "logo" }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "hidden md:block" }, [
-        _c("div", { staticClass: "mx-10 flex items-baseline" }, [
-          _c(
-            "a",
-            {
-              staticClass:
-                "mx-1 \n                           px-3 py-2 rounded-md \n                           text-sm font-medium \n                           text-gray-300 hover:text-white \n                           hover:bg-gray-700 focus:outline-none \n                           focus:text-white focus:bg-gray-700",
-              attrs: { href: "/" }
-            },
-            [_vm._v("Home")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass:
-                "mx-1 \n                           px-3 py-2 rounded-md \n                           text-sm font-medium \n                           text-gray-300 hover:text-white \n                           hover:bg-gray-700 focus:outline-none \n                           focus:text-white focus:bg-gray-700",
-              attrs: { href: "/about" }
-            },
-            [_vm._v("About us")]
-          )
-        ])
+    return _c("div", { staticClass: "flex-shrink-0" }, [
+      _c("a", { staticClass: "flex items-center", attrs: { href: "/" } }, [
+        _c("img", {
+          staticClass: "w-16 h-12",
+          attrs: { src: "/images/logo.png", alt: "logo" }
+        })
       ])
     ])
   },
@@ -71924,109 +72563,36 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "div",
-        {
-          staticClass:
-            "bg-indigo-900 pt-16 flex flex-col sm:flex-row text-blue-200 px-6 sm:px-20 mt-20 "
-        },
-        [
-          _c("div", { staticClass: "sm:w-1/3" }, [
-            _c("h3", { staticClass: "text-blue-400 text-xl mb-5" }, [
-              _vm._v("About redBus")
-            ]),
+    return _c(
+      "div",
+      { staticClass: "bg-indigo-900 pt-16 flex flex-col text-blue-200 px-3 " },
+      [
+        _c("hr", { staticClass: "bg-blue-100 mt-1 mb-3" }),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "bg-indigo-900 text-white text-center text-sm flex justify-between font-thin"
+          },
+          [
+            _c("p", [_vm._v("Ⓒ 2020 RideMe")]),
             _vm._v(" "),
-            _c("ul", { staticClass: "text-sm" }, [
-              _c("li", { staticClass: "leading-6 font-hairline" }, [
-                _c("a", { attrs: { href: "" } }, [_vm._v("About Us")])
+            _c("p", [
+              _c("a", { attrs: { href: "/terms" } }, [
+                _vm._v("Terms&Condingion")
               ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "leading-6 font-hairline" }, [
-                _c("a", { attrs: { href: "" } }, [_vm._v("Contact Us")])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "leading-6 font-hairline" }, [
-                _c("a", { attrs: { href: "" } }, [_vm._v("Sitemap")])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "leading-6 font-hairline" }, [
-                _c("a", { attrs: { href: "" } }, [_vm._v("Offers")])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "leading-6 font-hairline" }, [
-                _c("a", { attrs: { href: "" } }, [_vm._v("Careers")])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "leading-6 font-hairline" }, [
-                _c("a", { attrs: { href: "" } }, [_vm._v("Values")])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "sm:w-1/3" }, [
-            _c("h3", { staticClass: "text-blue-400 text-xl mb-5" }, [
-              _vm._v("Info")
-            ]),
-            _vm._v(" "),
-            _c("ul", { staticClass: "text-sm" }, [
-              _c("li", { staticClass: "leading-6 font-hairline" }, [
-                _c("a", { attrs: { href: "" } }, [_vm._v("T & C")])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "leading-6 font-hairline" }, [
-                _c("a", { attrs: { href: "" } }, [_vm._v("Privacy Policy")])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "leading-6 font-hairline" }, [
-                _c("a", { attrs: { href: "" } }, [_vm._v("FAQ")])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "leading-6 font-hairline" }, [
-                _c("a", { attrs: { href: "" } }, [_vm._v("Blog")])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "leading-6 font-hairline" }, [
-                _c("a", { attrs: { href: "" } }, [_vm._v("Agent Registration")])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "leading-6 font-hairline" }, [
-                _c("a", { attrs: { href: "" } }, [_vm._v("Insurance Partner")])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "leading-6 font-hairline" }, [
-                _c("a", { attrs: { href: "" } }, [_vm._v("User Agreement")])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "sm:w-1/3 order-first sm:order-last" }, [
-            _c("div", { staticClass: "mb-5" }, [
-              _c("img", {
-                staticClass: "w-20 h-16",
-                attrs: { src: "/images/logo.png", alt: "logo" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "mb-5" }, [
-              _c("p", { staticClass: "text-sm font-hairline" }, [
-                _vm._v(
-                  "\n                        redBus is the  world's largest online bus ticket booking service trusted by over 18 million happy customers \n                        globally. redBus offers bus ticket booking through its website,iOS and Android mobile apps for all major \n                        routes.\n                    "
-                )
+              _vm._v("|"),
+              _c("a", { attrs: { href: "/terms" } }, [
+                _vm._v("Pricacy and Policy")
               ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "mb-5" }, [_c("p", [_vm._v("socials ")])]),
-            _vm._v(" "),
-            _c("div", { staticClass: "mb-10" })
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "bg-indigo-900 text-white text-center" }, [
-        _c("p", [_vm._v("Ⓒ 2020 ibibogroup All rights reserved")])
-      ])
-    ])
+            _c("p", [_vm._v("\n            socials\n        ")])
+          ]
+        )
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -72057,65 +72623,115 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "px-40 py-10 text-lg" }, [
-      _c("h2", { staticClass: "text-4xl mb-10 font-semibold text-red-900" }, [
-        _vm._v("About us")
-      ]),
+    return _c("div", { staticClass: "p-4 sm:px-40 sm:py-10 text-lg" }, [
+      _c(
+        "h2",
+        { staticClass: "text-lg sm:text-4xl mb-10 font-semibold text-red-900" },
+        [_vm._v("About us")]
+      ),
       _vm._v(" "),
-      _c("p", { staticClass: "text-red-800 text-xl" }, [
+      _c("p", { staticClass: "text-red-800 text-sm sm:text-xl" }, [
         _vm._v(
-          "\n        redBus is India’s largest online bus ticketing platform that has transformed bus travel in the country by \n        bringing ease and convenience to millions of Indians who travel using buses. Founded in 2006, redBus is part \n        of India’s leading online travel company MakeMyTrip Limited (NASDAQ: MMYT). By providing widest choice, superior \n        customer service, lowest prices and unmatched benefits, redBus has served over 18 million customers. redBus has a \n        global presence with operations across Indonesia, Singapore, Malaysia, Colombia and Peru apart from India.\n    "
+          "\n        At Ornasol, we believe the world is full of adventure and beautiful journey. \n        To avail you with the transportation, we provide you with the ticketing and booking \n        functionality on your fingertips with ease. We definitely provide best decision , option \n        and benefits with least cost and unmatched advantages.\n    "
         )
       ]),
       _vm._v(" "),
       _c(
         "h2",
-        { staticClass: "text-4xl mb-10 font-semibold text-red-900 mt-20" },
-        [_vm._v("Managment Team")]
+        {
+          staticClass:
+            "text-base sm:text-xl mb-10 font-semibold text-red-900 mt-20 bg-blue-100 p-2 text-right"
+        },
+        [_vm._v("Sleek rides")]
       ),
       _vm._v(" "),
       _c("div", { staticClass: "flex mb-20" }, [
-        _c("div", { staticClass: "w-3/12 " }, [
-          _c("div", { staticClass: "w-1/2 bg-blue-300 m-auto h-40" }, [
-            _c("img", {
-              staticClass: "rounded-full",
-              attrs: { src: "", alt: "helo" }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "w-9/12" }, [
-          _c("h4", { staticClass: "text-2xl font-bold mb-4" }, [
-            _vm._v("Prakash Sangam, CEO")
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "text-xl" }, [
+        _c("div", { staticClass: "w-10/12 m-auto" }, [
+          _c("p", { staticClass: "text-sm sm:text-base" }, [
             _vm._v(
-              "\n                Prakash Sangam has been Chief Executive Officer of redBus since June 2014. Prior to redBus. He served as an \n                Executive Vice President of Info Edge India (Naukri group), heading two group businesses namely Shiksha.com\n                 and Jeevansathi.com. He’s also worked as General Manager of Marketing and Innovation at Airtel and has also \n                 had multiple roles across Marketing, Brand Management and Sales at Hindustan Unilever. Prakash has completed \n                 his MBA from IIM Calcutta and also holds an Honours degree in Production Engineering from Mumbai University.\n            "
+              "\n                Whether you’re going to church, work, a date, business meeting or"
+            ),
+            _c("br"),
+            _vm._v(
+              "\n                a turn up, arrive in style. Leave a lasting impression"
+            ),
+            _c("br"),
+            _vm._v(
+              "\n                by pulling up in a sleek RideMe car.\n            "
             )
           ])
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "flex" }, [
-        _c("div", { staticClass: "w-3/12 " }, [
-          _c("div", { staticClass: "w-1/2 bg-blue-300 m-auto h-40" }, [
-            _c("img", {
-              staticClass: "rounded-full",
-              attrs: { src: "", alt: "helo" }
-            })
+      _c(
+        "h2",
+        {
+          staticClass:
+            "text-base sm:text-xl mb-10 font-semibold text-red-900 mt-20 bg-blue-100 p-2 text-right"
+        },
+        [_vm._v("Best fare rates")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex mb-20" }, [
+        _c("div", { staticClass: "w-10/12 m-auto text-right" }, [
+          _c("p", { staticClass: "text-sm sm:text-base" }, [
+            _vm._v("\n                Enjoy lower costs on all your rides."),
+            _c("br"),
+            _vm._v("\n                We provide you with the best"),
+            _c("br"),
+            _vm._v("\n                fare rates ever.\n            ")
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "w-9/12" }, [
-          _c("h4", { staticClass: "text-2xl font-bold mb-4" }, [
-            _vm._v("Anoop Menon, CTO")
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "text-xl" }, [
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "h2",
+        {
+          staticClass:
+            "text-base sm:text-xl mb-10 font-semibold text-red-900 mt-20 bg-blue-100 p-2 text-left"
+        },
+        [_vm._v("Verified professional Drivers")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex mb-20" }, [
+        _c("div", { staticClass: "w-10/12 m-auto" }, [
+          _c("p", { staticClass: "text-sm sm:text-base" }, [
             _vm._v(
-              "\n                Anoop Menon serves as Chief Technology Officer at redBus. Anoop plays an integral role in setting the company’s \n                strategic direction, development and future growth. At redBus, he leads effective delivery of scalable systems \n                to the customers, agents and bus operators by incorporating the latest technology. A tech enthusiast, Anoop comes \n                with over 18 years of extensive experience in building scalable and high-performing products across telecom, \n                internet and mobile ecommerce domains. Anoop strongly believes that hard work and commitment can overcome the \n                barriers to success. He completed BE in Mechanical Engineering from Madras University and loves sports, movies, \n                TV and music.\n            "
+              "\n                At RideMe, we believe a happy driver makes a happy rider."
+            ),
+            _c("br"),
+            _vm._v(
+              "\n                We constantly train and retrain our drivers"
+            ),
+            _c("br"),
+            _vm._v(
+              "\n                to give you top notch services always.\n            "
             )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "h2",
+        {
+          staticClass:
+            "text-base sm:text-xl mb-10 font-semibold text-red-900 mt-20 bg-blue-100 p-2 text-left"
+        },
+        [_vm._v("Convenience")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex mb-20" }, [
+        _c("div", { staticClass: "w-10/12 m-auto" }, [
+          _c("p", { staticClass: "text-sm sm:text-base" }, [
+            _vm._v(
+              "\n                Enjoy the comfort of a car when you ride with us. We have "
+            ),
+            _c("br"),
+            _vm._v(
+              "\n                dedicated drivers on demand to take you anywhere at any "
+            ),
+            _c("br"),
+            _vm._v("\n                given time.\n            ")
           ])
         ])
       ])
@@ -73948,6 +74564,201 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/home/contactus.vue?vue&type=template&id=0aea98ff&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/front/home/contactus.vue?vue&type=template&id=0aea98ff&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "px-10 sm:px-40 py-10 sm:py-30 text-lg text-center mt-10 sm:mt-40 text-gray-700",
+        attrs: { id: "contactus" }
+      },
+      [
+        _c("p", { staticClass: "font-bold mb-4" }, [_vm._v("CONTACT US")]),
+        _vm._v(" "),
+        _c("p", { staticClass: "font-medium my-4 " }, [
+          _vm._v("It's easy to find us")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex w-6/12 m-auto justify-between" }, [
+          _c("a", { attrs: { href: "https://wa.me/+918794264414" } }, [
+            _c("div", {}, [
+              _c("i", {
+                staticClass:
+                  "fa fa-whatsapp text-3xl text-white bg-red-800 rounded-full p-4"
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "text-center text-sm mt-8" }, [
+              _vm._v("+918794264414\n            ")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "mailto:melaw07.tm@gmail.com" } }, [
+            _c("div", {}, [
+              _c("i", {
+                staticClass:
+                  "fa fa-envelope text-3xl text-white bg-red-800 rounded-full p-4"
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "text-center text-sm mt-8" }, [
+              _vm._v("\n                Melaw07.Tm@gmail.com\n            ")
+            ])
+          ])
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/home/fandq.vue?vue&type=template&id=d3d42ebe&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/front/home/fandq.vue?vue&type=template&id=d3d42ebe&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "px-10 sm:px-40 py-10 text-lg", attrs: { id: "fandq" } },
+      [
+        _c("h2", { staticClass: "font-semibold text-lg p-3" }, [_vm._v("FAQ")]),
+        _vm._v(" "),
+        _c(
+          "h3",
+          {
+            staticClass:
+              "border-l-4 border-blue-600 bg-blue-100 pl-3 p-2 mb-3 mt-10 text-md font-semibold"
+          },
+          [_vm._v("What is RideMe?")]
+        ),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "\n        RideMe is a new e-hailing service launched in Lagos on June 15th. RideMe connects drivers with riders giving the riders comfort, style and fair rates while providing the drivers and partners a tool for total business ownership.\n        "
+          ),
+          _c("br"),
+          _vm._v(
+            "At RideMe, we believe happy drivers and partners make happy riders \n    "
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "h3",
+          {
+            staticClass:
+              "border-l-4 border-blue-600 bg-blue-100 pl-3 p-2 mb-3 mt-10 text-md font-semibold"
+          },
+          [_vm._v("Do you accept card payments?")]
+        ),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "\n        Yes! RideMe accepts card payments. We also pay our drivers on the same day for card trips. No need to haggle riders for cash as you won’t need to wait 7 days to receive your earnings for card trips.\n    "
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "h3",
+          {
+            staticClass:
+              "border-l-4 border-blue-600 bg-blue-100 pl-3 p-2 mb-3 mt-10 text-md font-semibold"
+          },
+          [_vm._v("What documents are required to drive with RideMe?")]
+        ),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "\n        You need a valid driver’s license and identification photograph\n    "
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "h3",
+          {
+            staticClass:
+              "border-l-4 border-blue-600 bg-blue-100 pl-3 p-2 mb-3 mt-10 text-md font-semibold"
+          },
+          [_vm._v("What kind of cars are accepted on RideMe?")]
+        ),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "\n        We accept all Sedan and SUVs not later than 2003 model.\n    "
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "h3",
+          {
+            staticClass:
+              "border-l-4 border-blue-600 bg-blue-100 pl-3 p-2 mb-3 mt-10 text-md font-semibold"
+          },
+          [_vm._v("Accepted vehicle documents:")]
+        ),
+        _vm._v(" "),
+        _c("p", { staticClass: "pl-3" }, [
+          _c("ul", { staticClass: "list-disc" }, [
+            _c("li", [_vm._v("Vehicle license")]),
+            _vm._v(" "),
+            _c("li", [_vm._v("Vehicle insurance")]),
+            _vm._v(" "),
+            _c("li", [_vm._v("Road worthiness certificate")]),
+            _vm._v(" "),
+            _c("li", [_vm._v("Proof of ownership")])
+          ])
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/home/offers.vue?vue&type=template&id=b860c2b4&scoped=true&":
 /*!********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/front/home/offers.vue?vue&type=template&id=b860c2b4&scoped=true& ***!
@@ -74043,58 +74854,6 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/home/promise.vue?vue&type=template&id=7ab9c71c&scoped=true&":
-/*!*********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/front/home/promise.vue?vue&type=template&id=7ab9c71c&scoped=true& ***!
-  \*********************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "px-40 py-10 text-lg" }, [
-    _vm._v("\n    promise section\n")
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/home/safety.vue?vue&type=template&id=d945133e&scoped=true&":
-/*!********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/front/home/safety.vue?vue&type=template&id=d945133e&scoped=true& ***!
-  \********************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "px-40 py-10 text-lg" }, [
-    _vm._v("\n    safety section\n")
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/offersPage.vue?vue&type=template&id=10325cb7&scoped=true&":
 /*!*******************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/front/offersPage.vue?vue&type=template&id=10325cb7&scoped=true& ***!
@@ -74111,10 +74870,164 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "px-40 py-10 text-lg" }, [
-    _vm._v("\n    offersPage\n")
+    _vm._v("\n    terms page\n")
   ])
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/privacy.vue?vue&type=template&id=76914067&scoped=true&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/front/privacy.vue?vue&type=template&id=76914067&scoped=true& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "px-10 sm:px-40 py-10 text-gray-900" }, [
+      _c("h2", { staticClass: "text-3xl mb-10 font-extrabold" }, [
+        _vm._v("Ornasol Privacy Policy")
+      ]),
+      _vm._v(" "),
+      _c("h2", { staticClass: "mb-4 text-xl font-semibold" }, [
+        _vm._v("EFFECTIVE JANUARY, 2021")
+      ]),
+      _vm._v(" "),
+      _c("p", [
+        _c("strong", [_vm._v("Important –")]),
+        _vm._v(
+          " please read this Privacy Policy carefully as it constitutes a legally binding agreement (“Agreement”) between you (“Driver” or “Driver” or “Rider” or “User/s”) and Ornasol Logistics Software Ltd (“Us” or “Our” or “We”). We understand the importance of protecting your personal and financial information when you visit the Ornasol Website (collectively, the “Services”)\n        If you do not agree to this Privacy Statement, please do not access the Services. By using the Services other than to view this Privacy Policy for the first time constitutes an acceptance of the terms, conditions, and practices described in this Privacy Policy.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 1 – What do we do with your information?")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-lg" }, [
+        _vm._v(
+          "\n        When you register or make a booking facilitated through the Services, as part of that process we collect the personal information you give us such as your name, address, date of birth and email address and other details obtained through the registration process or creating of a User account.\n        When you browse our Website, your computer’s internet protocol (IP) address is collected in order to provide information that helps us learn about your browser and operating system.\n        Our Website is capable of collecting certain information about Users who access the Website or attempt to use its account functions. Types of information that are or may be collected by the Website and uses of that information are set forth below. We are the sole owner of the information collected on the Website.\n        Our Website is capable of collecting certain information about Users who access the Website or attempt to use its account functions. Types of information that are or may be collected by the Website and uses of that information are set forth below. We are the sole owner of the information collected on the Website.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 2 – Consent")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-lg" }),
+      _c("h5", { staticClass: "text-md mb-2 font-semibold" }, [
+        _vm._v("How do you get my Consent?")
+      ]),
+      _vm._v(
+        "\n        When you provide us with personal information to complete a transaction, verify your credit card, place an order, arrange for a delivery or return a purchase, we imply that you consent to our collecting it and using it for that specific reason only.\n        If we ask for your personal information for a secondary reason, like marketing, we will either ask you directly for your expressed consent, or provide you with an opportunity to say no\n        "
+      ),
+      _c("h5", { staticClass: "text-md mb-2 font-semibold" }, [
+        _vm._v("How do I withdraw my consent?")
+      ]),
+      _vm._v(
+        "\n        If after you opt-in, you change your mind, you may withdraw your consent for us to contact you, for the continued collection, use or disclosure of your information, at any time, by contacting us at @Melaw07.Tm@gmail.com \n    "
+      ),
+      _c("p"),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 3 – Disclosure")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-lg" }, [
+        _vm._v(
+          "\n        We may disclose your personal information if we are required by law to do so or if you violate the Terms of our Terms and Conditions.\n        We maintain safeguards to protect your personal information. We will use information collected on our Website for our own internal purposes. We do not share any personal information with any non-affiliated third parties, except in the following circumstances:\n        "
+        ),
+        _c("ul", { staticClass: "list-disc" }, [
+          _c("li", [
+            _vm._v(
+              "\n                As necessary to provide a service that the client has requested or authorised, or to maintain and service the client’s account (information may be provided to the firm’s outside accounting firm under this exception);\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                We may disclose your personal information if we are required by law to do so or if you violate our Terms and Conditions; and\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                To the extent reasonably necessary to prevent fraud and unauthorised transactions.\n            "
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 4 – Third Party Services")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-lg" }, [
+        _vm._v(
+          "\n        In general, the third-party providers used by us will only collect, use and disclose your information to the extent necessary to allow them to perform the services they provide to us.\n        However, certain third-party service providers, such as payment gateways and other payment transaction processors, have their own privacy policies in respect to the information we are required to provide to them for your purchase-related transactions.\n        For these providers, we recommend that you read their privacy policies so you can understand the manner in which your personal information will be handled by these providers.\n        In particular, remember that certain providers may be located in or have facilities that are located in a different jurisdiction than either you or us. So if you elect to proceed with a transaction that involves the services of a third-party service provider, then your information may become subject to the laws of the jurisdiction(s) in which that service provider or its facilities are located.\n        Once you leave our Website or are redirected to a third-party Website or application, you are no longer governed by this Privacy Policy or our Website’s Terms and Conditions.\n        "
+        ),
+        _c("span", { staticClass: "text-semibold mt-2" }, [_vm._v("Links -")]),
+        _vm._v(
+          " When you click on links on our Website, they may direct you away from our site. Please be aware that we are not responsible for the privacy practices of other sites and encourage you to read their privacy statements. This Website Privacy Policy applies solely to information collected by us on the domains owned and controlled by us.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 4 – Third Party Services")
+      ]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "\n        We take reasonable precautions to protect your personal information. When you submit your information via our Website or Mobile Application the information is protected both online and off-line as set forth in this section. All requests for financial and business sensitive information (to the extent such sensitivity is known), and all responses in the normal course thereto are encrypted and protected with the SSL encryption software. You can confirm that pages are encrypted by viewing the lock icon on the bottom of most browsers. We also take the measures off-line to protect your financial and known business sensitive information as we use to protect our own such information. We are not liable or responsible for the security of any information transmitted to the Website by you or for the disclosure of information due to errors in transmission.\n        "
+        ),
+        _c("span", { staticClass: "text-semibold mt-2" }, [
+          _vm._v("Cookies -")
+        ]),
+        _vm._v(
+          "A cookie is a piece of data stored on the user’s hard drive containing information about the user. The Website employs cookies, but will not use cookies to obtain data from your hard drive. Users can set their browsers or third party software to reject cookies. If a user rejects the cookie, it may be unable to use portions of our Website that require registration and the Website experience will not be capable of being tailored to the user from visit to visit. Cookies enable us to track and target the interests of our users to enhance the experience on our Website. These and similar types of information may also be collected by “web-bugs,” or single pixel gifs, and other means. Some of our business partners and advertisers may use cookies on our Website. We have no access to or control over these cookies.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 5 – Age of Consent")
+      ]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "\n        By using our Website and or application, you represent that you are at least 18 years of age.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 6 – Changes to this Privacy Policy")
+      ]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "\n        We reserve the right to modify this privacy policy at any time, so please review it frequently. Changes and clarifications will take effect immediately upon their posting on the Website. If we make material changes to this policy, w e will notify you here that it has been updated, so that you are aware of what information we collect, how we use it, and under what circumstances, if any, we use and/or disclose it. If our Website  is acquired or merged with another company, your information may be transferred to the new owners.\n    "
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -74137,10 +75050,666 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "px-40 py-10 text-lg" }, [
-    _vm._v("\n    offersPage\n")
+    _vm._v("\n    siteMap\n")
   ])
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/termsPage.vue?vue&type=template&id=347764d5&scoped=true&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/front/termsPage.vue?vue&type=template&id=347764d5&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "px-40 py-10 text-gray-900" }, [
+      _c("h2", { staticClass: "text-3xl mb-10 font-extrabold" }, [
+        _vm._v("Ornasol Terms & Conditions")
+      ]),
+      _vm._v(" "),
+      _c("h2", { staticClass: "mb-4 text-xl font-semibold" }, [
+        _vm._v("EFFECTIVE JANUARY, 2021")
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 1 - Contractual Relationship")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-lg" }, [
+        _c("strong", [_vm._v("Important –")]),
+        _vm._v(
+          " please read these Terms and Conditions of Use (“Terms”) carefully as \n        they constitute a legally binding agreement (“Agreement”) between you (“Driver” or “Rider” or “User/s”) \n        and  Logistics Software Ltd (“Ornasol” or the “Company”). By using the Ornasol website (collectively, \n        the “Services”), you agree that you have read, understood, accepted and agreed with the Terms. These \n        Terms supersede prior Agreements with you. Ornasol has the right but not the obligation to immediately \n        terminate or modify these Terms or any Services to you at any time for any reason which will be deemed \n        effective upon posting at rideme.ng and your continued access or use of the Services after such posting \n        constitutes your consent to be bound by the new Terms, as amended. You agree that it shall be your \n        responsibility to review the Terms regularly or before you use the Services whereupon the continued use \n        of the Services after any such changes, whether or not reviewed by you, shall constitute your consent and \n        acceptance to such changes. RIDEME DOES NOT PROVIDE TRANSPORTATION SERVICES, AND IS NOT A TRANSPORTATION \n        CARRIER. ORNASOL PROVIDES TECHNOLOGY SERVICES THAT MATCH INDIVIDUALS WHO SEEK TRANSPORTATION (“RIDERS”) \n        WITH PERSONS WHO PROVIDE TRANSPORTATION AS INDEPENDENT CONTRACTORS (“DRIVERS”). DRIVERS AND RIDERS ARE \n        COLLECTIVELY REFERRED TO HEREIN AS “USERS” AND EACH SHALL CREATE A USER ACCOUNT THAT ENABLES ACCESS TO THE\n         SERVICES. IT IS UP TO EACH USER TO DECIDE WHETHER OR NOT TO LOGIN TO THE SERVICES AND OFFER OR ACCEPT \n         TRANSPORTATION FROM ANOTHER USER AND ANY SUCH DECISION IS MADE IN SUCH USER’S SOLE DISCRETION. EACH OFFER \n         OR ACCEPTANCE OF TRANSPORT SHALL CONSTITUTE A SEPARATE AGREEMENT BETWEEN SUCH USERS. BY REGISTERING TO \n         ACCESS THE SERVICES, DRIVERS AGREE TO BE INDEPENDENT CONTRACTOR AND UNDERSTAND THAT THEY ARE NOT EMPLOYED \n         BY THE COMPANY. FURTHERMORE DRIVERS COMMIT TO UNDERSTANDING THEIR LEGAL, INSURANCE AND TAX OBLIGATIONS AS \n         AN INDEPENDENT CONTRACTOR. For each ride conducted, the Services require destination and pick up information. \n         The Services will display an approximate fare estimate for that specific ride, based on an average incorporating \n         such factors as distance, duration, time of day and location. Riders may view the estimated time of arrival,  \n         Driver’s profile and vehicle information for various available Drivers. The Rider has complete discretion as \n         to Driver selection and the Driver has complete discretion as to Rider acceptance.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 2 - Representations and Warranties")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-lg" }, [
+        _vm._v(
+          "\n        By using the Service, you expressly represent and warrant that you are legally entitled to accept and agree to the Terms and that you are at least eighteen (18) years old or have parental consent. Without limiting the generality of the foregoing, the Services are not available to persons under the age of eighteen (18) or such persons that are forbidden for any reason whatsoever to enter into a contractual relationship unless parental consent is obtained and provided to Ornasol. By using the Service, you further represent and warrant that you have the right, authority and capacity to use the Service and to abide by the Terms. You further confirm that all the information which you provide shall be true and accurate. Your use of the Service is for your own sole, personal use. You undertake not to authorise others to use your identity or User status, and you may not assign or otherwise transfer your user account to any other person or entity, unless expressly prohibited by the Company in advance through prior arrangement with the Company. When using the Service you agree to comply with all applicable Nigerian laws while using the Service.\n        You may only access the Service using authorised means. It is your responsibility to check and ensure that you have downloaded the correct Software for your device. The Company reserves the right not to permit you to use the Service should you use the Services with an incompatible or unauthorised device or for purposes other than which the Services are intended to be used.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 3 - By using the Services, Riders agree that:")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-lg" }, [
+        _c("ul", { staticClass: "list-disc" }, [
+          _c("li", [
+            _vm._v("You will only use the Service for lawful purposes;")
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You will not hold Rideme responsible for any personal belongings left in the car and you \n                understand and accept that the loss of these items is not covered under any Rideme insurance \n                policy. Passengers who lose an item should immediately contact Rideme so the driver may be \n                contacted to try and locate the lost item;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You will only use the Services for the purpose for which they are intended to be used;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You will not use the Services to cause nuisance, annoyance, inconvenience or make fake bookings – \n                fake bookings will result in automatic account deactivation;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You shall not contact a Driver for purposes other than to use the Services;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You will not impair the proper operation of the network;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You shall not intentionally or unintentionally cause or attempt to cause damage to the Driver or \n                the Drivers vehicle and property;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You will keep secure and confidential your account password or any identification we provide \n                you which allows access to the Service;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You will provide us with whatever proof of identity we may reasonably request or require;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You agree to provide accurate, current and complete information as required for the Services and undertake the responsibility to maintain and update your information in a timely manner to keep it accurate, current and complete at all times during the term of this Agreement;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You agree that the Company may rely on your information as accurate, current and complete;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You acknowledge that if your information is untrue, inaccurate, not current or incomplete in any respect, the Company has the right but not the obligation to terminate this Agreement and your use of the Services at any time with or without notice;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                Unless otherwise permitted by Ornasol in writing, you may only possess one Account;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You agree that the Service is provided on a reasonable effort basis;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You agree that your use of the Service will be subject to the Company’s Privacy Policy as may be amended from time to time;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                Your use of the Service grants you no rights in relation to the Ornasol intellectual property rights (including without limitation, copyright, trademarks, logos, graphics, photographs, animations, videos and text or rights in and to the Services;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You agree to compensate or defend Ornasol fully against any claims or legal proceedings brought against Ornasol by any other person as a result of your breach of these Terms.\n             "
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v(
+          "Section 4 - By using the Services, Partners and Drivers agree that:"
+        )
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-lg" }, [
+        _c("ul", { staticClass: "list-disc" }, [
+          _c("li", [
+            _vm._v(
+              "You must be at least 18 and have held a valid full licence for at least 1 year;"
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You are medically fit to operate a motor vehicle and have the appropriate commercial licence extension, approvals and authority to provide transportation to Riders for the State or Territory in which you provide Services;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You will only provide Services using the vehicle that has been registered with Ornasol  and you will not transport more passengers than can securely be seated in such vehicle;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                It is your responsibility to ensure you have the appropriate insurances in place, and it is your requirement to provide an up to date Certificate of Currency to Ornasol ;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You will be solely responsible for any and all liability that results from or is alleged as a result of your provision of transportation, including, but not limited to personal injuries, death and property damages;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                In the event of a motor vehicle accident you will be solely responsible for compliance with any applicable statutory or department of motor vehicles requirements, for reporting the accident to Rideme and your insurer in a timely manner, and for all necessary contacts with your insurance carrier;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You will comply with all applicable laws, rules and regulations while providing transportation and you will be solely responsible for any violations of such provisions;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You will only use the Services for the purpose for which they are intended to be used;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You will not use the Services for sending or storing any unlawful material or for fraudulent purposes;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You agree that the Company may obtain information about you, including your criminal and driving records, and you agree to provide any further necessary authorisations to facilitate our access to such records during the term of the Agreement.\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You will keep secure and confidential your account password or any identification we provide you which allows access to the Service;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You will provide us with any proof of identity we may reasonably request or require;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You agree to provide accurate, current and complete information as required for the Services and undertake the responsibility to maintain and update your information in a timely manner to keep it accurate, current and complete at all times during the term of this Agreement. You agree that the Company may rely on your information as accurate, current and complete. You acknowledge that if your information is untrue, inaccurate, not current or incomplete in any respect, you will be liable for any resulting damages and the Company has the right but not the obligation to terminate this Agreement and your use of the Services at any time with or without notice;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You agree that the Service is provided on a reasonable effort basis;\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You agree to defend, indemnify and hold harmless Ornasol and its subsidiaries in accordance with Clause 16 of these Terms below; and\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                You agree that your use of the Service will be subject to the Company’s Privacy Policy as may be amended from time to time.\n             "
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 5 - Payments")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-lg" }, [
+        _vm._v(
+          "\n        As a Rider, you agree that any amounts charged following a ride (“Charge”) are mandatory and due and payable immediately upon completion of the ride. Charges include applicable (ride) fees, tolls, surcharges, and taxes as applicable. Ornasol has the authority and reserves the right to determine and modify pricing by posting applicable Charges to the Company’s website. Charges will vary depending on your use of Ornasol, Big  Ornasol or Fancy Ornasol and you are responsible for reviewing Charges and shall be responsible for all Charges incurred under your User account regardless of your awareness of such Charges or the amounts thereof.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-lg" }, [
+        _c("ul", { staticClass: "list-disc" }, [
+          _c("li", [
+            _vm._v(
+              "\n                Ride fees: consist of a base price and incremental charges based on the duration and distance of your ride. A temporary fare increase may be added in the future during peak periods to manage short term demand and supply in-equilibriums. For particularly short rides, a minimum ride fee will apply.\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                Payment processing: is facilitated through a third party API.\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                Cancellation fee: in the event that a Rider cancels a transport request after more than 2 minutes, makes repeated or frequent cancellations, or fails to show up in a timely manner, you agree to pay a cancellation/waiting fee as determined by  Ornasol . Ornasol  may also assess a cancellation fee against you if we suspect that you have intentionally delayed/cancelled rides/ disrupt the provision of Services.\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                Damage fee: if a Driver reports that a Rider has materially damaged the Driver’s vehicle, the Rider agrees to pay a damage fee to the extent of the damage (as determined by the Driver in their sole discretion), towards vehicle repair or cleaning. Drivers shall be responsible for rectifying damage caused to their vehicle; Ornasol has neither the requirement nor the obligation to take responsibility for any damage to a Drivers vehicle.\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                Payment authorisation: Riders agree that Ornasol may issue a reasonable authorisation hold, which is not an actual charge against your credit/debit card (“Card”), in order to verify your payment method via a Card. The hold may appear in your statement as “pending”. The authorisation hold is issued as a preventive measure against any unauthorised or fraudulent usage of your Card.\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                Other charges: other fees, tolls, and surcharges may apply to your ride, including actual or anticipated airport fees, state or local fees, tolls (and return tolls in select instances), and processing fees for split payments.\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                Taxes: where required by law  Ornasol will collect applicable taxes.\n             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                Refunds: once you have completed a journey using the Service, you are required to make payment in full through cash or card payment whereby your payment will be deducted automatically from your Card and is non-refundable (since the journey has already been provided). If you have any complaints in relation to the transportation, that dispute must be taken up with the Driver directly. Any refunds owed to you as a Rider be they for reversal of a cancellation fee or otherwise shall be applied as a credit to your next ride.\n\n                    The Company has the right to suspend the processing of any transaction where the Company reasonably believes that the transaction may be fraudulent, illegal or involves any criminal activity or where the Company reasonably believes a User to be in breach of the Terms.\n                    You agree that you will cooperate in relation to any financial crime screening that is required and to assist us in complying with any prevailing laws or regulations in place.\n                    You shall be responsible to resolve any disputes with your Card Company on your own.\n             "
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 6 - Taxes")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-lg" }, [
+        _vm._v(
+          "\n        Users agree that this Agreement shall be subject to all prevailing statutory taxes, duties, fees, charges and/or costs, however denominated, as may be in force and in connection with any future taxes that may be introduced at any point of time. Users further agree to use their best efforts to do everything necessary and required by the relevant laws to enable, assist and/or defend the Company to claim or verify any input tax credit, set off, rebate or refund in respect of any taxes paid or payable in connection with the Services supplied under this Agreement.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 7 – License Grant & Restriction")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-" }, [
+        _vm._v(
+          "\n        Subject to the Terms of this Agreement, you are hereby granted a non-exclusive, limited, non-transferable, freely revocable license to use the  Ornasol Services for personal, non-commercial use only and as permitted by the features of the Service and applicable law. Ornasol reserves all rights not expressly granted herein in the Service and the Service Content. Ornasol may terminate this license at any time for any reason.\n        You shall not (i) license, sublicense, sell, resell, transfer, assign, distribute or otherwise commercially exploit or make available to any third party the Services in any way; (ii) modify or make derivative works based on the Services; (iii) create internet “links” to the Application or “frame” or “mirror” any software on any other server or wireless or internet-based device; (iv) reverse engineer or access the software in order to (a) build a competitive product or service, (b) build a product using similar ideas, features, functions or graphics of the services, or (c) copy any ideas, features, functions or graphics of the Services, (v) launch an automated program or script, including, but not limited to, web spiders, web crawlers, web robots, web ants, web indexers, bots, viruses or worms, or any program which may make multiple server requests per second, or unduly burdens or hinders the operation and/or performance of the Services, (vi) use any robot, spider, site search/retrieval application, or other manual or automatic device or process to retrieve, index, “data mine”, or in any way reproduce or circumvent the navigational structure or presentation of the Services or its contents; (vii) post, distribute or reproduce in any way any copyrighted material, trademarks, or other proprietary information without obtaining the prior consent of the owner of such proprietary rights, (viii) remove any copyright, trademark or other proprietary rights notices contained in the Service.\n        You may use Services only for your personal, non-commercial purposes and shall not use the Services to: (i) send spam or otherwise duplicative or unsolicited messages; (ii) send or store infringing, obscene, threatening, libellous, or otherwise unlawful or tortious material, including but not limited to materials harmful to children or violative of third party privacy rights; (iii) send material containing software viruses, worms, Trojan horses or other harmful computer code, files, scripts, agents or programs; (iv) interfere with or disrupt the integrity or performance of the Service or the data contained therein; (v) attempt to gain unauthorised access to the Services or its related systems or networks; or (vi) impersonate any person or entity or otherwise misrepresent your affiliation with a person or entity (vii) to abstain from any conduct that could possibly damage the Company’s reputation or amount to being disreputable.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 8 – Intellectual Property Ownership")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-" }, [
+        _vm._v(
+          "\n        The Company shall own all rights, title and interests, including all related intellectual property rights. Users may choose to or the Company may invite you to submit comments or ideas about the Service, including how to improve the Services (“Ideas”). By submitting any Idea, you agree that your disclosure is gratuitous, unsolicited and without restriction and will not place Ornasol under any fiduciary or other obligation, and that we are free to use the Idea without any additional compensation to you, and/or to disclose the Idea on a non-confidential basis or otherwise to anyone. You further acknowledge that, by acceptance of your submission,  Ornasol does not waive any rights to use similar or related ideas previously known to Ornasol , or developed by its employees, or obtained from sources other than you. The Terms do not constitute a sale agreement and do not convey to you any rights of ownership in or related to the Services, or any intellectual property rights owned by the Company. The Company name, the Company logo, the Services and the product names are trademarks of the Company or third parties, and no right or license is granted to use them.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 9 – Anti-Discrimination")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-" }, [
+        _vm._v(
+          "\n        Users will not discriminate or harass anyone on the basis of race, national origin, religion, gender, gender identity, physical or mental disability, medical condition, marital status, age or sexual orientation. You will make reasonable accommodation for service animals.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 10 – Rating system")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-" }, [
+        _vm._v(
+          "\n        All users agree to mutual rating system when using the Services. Users consent to other users rating them based on the User experience or on specific factors set exclusively by Ornasol. The purpose of these ratings is to create a community of mutual trust, respect and responsibility among Users. These ratings may be used to deactivate a driver who continuously falls below a certain minimum expected standard exclusively set by the Company, to be determined by the Company at its sole discretion.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 11 – Confidentiality")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-" }, [
+        _vm._v(
+          "\n        You shall maintain in confidence all information and data relating to the Company, its Services, products, business affairs, marketing and promotion plans or other operations and its associated Companies which are disclosed to you by or on behalf of the Company (whether orally or in writing and whether before, on or after the date of this Agreement) or which are otherwise directly or indirectly acquired by you from the Company, or any of its affiliated Companies, or created in the course of this Agreement. You shall further ensure that the use of such confidential information is made in order to perform the Services, and shall not without the Company’s prior written consent, disclose such information to any third-party nor use it for any other purpose.\n        The above obligations of confidentiality shall not apply to the extent that you can show that the relevant information:\n        "
+        ),
+        _c("ul", { staticClass: "list-disc" }, [
+          _c("li", [
+            _vm._v(
+              "\n                Was at the time of receipt already in the Recipient’s possession;\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                Is, or becomes in the future, public knowledge through no fault or omission of the recipient;\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                Was received from a third-party having the right to disclose it; or\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                Is required to be disclosed by law.\n            "
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 12 – Personal Data Protection")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-" }, [
+        _vm._v(
+          "\n        You agree and consent to the Company using and processing your Personal Data for the Purposes and in the manner as identified hereunder.\n        For the purposes of this Agreement, “Personal Data” means information about you (the User), from which you are identifiable, including but not limited to your name, licence details, nationality, address, telephone number, credit or debit card details, race, gender, date of birth, email address, any information about you which you have provided to the Company in registration forms, application forms or any other similar forms and/or any information about you that has been or may be collected, stored, used and processed by the Company from time to time and includes sensitive personal data such as data relating to health, religious or other similar beliefs.\n        The provision of your Personal Data is voluntary. However, if you do not provide the Company your Personal Data, your request for the registration may be incomplete and the Company will not be able to process your Personal Data for the Purposes outlined below and may cause the Company to be unable to allow you to use the Service.\n        The Company may use and process your Personal Data for business and activities of the Company which shall include, without limitation the following (the “Purpose”):\n        "
+        ),
+        _c("ul", { staticClass: "list-disc" }, [
+          _c("li", [
+            _vm._v(
+              "\n                To perform the Company’s obligations in respect of any contract entered into with you;\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                To provide you with any services pursuant to the Terms herein;\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                To process your participation in any events, promotions, activities, focus groups, research studies, contests, promotions, polls, surveys or any productions and to communicate with you regarding your attendance thereto;\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                Process, manage or verify your registration for the Service pursuant to the Terms herein;\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                To validate and/or process payments pursuant to the Terms herein;\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                To develop, enhance and provide what is required pursuant to the Terms herein to meet your needs;\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                To process any refunds, rebates and or charges pursuant to the Terms herein;\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                To facilitate or enable any checks as may be required pursuant to the Terms herein;\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                To respond to questions, comments and feedback from you;\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                To communicate with you for any of the purposes listed herein;\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                For internal administrative purposes, such as auditing, data analysis, database records;\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                For purposes of detection, prevention and prosecution of crime;\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                For the Company to comply with its obligations under law;\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                To send you alerts, newsletters, updates, mailers, promotional materials, special privileges, festive greetings from the Company, its partners, advertisers and or sponsors;\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                To notify and invite you to events or activities organised by the Company, its partners, advertisers, and or sponsors; and\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "\n                To share your Personal Data amongst the Company’s within the Group and the Group’s agents, third party providers, developers, advertisers, partners, event companies or sponsors who may communicate with you for any reasons whatsoever.\n            "
+            )
+          ])
+        ]),
+        _vm._v(
+          "\n        If you do not consent to the Company processing your Personal Data for any of the Purposes, please notify the Company at @Melaw07.Tm@gmail.com\n        If any of the Personal Data that you have provided to us changes, for example, if you change your e- mail address, telephone number, payment details or if you wish to cancel your account, please update your details by sending your request to the support contact details \n        We will, to the best of our abilities, effect such changes as requested within fourteen (14) working days of receipt of such notice of change.\n        By submitting your information you consent to the use of that information as set out in the form of submission and in these Terms.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 13 - Use of Google Services")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-" }, [
+        _vm._v(
+          "\n        Rideme’s technology incorporates certain software provided by Google (namely, the Maps API). In agreeing to these Terms, all Users also agree to Google’s current Terms of Use.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 14 - Analytics, Location Data")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-" }, [
+        _vm._v(
+          "\n        Rideme may directly collect analytics data, or use third-party analytics tools, to help us measure traffic, safety, security and usage trends for our service. These tools collect information sent by your browser or mobile device, including the pages you visit and other information that assists us in improving the Services. We collect and use this analytics information in both individual and aggregate form.\n        When you access the Services we may access, collect, monitor and/or remotely store “location data,” which may include GPS coordinates (e.g. latitude and/or longitude) or similar information regarding the location of your mobile device. Location data may convey to us information about how you browse, drive, and use the Services. Some features of the Services, particularly location-based services, may not function properly if use or availability of location data is impaired or disabled.\n        We use or may use cookies, log file, device identifiers, location data and clear gifs information to: (a) remember information so that you will not have to re-enter it during your visit or the next time you visit the site; (b) provide custom, personalised content and information; (c) to provide and monitor the effectiveness, safety and security of Users and Service; (d) monitor individual and aggregate metrics such as total number of visitors, traffic, driving habits, and demographic patterns; (e) diagnose or fix technology problems; (f) help you efficiently access your information after you sign in; (g) to provide advertising to your browser or device, and (h) update the Services.\n        shall not be responsible for any loss or damage of any sort relating to your dealings with such advertisers.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 15 - Indemnification")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-" }, [
+        _vm._v(
+          "\n        You agree to defend, indemnify and hold harmless Ornasol and its subsidiaries, agents, licensors, managers, and other affiliated companies, and their employees, contractors, agents, officers and directors, from and against any and all claims, damages, obligations, losses, liabilities, costs or debt, and expenses (including but not limited to legal fees) arising from: (i) your use of and access to the Services, including any data or content transmitted or received by you; (ii) your violation of any Terms of this Agreement, including without limitation your breach of any of the representations and warranties below; (iii) your violation of any third-party right, including without limitation any right of privacy or intellectual property rights; (iv) your violation of any applicable law, rule or regulation; (v) any claim or damages that arise as a result of any of your User content or any that is submitted via your account; (vi) any other party’s access and use of the Service with your unique username, password or other appropriate security code; or (vii) any and all claims or damages (alleged or actual) that arise as a result of transportation you provide as a Driver or transportation you receive as a Rider.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 16 - Disclaimer of Warranties")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-" }, [
+        _vm._v(
+          "\n        THE COMPANY MAKES NO REPRESENTATION, WARRANTY, OR GUARANTEE AS TO THE RELIABILITY, TIMELINESS, QUALITY, SUITABILITY, AVAILABILITY, ACCURACY OR COMPLETENESS OF THE SERVICES. THE COMPANY DOES NOT REPRESENT OR WARRANT THAT (A) THE USE OF THE SERVICE WILL BE SECURE, TIMELY, UNINTERRUPTED OR ERROR-FREE OR OPERATE IN COMBINATION WITH ANY OTHER HARDWARE, SOFTWARE, SYSTEM OR DATA, (B) THE SERVICE WILL MEET YOUR REQUIREMENTS OR EXPECTATIONS, (C) ANY STORED DATA WILL BE ACCURATE OR RELIABLE, (D) THE QUALITY OF ANY PRODUCTS, SERVICES, INFORMATION, OR OTHER MATERIALS PURCHASED OR OBTAINED BY YOU THROUGH THE APPLICATION WILL MEET YOUR REQUIREMENTS OR EXPECTATIONS, (E) ERRORS OR DEFECTS IN THE SERVICE WILL BE CORRECTED, OR (F) THE APPLICATION OR THE SERVER(S) THAT MAKE THE APPLICATION AVAILABLE ARE FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS, OR (G) THE SERVICE TRACKS YOU OR THE VEHICLE USED BY THE DRIVER. THE SERVICE IS PROVIDED TO YOU STRICTLY ON AN “AS IS” BASIS. ALL CONDITIONS, REPRESENTATIONS AND WARRANTIES, WHETHER EXPRESS, IMPLIED, STATUTORY OR OTHERWISE, INCLUDING, WITHOUT LIMITATION, ANY IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT OF THIRD PARTY RIGHTS, ARE HEREBY EXCLUDED AND DISCLAIMED TO THE HIGHEST AND MAXIMUM EXTENT. THE COMPANY MAKES NO REPRESENTATION, WARRANTY, OR GUARANTEE AS TO THE RELIABILITY, SAFETY, TIMELINESS, QUALITY, SUITABILITY OR AVAILABILITY OF ANY SERVICES, INCLUDING BUT NOT LIMITED TO THE DRIVER SERVICES OBTAINED BY OR FROM THIRD PARTIES THROUGH THE USE OF THE SERVICES. YOU ACKNOWLEDGE AND AGREE THAT THE ENTIRE RISK ARISING OUT OF YOUR USE OF THE SERVICES, AND ANY THIRD PARTY SERVICES, INCLUDING BUT NOT LIMITED TO THE DRIVER SERVICES REMAINS SOLELY AND ABSOLUTELY WITH YOU AND YOU SHALL HAVE NO RECOURSE WHATSOEVER TO THE COMPANY.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v(
+          "Section 18 - No Warranty or Guarantee Provided as to Driver or Passenger Safety"
+        )
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-" }, [
+        _vm._v(
+          "\n        Ornasol has taken commercially reasonable steps (including those required by regulatory authorities) to review a Drivers commercial licence extension as required by Nigerian law, reviewing proof of vehicle insurance, and reviewing for a valid driver’s license. This however, is not to be deemed a warranty or guarantee, either express or implied, for the safety of a ride, the reliability of a Driver, a ride or the Driver’s vehicle, or for anything else, and Ornasol expressly disclaims all warranties as to Drivers and Riders. A User should take all reasonable steps in determining whether to accept a ride from Driver or give a ride.\n        Ornasol is not responsible for any damages (including personal injury, death, property damage, lost time or wages, and the like) resulting from or related to a ride facilitated by the Services, or for resolving any disputes between Users. You hereby agree that your use of the Services is at your sole risk.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 19 - Internet Delays")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-" }, [
+        _vm._v(
+          "\n        THE SERVICE MAY BE SUBJECT TO LIMITATIONS, DELAYS, AND OTHER PROBLEMS INHERENT IN THE USE OF THE INTERNET AND ELECTRONIC COMMUNICATIONS INCLUDING THE DEVICE USED BY YOU OR THE THIRD PARTY TRANSPORTATION PROVIDER BEING FAULTY, NOT CONNECTED, OUT OF RANGE, SWITCHED OFF OR NOT FUNCTIONING. THE COMPANY IS NOT RESPONSIBLE FOR ANY DELAYS, DELIVERY FAILURES, DAMAGES OR LOSSES RESULTING FROM SUCH PROBLEMS.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 20 - Limitation of Liability")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-" }, [
+        _vm._v(
+          "\n        ANY CLAIMS AGAINST THE COMPANY BY YOU SHALL IN ANY EVENT BE LIMITED TO THE AGGREGATE AMOUNT OF ALL AMOUNTS ACTUALLY PAID BY AND/OR DUE FROM YOU IN UTILISING THE SERVICE DURING THE EVENT GIVING RISE TO SUCH CLAIMS. IN NO EVENT SHALL THE COMPANY BE LIABLE TO YOU OR ANYONE FOR ANY DIRECT, INDIRECT, PUNITIVE, ECONOMIC, FUTURE SPECIAL, EXEMPLARY, INCIDENTAL, CONSEQUENTIAL OR OTHER DAMAGES OR LOSSES OF ANY TYPE OR KIND (INCLUDING PERSONAL INJURY, EMOTIONAL DISTRESS AND LOSS OF DATA, GOODS, REVENUE, PROFITS, USE OR OTHER ECONOMIC ADVANTAGE). THE COMPANY SHALL NOT BE LIABLE FOR ANY LOSS, DAMAGE OR INJURY WHICH MAY BE INCURRED BY OR CAUSED TO YOU OR TO ANY PERSON FOR WHOM YOU HAVE BOOKED THE SERVICE FOR, INCLUDING BUT NOT LIMITED TO LOSS, DAMAGE OR INJURY ARISING OUT OF, OR IN ANY WAY CONNECTED WITH THE SERVICE INCLUDING BUT NOT LIMITED TO THE USE OR INABILITY TO USE THE SERVICE, ANY RELIANCE PLACED BY YOU ON THE COMPLETENESS, ACCURACY OR EXISTENCE OF ANY ADVERTISING, OR AS A RESULT OF ANY RELATIONSHIP OR TRANSACTION BETWEEN YOU AND ANY THIRD PARTY PROVIDER, ADVERTISER OR SPONSOR WHOSE ADVERTISING APPEARS ON THE WEBSITE OR IS REFERRED TO BY THE SERVICE, EVEN IF THE COMPANY HAVE BEEN PREVIOUSLY ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. THE COMPANY DOES NOT AND WILL NOT ASSESS NOR MONITOR THE SUITABILITY, LEGALITY, ABILITY, MOVEMENT OR LOCATION OF ANY THIRD PARTY PROVIDERS INCLUDING DRIVERS, PARTNERS ADVERTISERS AND/OR SPONSORS AND YOU EXPRESSLY WAIVE AND RELEASE THE COMPANY FROM ANY AND ALL LIABILITY, CLAIMS OR DAMAGES ARISING FROM OR IN ANY WAY RELATED TO THE THIRD PARTY PROVIDERS INCLUDING DRIVERS, ADVERTISERS AND/OR SPONSORS. THE COMPANY WILL NOT BE A PARTY TO DISPUTES, NEGOTIATIONS OF DISPUTES BETWEEN USERS AND SUCH THIRD PARTY PROVIDERS INCLUDING DRIVERS, PARTNERS, UNIONS,ADVERTISERS AND/OR SPONSORS ETC. WE CANNOT AND WILL NOT BE OBLIGED TO PROVIDE PAYMENTS TO YOU, AND THE THIRD PARTY PROVIDERS, INCLUDING DRIVERS, ADVERTISERS, UNION AND/OR SPONSORS. RESPONSIBILITY FOR THE DECISIONS YOU MAKE REGARDING SERVICES AND PRODUCTS OFFERED VIA THE SERVICE (WITH ALL ITS IMPLICATIONS) RESTS SOLELY WITH AND ON YOU. YOU EXPRESSLY WAIVE AND RELEASE THE COMPANY FROM ANY AND ALL LIABILITY, CLAIMS, CAUSES OF ACTION, OR DAMAGES ARISING FROM YOUR USE OF THE SERVICE, OR IN ANY WAY RELATED TO THE THIRD PARTIES INCLUDING DRIVERS, ADVERTISERS AND/OR SPONSORS INTRODUCED TO YOU BY THE SERVICE. THE QUALITY OF THE DRIVER SERVICES SCHEDULED THROUGH THE USE OF THE SERVICES IS ENTIRELY THE RESPONSIBILITY OF THE DRIVER WHO ULTIMATELY PROVIDES SUCH TRANSPORTATION SERVICES TO YOU. YOU UNDERSTAND, THEREFORE, THAT BY USING THE SERVICES, YOU MAY BE EXPOSED TO TRANSPORTATION THAT IS POTENTIALLY DANGEROUS, OFFENSIVE, HARMFUL TO MINORS, UNSAFE OR OTHERWISE OBJECTIONABLE, AND THAT YOU USE THE SERVICE AT YOUR OWN RISK.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 22 - No Agency")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-" }, [
+        _vm._v(
+          "\n        Drivers are Independent Contractors, and no agency, partnership, joint venture, employee-employer or franchisor-franchisee relationship is intended or created by this Agreement.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 24 - Copyright Infringement")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-" }, [
+        _vm._v(
+          "\n        If you believe that your copyrighted work has been copied in a way that constitutes copyright infringement and is accessible via the Services, please email @"
+        ),
+        _c("a", { attrs: { mailto: "Melaw07.Tm@gmail.com" } }, [
+          _vm._v("Melaw07.Tm@gmail.com")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 25 - Term and Termination")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-" }, [
+        _vm._v(
+          "\n        This Agreement is effective upon your creation of a User account, as amended by any modifications made pursuant to Section 1 – Contractual Relationship. You may discontinue your use of or participation in the Services at any time, for any reason. We may suspend or deactivate your User account (either as a Rider and/or Driver), or revoke your permission to access the Services, at any time, for any reason, upon notice to you. We reserve the right to refuse access to the Services to any User for any reason not prohibited by law. Either party may terminate the Agreement for any reason upon written notice to the other party.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 26 - Arbitration")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-" }, [
+        _vm._v(
+          "\n        Users agree that any legal disputes or claims arising out of or related to the Agreement (including but not limited to the use of the Services, or the interpretation, enforceability, revocability, or validity of the Agreement, or the arbitrability of any dispute), that cannot be resolved informally shall be submitted to binding arbitration in the State or Territory in which the Agreement was performed. The arbitration shall be conducted by the appropriate arbitrator body, or as otherwise mutually agreed by you and Ornasol. Any judgment on the award rendered by the arbitrator may be entered in any court having jurisdiction thereof. Claims shall be brought within the time required by applicable law. You and Ornasol agree that any claim, action or proceeding arising out of or related to the Agreement must be brought in your individual capacity, and not as a plaintiff or class member in any purported class, collective, or representative proceeding. The arbitrator may not consolidate more than one person’s claims, and may not otherwise preside over any form of a representative, collective, or class proceeding.\n        YOU ACKNOWLEDGE AND AGREE THAT YOU AND RIDEME ARE EACH WAIVING THE RIGHT TO A TRIAL IN COURT AT FIRST INSTANCE OR TO PARTICIPATE AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS ACTION OR REPRESENTATIVE PROCEEDING.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-lg mb-4 font-semibold" }, [
+        _vm._v("Section 27 - General")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "leading-8 text-" }, [
+        _vm._v(
+          "\n        This Agreement shall be governed by Nigerian law, without regard to the choice or conflicts of law provisions of any jurisdiction, and any disputes, actions, claims or causes of action arising out of or in connection with the Terms or the Services shall be subject to the exclusive jurisdiction of the Courts of Law in India to which you hereby agree to submit to.\n        You hereby agree that the Company is entitled to terminate this Agreement immediately in the event that you are found to be in breach of any of the terms stipulated in this Agreement. For the avoidance of doubt, the termination of this Agreement shall not require the Company to compensate, reimburse or cover any cost incurred by you in the course of you acquiring Services from the Driver under this Agreement.\n    "
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -75167,27 +76736,97 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "sm:px-40 sm:py-10 flex flex-col" }, [
-    _c(
-      "div",
-      {
-        staticClass:
-          "header bg-gray-100 sm:-mx-40 sm:-my-10 min-w-full p-2 sm:p-4 rounded-md"
-      },
-      [_vm._v("\n        User Information\n    ")]
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "infoDiv border border-gray-100" }, [
-      _c("div", { staticClass: "inputGroup" }, [
-        _c("input", {
-          attrs: { type: "file", name: "image" },
-          on: { change: _vm.upload_image }
-        })
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "sm:px-40 sm:py-10 flex flex-col" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "header bg-gray-100 min-w-full p-2 rounded-md rounded-b-none"
+          },
+          [_vm._v("\n            Address Information\n        ")]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "infoDiv border border-gray-100 p-4" }, [
+          _c("div", { staticClass: "flex sm:flex-row flex-col" }, [
+            _c("div", { staticClass: "inputGroup w-full sm:w-6/12" }, [
+              _c("label", { attrs: { for: "fistName" } }, [
+                _vm._v("First Name:")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                staticClass:
+                  "border border-blue-500 text-blue-800 p-1 sm:p-2 w-10/12 m-auto",
+                attrs: { type: "text", name: "", id: "fistName" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inputGroup w-full sm:w-6/12" }, [
+              _c("label", { attrs: { for: "secondName" } }, [
+                _vm._v("Seconde Name:")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                staticClass:
+                  "border border-blue-500 text-blue-800 p-1 sm:p-2 w-10/12 m-auto",
+                attrs: { type: "text", name: "", id: "secondName" }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex sm:flex-row flex-col mt-2" }, [
+            _c("div", { staticClass: "inputGroup w-full sm:w-6/12" }, [
+              _c("label", { attrs: { for: "tel" } }, [_vm._v("Telephone:")]),
+              _vm._v(" "),
+              _c("input", {
+                staticClass:
+                  "border border-blue-500 text-blue-800 p-1 sm:p-2 w-10/12 m-auto",
+                attrs: { type: "text", name: "", id: "tel" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inputGroup w-full sm:w-6/12" }, [
+              _c("label", { attrs: { for: "address" } }, [
+                _vm._v("Home address:")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                staticClass:
+                  "border border-blue-500 text-blue-800 p-1 sm:p-2 w-10/12 m-auto",
+                attrs: { type: "text", name: "", id: "address" }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "flex sm:flex-row flex-col mt-2 justify-end" },
+            [
+              _c("div", { staticClass: "sm:w-6/12" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "cursor-pointer w-full sm:w-10/12 m-auto mt-3 p-2 text-base border border-blue-500 hover:bg-blue-500 hover:text-white text-blue-700",
+                    attrs: { type: "submit" }
+                  },
+                  [_vm._v("Save")]
+                )
+              ])
+            ]
+          )
+        ])
       ])
     ])
-  ])
-}
-var staticRenderFns = []
+  }
+]
 render._withStripped = true
 
 
@@ -90528,13 +92167,15 @@ Vue.component('navigations', __webpack_require__(/*! ./components/admin/navigati
 Vue.component('about-page', __webpack_require__(/*! ./components/front/aboutPage */ "./resources/js/components/front/aboutPage.vue")["default"]);
 Vue.component('contactus-page', __webpack_require__(/*! ./components/front/contactusPage */ "./resources/js/components/front/contactusPage.vue")["default"]);
 Vue.component('offers-page', __webpack_require__(/*! ./components/front/offersPage */ "./resources/js/components/front/offersPage.vue")["default"]);
+Vue.component('terms-page', __webpack_require__(/*! ./components/front/termsPage */ "./resources/js/components/front/termsPage.vue")["default"]);
 Vue.component('values-page', __webpack_require__(/*! ./components/front/valuesPage */ "./resources/js/components/front/valuesPage.vue")["default"]);
-Vue.component('siteMap-page', __webpack_require__(/*! ./components/front/siteMapPage */ "./resources/js/components/front/siteMapPage.vue")["default"]);
+Vue.component('site-page', __webpack_require__(/*! ./components/front/siteMapPage */ "./resources/js/components/front/siteMapPage.vue")["default"]);
 Vue.component('user-page', __webpack_require__(/*! ./components/front/userPage */ "./resources/js/components/front/userPage.vue")["default"]);
 Vue.component('banner', __webpack_require__(/*! ./components/front/home/banner */ "./resources/js/components/front/home/banner.vue")["default"]);
 Vue.component('offers', __webpack_require__(/*! ./components/front/home/offers */ "./resources/js/components/front/home/offers.vue")["default"]);
-Vue.component('promise', __webpack_require__(/*! ./components/front/home/promise */ "./resources/js/components/front/home/promise.vue")["default"]);
-Vue.component('safety', __webpack_require__(/*! ./components/front/home/safety */ "./resources/js/components/front/home/safety.vue")["default"]);
+Vue.component('privacy', __webpack_require__(/*! ./components/front/privacy */ "./resources/js/components/front/privacy.vue")["default"]);
+Vue.component('fandq', __webpack_require__(/*! ./components/front/home/fandq */ "./resources/js/components/front/home/fandq.vue")["default"]);
+Vue.component('contactus', __webpack_require__(/*! ./components/front/home/contactus */ "./resources/js/components/front/home/contactus.vue")["default"]);
 Vue.component('research', __webpack_require__(/*! ./components/front/booking/research */ "./resources/js/components/front/booking/research.vue")["default"]);
 Vue.component('book-header', __webpack_require__(/*! ./components/front/booking/bookheader */ "./resources/js/components/front/booking/bookheader.vue")["default"]);
 Vue.component('no-cab', __webpack_require__(/*! ./components/front/booking/noCab */ "./resources/js/components/front/booking/noCab.vue")["default"]);
@@ -92212,6 +93853,144 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/front/home/contactus.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/front/home/contactus.vue ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _contactus_vue_vue_type_template_id_0aea98ff_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./contactus.vue?vue&type=template&id=0aea98ff&scoped=true& */ "./resources/js/components/front/home/contactus.vue?vue&type=template&id=0aea98ff&scoped=true&");
+/* harmony import */ var _contactus_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./contactus.vue?vue&type=script&lang=js& */ "./resources/js/components/front/home/contactus.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _contactus_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _contactus_vue_vue_type_template_id_0aea98ff_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _contactus_vue_vue_type_template_id_0aea98ff_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "0aea98ff",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/front/home/contactus.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/front/home/contactus.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/front/home/contactus.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_contactus_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./contactus.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/home/contactus.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_contactus_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/front/home/contactus.vue?vue&type=template&id=0aea98ff&scoped=true&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/front/home/contactus.vue?vue&type=template&id=0aea98ff&scoped=true& ***!
+  \*****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_contactus_vue_vue_type_template_id_0aea98ff_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./contactus.vue?vue&type=template&id=0aea98ff&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/home/contactus.vue?vue&type=template&id=0aea98ff&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_contactus_vue_vue_type_template_id_0aea98ff_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_contactus_vue_vue_type_template_id_0aea98ff_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/front/home/fandq.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/front/home/fandq.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _fandq_vue_vue_type_template_id_d3d42ebe_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fandq.vue?vue&type=template&id=d3d42ebe&scoped=true& */ "./resources/js/components/front/home/fandq.vue?vue&type=template&id=d3d42ebe&scoped=true&");
+/* harmony import */ var _fandq_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fandq.vue?vue&type=script&lang=js& */ "./resources/js/components/front/home/fandq.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _fandq_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _fandq_vue_vue_type_template_id_d3d42ebe_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _fandq_vue_vue_type_template_id_d3d42ebe_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "d3d42ebe",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/front/home/fandq.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/front/home/fandq.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/front/home/fandq.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_fandq_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./fandq.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/home/fandq.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_fandq_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/front/home/fandq.vue?vue&type=template&id=d3d42ebe&scoped=true&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/front/home/fandq.vue?vue&type=template&id=d3d42ebe&scoped=true& ***!
+  \*************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_fandq_vue_vue_type_template_id_d3d42ebe_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./fandq.vue?vue&type=template&id=d3d42ebe&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/home/fandq.vue?vue&type=template&id=d3d42ebe&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_fandq_vue_vue_type_template_id_d3d42ebe_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_fandq_vue_vue_type_template_id_d3d42ebe_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/front/home/offers.vue":
 /*!*******************************************************!*\
   !*** ./resources/js/components/front/home/offers.vue ***!
@@ -92276,144 +94055,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_offers_vue_vue_type_template_id_b860c2b4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_offers_vue_vue_type_template_id_b860c2b4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/front/home/promise.vue":
-/*!********************************************************!*\
-  !*** ./resources/js/components/front/home/promise.vue ***!
-  \********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _promise_vue_vue_type_template_id_7ab9c71c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./promise.vue?vue&type=template&id=7ab9c71c&scoped=true& */ "./resources/js/components/front/home/promise.vue?vue&type=template&id=7ab9c71c&scoped=true&");
-/* harmony import */ var _promise_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./promise.vue?vue&type=script&lang=js& */ "./resources/js/components/front/home/promise.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _promise_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _promise_vue_vue_type_template_id_7ab9c71c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _promise_vue_vue_type_template_id_7ab9c71c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  "7ab9c71c",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/front/home/promise.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/front/home/promise.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/components/front/home/promise.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_promise_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./promise.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/home/promise.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_promise_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/front/home/promise.vue?vue&type=template&id=7ab9c71c&scoped=true&":
-/*!***************************************************************************************************!*\
-  !*** ./resources/js/components/front/home/promise.vue?vue&type=template&id=7ab9c71c&scoped=true& ***!
-  \***************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_promise_vue_vue_type_template_id_7ab9c71c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./promise.vue?vue&type=template&id=7ab9c71c&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/home/promise.vue?vue&type=template&id=7ab9c71c&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_promise_vue_vue_type_template_id_7ab9c71c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_promise_vue_vue_type_template_id_7ab9c71c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/front/home/safety.vue":
-/*!*******************************************************!*\
-  !*** ./resources/js/components/front/home/safety.vue ***!
-  \*******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _safety_vue_vue_type_template_id_d945133e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./safety.vue?vue&type=template&id=d945133e&scoped=true& */ "./resources/js/components/front/home/safety.vue?vue&type=template&id=d945133e&scoped=true&");
-/* harmony import */ var _safety_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./safety.vue?vue&type=script&lang=js& */ "./resources/js/components/front/home/safety.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _safety_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _safety_vue_vue_type_template_id_d945133e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _safety_vue_vue_type_template_id_d945133e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  "d945133e",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/front/home/safety.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/front/home/safety.vue?vue&type=script&lang=js&":
-/*!********************************************************************************!*\
-  !*** ./resources/js/components/front/home/safety.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_safety_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./safety.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/home/safety.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_safety_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/front/home/safety.vue?vue&type=template&id=d945133e&scoped=true&":
-/*!**************************************************************************************************!*\
-  !*** ./resources/js/components/front/home/safety.vue?vue&type=template&id=d945133e&scoped=true& ***!
-  \**************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_safety_vue_vue_type_template_id_d945133e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./safety.vue?vue&type=template&id=d945133e&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/home/safety.vue?vue&type=template&id=d945133e&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_safety_vue_vue_type_template_id_d945133e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_safety_vue_vue_type_template_id_d945133e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -92488,6 +94129,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/front/privacy.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/front/privacy.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _privacy_vue_vue_type_template_id_76914067_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./privacy.vue?vue&type=template&id=76914067&scoped=true& */ "./resources/js/components/front/privacy.vue?vue&type=template&id=76914067&scoped=true&");
+/* harmony import */ var _privacy_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./privacy.vue?vue&type=script&lang=js& */ "./resources/js/components/front/privacy.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _privacy_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _privacy_vue_vue_type_template_id_76914067_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _privacy_vue_vue_type_template_id_76914067_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "76914067",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/front/privacy.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/front/privacy.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/front/privacy.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_privacy_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./privacy.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/privacy.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_privacy_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/front/privacy.vue?vue&type=template&id=76914067&scoped=true&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/front/privacy.vue?vue&type=template&id=76914067&scoped=true& ***!
+  \**********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_privacy_vue_vue_type_template_id_76914067_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./privacy.vue?vue&type=template&id=76914067&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/privacy.vue?vue&type=template&id=76914067&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_privacy_vue_vue_type_template_id_76914067_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_privacy_vue_vue_type_template_id_76914067_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/front/siteMapPage.vue":
 /*!*******************************************************!*\
   !*** ./resources/js/components/front/siteMapPage.vue ***!
@@ -92552,6 +94262,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_siteMapPage_vue_vue_type_template_id_70d147ba_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_siteMapPage_vue_vue_type_template_id_70d147ba_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/front/termsPage.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/front/termsPage.vue ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _termsPage_vue_vue_type_template_id_347764d5_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./termsPage.vue?vue&type=template&id=347764d5&scoped=true& */ "./resources/js/components/front/termsPage.vue?vue&type=template&id=347764d5&scoped=true&");
+/* harmony import */ var _termsPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./termsPage.vue?vue&type=script&lang=js& */ "./resources/js/components/front/termsPage.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _termsPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _termsPage_vue_vue_type_template_id_347764d5_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _termsPage_vue_vue_type_template_id_347764d5_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "347764d5",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/front/termsPage.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/front/termsPage.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/front/termsPage.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_termsPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./termsPage.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/termsPage.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_termsPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/front/termsPage.vue?vue&type=template&id=347764d5&scoped=true&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/components/front/termsPage.vue?vue&type=template&id=347764d5&scoped=true& ***!
+  \************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_termsPage_vue_vue_type_template_id_347764d5_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./termsPage.vue?vue&type=template&id=347764d5&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/front/termsPage.vue?vue&type=template&id=347764d5&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_termsPage_vue_vue_type_template_id_347764d5_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_termsPage_vue_vue_type_template_id_347764d5_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -1,5 +1,8 @@
 @extends('layouts.front')
 
 @section('content')
-<siteMap-page></siteMap-page>
+<site-page></site-page>
+{{-- <div>
+    hdafads
+</div> --}}
 @endsection
