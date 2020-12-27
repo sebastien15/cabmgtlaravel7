@@ -18,9 +18,10 @@ class CreateOperatorinfosTable extends Migration
             $table->unSignedBigInteger('operator_id');
             $table->string('phone');
             $table->string('company_name');
+            $table->string('number_plate');
+            $table->string('profile_pic');
             $table->unSignedBigInteger('car_id');
             $table->timestamps();
-
             $table->foreign('operator_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('car_id')->references('id')->on('cars')->onDelete('cascade');
         });

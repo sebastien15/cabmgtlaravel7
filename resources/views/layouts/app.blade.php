@@ -30,8 +30,8 @@
                     <a class="text-2xl font-bold " href="{{ url('/') }}">
                         Ornasol</a>
                 </div>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="flex mt-2">
+                <div class="" id="navbarSupportedContent">
+                        <ul class="mt-2">
                             <!-- Authentication Links -->
                             @guest
                                 <li class="mr-2 cursor-pointer">
@@ -43,12 +43,12 @@
                                     </li>
                                 @endif
                             @else
-                                <li class="nav-item dropdown">
-                                    <a id="navbarDropdown">
-                                        {{ Auth::user()->name }}
+                                <li class="flex justify-around">
+                                    <a id="navbarDropdown" class="mr-2">
+                                       HEY {{ Auth::user()->name }} !
                                     </a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <div class="">
+                                        <a class="dropdown-item cursor-pointer p-4 hover:bg-white hover:text-blue-800" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
@@ -69,9 +69,7 @@
     </div>
     <script>
         let operatorcheck = document.querySelector("#operatorcheck");
-        console.log(operatorcheck)
         operatorcheck.addEventListener('change',()=>{
-            console.log('working')
             let operator = document.querySelector("#role")
         })
     </script>

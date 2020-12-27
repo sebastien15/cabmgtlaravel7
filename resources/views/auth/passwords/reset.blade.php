@@ -6,11 +6,10 @@
         <div class="w-8/12 shadow-md bg-white">
             <div class="sm:p-12 text-center">
                 <div class="p-4 text-xl sm:text-2xl font-bold">{{ __('Reset Password') }}</div>
-
+password reset view
                 <div class="p-4">
                     <form method="POST" action="{{ route('password.update') }}">
                         @csrf
-
                         <input type="hidden" name="token" value="{{ $token }}">
 
                         <div class="flex flex-col sm:flex-row mb-4">

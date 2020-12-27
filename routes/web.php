@@ -21,6 +21,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('admin/home', 'HomeController@adminHome')->name('admin.home')->middleware('is_admin');
+// Route::get('admin/dashboard', 'HomeController@adminHome')->name('admin.home')->middleware('is_admin');
 Route::get('/schedulers/today','schedulerController@getTodaysScheduler');
 // Route::get('operator/home', 'HomeController@operatorHome')->middleware('is_admin');
 

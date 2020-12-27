@@ -1,8 +1,7 @@
 <template>
     <div>   
         <navigations></navigations>
-        <hr class="w-10/12 bg-blue-400 m-auto" style="height: 1px">
-        <div class="p-5 sm:p-20">
+        <div class="p-5 sm:p-20 text-center sm:text-left mt-6">
             <!-- <div class="sm:w-1/2 p-2 md:pt-20 ">
                 <div class="overflow-x-auto">
                     <table class="border border-blue-900 ">
@@ -24,6 +23,9 @@
             </div> -->
             <!-- {{ profile[0] }} -->
             <ul class="list-none" v-if="profileAdded">
+                <li>
+                    <img class="w-32 h-32" :src="'../upload/'+ profile[0].profile_pic" />
+                </li>
                 <li><span class="mr-2">Names: </span> <span>{{user.name}}</span></li>
                 <li><span class="mr-2">phone: </span> <span>{{profile[0].phone}}</span></li>
                 <li><span class="mr-2">Company names: </span> <span>{{profile[0].company_name}}</span></li>
@@ -40,14 +42,16 @@
                 profileform ? 'absolute' : 'hidden',
             ]"
             >
-            <h2 class="text-2xl font-bold mb-4" v-show="!editMode">Add a Profile</h2>
-            <h2 class="text-2xl font-bold mb-4" v-show="editMode" >Edit a Profile</h2>
+            <h2 class="text-2xl font-bold mb-4" v-show="!editMode">Add Profile information</h2>
+            <h2 class="text-2xl font-bold mb-4" v-show="editMode" >Edit Profile</h2>
             <div class="border-b-blue-200 mb-10">
-                <form @submit.prevent="editMode? updateProfile(profile[0].id) : addProfile()">
+                <form @submit.prevent="editMode? updateProfile(profile[0].id) : addProfile()"  enctype="multipart/form-data">
                     <div class="flex flex-col justify-between mb-2">
                         <input type="hidden" v-model="form.operator_id" name="operator_id" placeholder="company_name"/>
                         <input class="w-8/12 m-auto mb-3 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" type="text" v-model="form.company_name" name="company_name" placeholder="company_name"/>
                         <input class="w-8/12 m-auto mb-3 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" type="text" v-model="form.phone" name="phone" placeholder="phone"/>
+                        <input class="w-8/12 m-auto mb-3 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" type="text" v-model="form.number_plate" name="NumberPlage" placeholder="Number Plate"/>
+                        <input class="w-8/12 m-auto mb-3 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" @change="onFileChange" type="file" name="profilepic" id="profilepic" placeholder="profile pic"/>
                         <select class="w-8/12 m-auto mb-3 text-blue-800 text-md rounded-sm border border-blue-700 px-2 py-3" v-model="form.car_id" name="car_id">
                             <option v-for="car in cars" :key="car.id" :value="car.id" v-text="car.name"></option>
                         </select>
@@ -75,12 +79,15 @@ export default {
             usercar:'',
             profileform:false,
             editMode: false,
+            fileName:"",
             form: new Form({
-                    operator_id: '',
+                    operator_id: this.user,
                     user_id: '',
                     car_id : '',
                     company_name: '',
                     phone: '',
+                    profile_pic: '',
+                    number_plate: '',
                 }),
         }
     },
@@ -88,6 +95,9 @@ export default {
             allcars() {
                 axios.get("/api/cars").then( data => (this.cars = data.data))
              },
+            onFileChange(e){
+                this.form.profile_pic = e.target.files[0];
+            },
             userProfile() {
                 axios.get("/api/operatorinfo/" + this.user.id).then( data => {
                     this.profile = data.data;
@@ -110,8 +120,16 @@ export default {
                 this.editMode = false;
                 this.form.operator_id = this.user.id;
                 this.allcars();
-                this.$Progress.start()
-                this.form.post('/api/operatorinfo')
+                this.$Progress.start();
+                const setHeaders = {
+                    headers: {
+                        'content-type': 'multipart/form-data'
+                        // 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    }
+                };
+                console.log('the form follows');
+                console.log(this.form);
+                this.form.post('/api/operatorinfo',setHeaders)
                     .then(() => {
                         Fire.$emit('AfterCreatedUserLoadIt'); //custom events
                         Toast.fire({
@@ -128,7 +146,13 @@ export default {
                 
             },
             updateProfile(id){
-             this.form.put('/api/operatorinfo/'+id)
+            const setHeaders = {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                    // 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                }
+            };
+             this.form.put('/api/operatorinfo/'+id, setHeaders)
                 .then(()=>{
                     Toast.fire({
                         icon: 'success',

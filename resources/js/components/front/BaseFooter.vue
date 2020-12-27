@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-indigo-900 pt-16 flex flex-col text-blue-200 px-3 ">
+    <div class="bg-indigo-200 pt-8 flex flex-col text-gray-500 px-3 ">
         <!-- <div class="bg-indigo-900 pt-16 flex flex-col sm:flex-row text-blue-200 px-6 sm:px-20 mt-20 ">
                 <div class="sm:w-1/3">
                     <h3 class="text-blue-400 text-xl mb-5">About redBus</h3>
@@ -43,14 +43,16 @@
                     </div>
                 </div>
         </div> -->
-        <hr class="bg-blue-100 mt-1 mb-3">
-        <div class="bg-indigo-900 text-white text-center text-sm flex justify-between font-thin">
+        <hr class="bg-blue-100 mt-1 mb-12 w-full sm:w-8/12 md:w-6/12 m-auto">
+        <div class="bg-indigo-200 text-gray-500 text-center text-sm flex justify-between w-full sm:w-8/12 md:w-6/12 m-auto">
             <p>Ⓒ 2020 RideMe</p>
             <p>
                 <a href="/terms">Terms&Condingion</a>|<a href="/terms">Pricacy and Policy</a>
             </p>
             <p>
-                socials
+                <a href="" class="text-gray-600 text-md mr-1"><i class="fa fa-facebook-square"></i></a>
+                <a href="" class="text-gray-600 text-md mr-1"><i class="fa fa-instagram"></i></a>
+                <a href="" class="text-gray-600 text-md"><i class="fa fa-twitter-square"></i></a>
             </p>
         </div>
     </div>
