@@ -206,7 +206,7 @@
         data() {
             return {
                 isOpen: false,
-                dropOpen: false,
+                dropOpen: true,
             }
         },
         methods: {
@@ -216,7 +216,6 @@
             },
             selfInvoking(){
                 this.dropOpen = !this.dropOpen
-                console.log(this.dropOpen)
             }
         }
     }

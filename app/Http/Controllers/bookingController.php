@@ -29,6 +29,7 @@ class bookingController extends Controller
         $booking->user_id          = $request->user_id;
         $booking->route_id         = $request->route_id;
         $booking->scheduler_id     = $request->scheduler_id;
+        $booking->operator_id      = $request->operator_id;
         $booking->loc_from         = $request->loc_from;
         $booking->loc_to           = $request->loc_to;
         $booking->car_id           = $request->car_id;
@@ -76,6 +77,7 @@ class bookingController extends Controller
             $booking->user_id          = is_null($request->user_id) ? $booking->user_id : $request->user_id;
             $booking->route_id         = is_null($request->route_id) ? $booking->route_id : $request->route_id;
             $booking->scheduler_id     = is_null($request->scheduler_id) ? $booking->scheduler_id : $request->scheduler_id;
+            $booking->operator_id     = is_null($request->operator_id) ? $booking->operator_id : $request->operator_id;
             $booking->loc_from         = is_null($request->loc_from) ? $booking->loc_from : $request->loc_from;
             $booking->loc_to           = is_null($request->loc_to) ? $booking->loc_to : $request->loc_to;
             $booking->car_id           = is_null($request->car_id) ? $booking->car_id : $request->car_id;
@@ -108,6 +110,18 @@ class bookingController extends Controller
     {
         if (Booking::where('scheduler_id', $id)->exists()) {
             $booking = Booking::where('scheduler_id', $id)->get()->toJson(JSON_PRETTY_PRINT);
+            return response($booking, 200);
+        } else {
+            return response()->json([
+              "message" => "booking not found"
+            ], 404);
+        }
+     }
+    public function findByOperator($id)
+    {
+        if (Booking::where('operator_id', $id)->exists()) {
+            // $booking = Booking::where('operator_id', $id)->orderBy('id',DESC)->get()->toJson(JSON_PRETTY_PRINT);
+            $booking = Booking::where('operator_id', $id)->get()->toJson(JSON_PRETTY_PRINT);
             return response($booking, 200);
         } else {
             return response()->json([

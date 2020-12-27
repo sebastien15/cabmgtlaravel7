@@ -12,7 +12,7 @@ class LocationsTableSeeder extends Seeder
     public function run()
     {
         DB::table('locations')->insert([
-            'name' => 'Itanaga',
+            'name' => 'Itanagar',
             'loc_postcode' => 13,
         ]);
         DB::table('locations')->insert([

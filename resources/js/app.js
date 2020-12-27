@@ -100,8 +100,9 @@ Vue.component('operatorprofile', require('./components/admin/operator/profile').
 Vue.component('operatorlocation', require('./components/admin/operator/location').default);
 
 // operator components ends
-
+// admin dashboard
 Vue.component('car', require('./components/admin/superAdmin/car').default);
+Vue.component('admin-dashboard', require('./components/admin/superAdmin/admindashboard').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

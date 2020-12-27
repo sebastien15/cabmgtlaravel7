@@ -1,7 +1,6 @@
 <template>
     <div>    
         <navigations></navigations>
-        <hr class="w-10/12 bg-blue-400 m-auto" style="height: 1px">
         <div class="flex flex-col sm:flex-row justify-around ">
             <div class="sm:w-10/12 p-2 md:pt-20 ">
                 <h4 class="text-sm sm:text-xl font-bold mb-3">To day's Scheduler</h4>
@@ -230,6 +229,7 @@ export default {
                 this.form.Scheduler_id = this.singleScheduler.id
              },
             saveScheduler(){
+                console.log(this.form)
                 this.$Progress.start()
                 this.form.post('/api/schedulers')                
                     .then(() => {

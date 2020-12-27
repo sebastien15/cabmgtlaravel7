@@ -17,6 +17,7 @@ class CreateBookingsTable extends Migration
             $table->id();
             $table->unSignedBigInteger('user_id');
             $table->unSignedBigInteger('scheduler_id');
+            $table->unSignedBigInteger('operator_id');
             $table->unSignedBigInteger('route_id')->nullable();
             $table->unSignedBigInteger('car_id');
             $table->string('loc_from');

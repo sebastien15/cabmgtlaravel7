@@ -23,13 +23,19 @@ class operatorinfoController extends Controller
     
     public function store(Request $request)
     {
+        $upload_path = public_path('upload');
+        $file_name = $request->profile_pic->getClientOriginalName();
+        $generated_new_name = time() . '.' . $request->profile_pic->getClientOriginalExtension();
+        $request->profile_pic->move($upload_path, $generated_new_name);
 
-        $Operatorinfo = new Operatorinfo;
+        $Operatorinfo = new Operatorinfo;   
  
-        $Operatorinfo->operator_id = $request->operator_id;
-        $Operatorinfo->phone = $request->phone;
+        $Operatorinfo->operator_id  = $request->operator_id;
+        $Operatorinfo->phone        = $request->phone;
+        $Operatorinfo->number_plate = $request->number_plate;
+        $Operatorinfo->profile_pic  = $generated_new_name;
         $Operatorinfo->company_name = $request->company_name;
-        $Operatorinfo->car_id = $request->car_id;
+        $Operatorinfo->car_id       = $request->car_id;
  
         $Operatorinfo->save();
         

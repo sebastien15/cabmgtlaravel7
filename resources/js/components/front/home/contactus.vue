@@ -5,7 +5,7 @@
         <div class="flex w-6/12 m-auto justify-between">
             <a href="https://wa.me/+918794264414">
                 <div class="">
-                    <i class="fa fa-whatsapp text-3xl text-white bg-red-800 rounded-full p-4"></i>
+                    <i class="fa fa-whatsapp-square text-3xl text-white bg-red-800 rounded-full p-4"></i>
                 </div>
                 <div class="text-center text-sm mt-8">+918794264414
                 </div>
