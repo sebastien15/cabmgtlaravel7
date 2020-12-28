@@ -2248,6 +2248,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "BaseNav",
   props: ['user'],
@@ -68710,27 +68725,55 @@ var render = function() {
               ]),
               _vm._v(" "),
               _vm.user
-                ? _c(
-                    "a",
-                    {
-                      staticClass:
-                        "mx-1 \n                           px-3 py-2 rounded-md \n                           text-sm font-medium \n                           text-gray-300 hover:text-white \n                           hover:bg-gray-700 focus:outline-none \n                           focus:text-white focus:bg-gray-700",
-                      attrs: { href: "/user/dashboard" }
-                    },
-                    [_vm._v("Dashboard")]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.user
-                ? _c(
-                    "a",
-                    {
-                      staticClass:
-                        "mx-1 \n                           px-3 py-2 rounded-md \n                           text-sm font-medium \n                           text-gray-300 hover:text-white \n                           hover:bg-gray-700 focus:outline-none \n                           focus:text-white focus:bg-gray-700",
-                      attrs: { href: "/user/profile" }
-                    },
-                    [_vm._v("Profile")]
-                  )
+                ? _c("div", [
+                    _vm.user.is_admin == 3
+                      ? _c(
+                          "a",
+                          {
+                            staticClass:
+                              "mx-1 \n                           px-3 py-2 rounded-md \n                           text-sm font-medium \n                           text-gray-300 hover:text-white \n                           hover:bg-gray-700 focus:outline-none \n                           focus:text-white focus:bg-gray-700",
+                            attrs: { href: "/user/dashboard" }
+                          },
+                          [_vm._v("Dashboard")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.user.is_admin == 3
+                      ? _c(
+                          "a",
+                          {
+                            staticClass:
+                              "mx-1 \n                           px-3 py-2 rounded-md \n                           text-sm font-medium \n                           text-gray-300 hover:text-white \n                           hover:bg-gray-700 focus:outline-none \n                           focus:text-white focus:bg-gray-700",
+                            attrs: { href: "/user/profile" }
+                          },
+                          [_vm._v("Profile")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.user.is_admin == 2
+                      ? _c(
+                          "a",
+                          {
+                            staticClass:
+                              "mx-1 \n                           px-3 py-2 rounded-md \n                           text-sm font-medium \n                           text-gray-300 hover:text-white \n                           hover:bg-gray-700 focus:outline-none \n                           focus:text-white focus:bg-gray-700",
+                            attrs: { href: "/operator/dashboard" }
+                          },
+                          [_vm._v("Dashboard")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.user.is_admin == 2
+                      ? _c(
+                          "a",
+                          {
+                            staticClass:
+                              "mx-1 \n                           px-3 py-2 rounded-md \n                           text-sm font-medium \n                           text-gray-300 hover:text-white \n                           hover:bg-gray-700 focus:outline-none \n                           focus:text-white focus:bg-gray-700",
+                            attrs: { href: "/operator/profile" }
+                          },
+                          [_vm._v("Profile")]
+                        )
+                      : _vm._e()
+                  ])
                 : _vm._e()
             ])
           ])

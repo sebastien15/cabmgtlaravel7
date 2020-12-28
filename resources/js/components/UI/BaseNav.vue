@@ -38,21 +38,37 @@
                                     <a href="#fandq" class="text-sm hover:bg-red-800 px-3 hover:text-white">F&Q</a>
                                 </div>
                                </div>
-                            <a href="/user/dashboard" v-if="user"
-                               class="mx-1 
-                               px-3 py-2 rounded-md 
-                               text-sm font-medium 
-                               text-gray-300 hover:text-white 
-                               hover:bg-gray-700 focus:outline-none 
-                               focus:text-white focus:bg-gray-700">Dashboard</a>
-                            <a href="/user/profile" v-if="user"
-                               class="mx-1 
-                               px-3 py-2 rounded-md 
-                               text-sm font-medium 
-                               text-gray-300 hover:text-white 
-                               hover:bg-gray-700 focus:outline-none 
-                               focus:text-white focus:bg-gray-700">Profile</a>
+                            <div v-if="user">
+                                <a href="/user/dashboard" v-if="user.is_admin == 3"
+                                class="mx-1 
+                                px-3 py-2 rounded-md 
+                                text-sm font-medium 
+                                text-gray-300 hover:text-white 
+                                hover:bg-gray-700 focus:outline-none 
+                                focus:text-white focus:bg-gray-700">Dashboard</a>
+                                <a href="/user/profile" v-if="user.is_admin == 3"
+                                class="mx-1 
+                                px-3 py-2 rounded-md 
+                                text-sm font-medium 
+                                text-gray-300 hover:text-white 
+                                hover:bg-gray-700 focus:outline-none 
+                                focus:text-white focus:bg-gray-700">Profile</a>
+                                <a href="/operator/dashboard" v-if="user.is_admin == 2"
+                                class="mx-1 
+                                px-3 py-2 rounded-md 
+                                text-sm font-medium 
+                                text-gray-300 hover:text-white 
+                                hover:bg-gray-700 focus:outline-none 
+                                focus:text-white focus:bg-gray-700">Dashboard</a>
+                                <a href="/operator/profile" v-if="user.is_admin == 2"
+                                class="mx-1 
+                                px-3 py-2 rounded-md 
+                                text-sm font-medium 
+                                text-gray-300 hover:text-white 
+                                hover:bg-gray-700 focus:outline-none 
+                                focus:text-white focus:bg-gray-700">Profile</a>
                                
+                            </div>
                             <!-- <a href="/contactus"
                                class="mx-1 
                                px-3 py-2 rounded-md 
